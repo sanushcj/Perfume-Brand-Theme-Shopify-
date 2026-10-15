@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "collection-main": {
+      "type": "collection-main",
+      "settings": {
+        "eyebrow": "Our Collection",
+        "products_per_page": 24
+      }
+    }
+  },
+  "order": ["collection-main"]
+}

@@ -1,0 +1,309 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign product_form_id = 'product-form-' | append: product.id -%}
+
+<div class="product-page">
+  <div class="container">
+
+    {%- render 'breadcrumbs', type: 'product' -%}
+
+    <div class="product-layout">
+
+      {%- comment -%} === GALLERY === {%- endcomment -%}
+      <div class="product-gallery">
+        {%- if product.images.size > 0 -%}
+          <img
+            id="ProductMainImage"
+            src="{{ product.featured_image | image_url: width: 900 }}"
+            alt="{{ product.featured_image.alt | default: product.title | escape }}"
+            class="product-main-image"
+            loading="eager"
+            fetchpriority="high"
+            width="900"
+            height="1125"
+          >
+
+          {%- if product.images.size > 1 -%}
+            <div class="product-thumbnails" role="list" aria-label="Product images">
+              {%- for image in product.images -%}
+                <img
+                  src="{{ image | image_url: width: 200 }}"
+                  alt="{{ image.alt | default: product.title | escape }}"
+                  class="product-thumbnail{% if forloop.first %} active{% endif %}"
+                  loading="lazy"
+                  width="80"
+                  height="80"
+                  data-full="{{ image | image_url: width: 900 }}"
+                  role="listitem"
+                  tabindex="0"
+                  aria-label="View image {{ forloop.index }}"
+                >
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+        {%- else -%}
+          <div class="product-main-image" style="aspect-ratio:4/5; display:flex; align-items:center; justify-content:center; font-size:80px; background: var(--color-bg-card);">🌸</div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} === PRODUCT INFO === {%- endcomment -%}
+      <div class="product-info">
+
+        <div class="product-info-category">{{ product.type | default: 'Eau de Parfum' }}</div>
+
+        <h1 class="product-info-title">{{ product.title }}</h1>
+
+        {%- if product.metafields.custom.subtitle != blank -%}
+          <p class="product-info-subtitle">{{ product.metafields.custom.subtitle }}</p>
+        {%- endif -%}
+
+        {%- comment -%} Rating {%- endcomment -%}
+        <div class="product-rating">
+          <div class="stars" aria-label="4.9 out of 5 stars">★★★★★</div>
+          <span class="rating-count">({{ product.metafields.reviews.rating_count | default: '2.4k' }} reviews)</span>
+        </div>
+
+        {%- comment -%} Price {%- endcomment -%}
+        <div class="product-price-block">
+          <span class="product-price-main" id="ProductPrice">
+            {{ current_variant.price | money }}
+          </span>
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+            <span class="product-price-original">{{ current_variant.compare_at_price | money }}</span>
+            <span class="product-price-save">
+              Save {{ current_variant.compare_at_price | minus: current_variant.price | money }}
+            </span>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Product Form {%- endcomment -%}
+        <form
+          id="{{ product_form_id }}"
+          action="{{ routes.cart_add_url }}"
+          method="post"
+          enctype="multipart/form-data"
+          data-add-to-cart
+          novalidate="novalidate"
+        >
+          <input type="hidden" name="form_type" value="product">
+          <input type="hidden" name="utf8" value="✓">
+
+          {%- comment -%} Variant Selector {%- endcomment -%}
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              <div class="size-selector">
+                <div class="size-label">
+                  {{ option.name }}:
+                  <strong style="color: var(--color-gold);" id="SelectedOption{{ forloop.index }}">{{ option.selected_value }}</strong>
+                </div>
+                <div class="size-options" role="radiogroup" aria-label="{{ option.name }}">
+                  {%- for value in option.values -%}
+                    {%- assign variant_option = 'option' | append: forloop.parentloop.index -%}
+                    {%- assign current_variant_for_option = product.variants | where: variant_option, value | first -%}
+                    <button
+                      type="button"
+                      class="size-option{% if option.selected_value == value %} active{% endif %}{% unless current_variant_for_option.available %} sold-out{% endunless %}"
+                      data-option-position="{{ forloop.parentloop.index }}"
+                      data-value="{{ value | escape }}"
+                      data-variant-id="{{ current_variant_for_option.id }}"
+                      {% if current_variant_for_option.available == false %}
+                        style="opacity: 0.4; text-decoration: line-through;"
+                        aria-label="{{ value }} - Sold out"
+                      {% else %}
+                        aria-label="{{ value }}"
+                      {% endif %}
+                      role="radio"
+                      aria-checked="{{ option.selected_value == value }}"
+                    >
+                      {{ value }}
+                    </button>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <input type="hidden" name="id" value="{{ current_variant.id }}" id="ProductVariantId">
+
+          {%- comment -%} Quantity + Add to Cart {%- endcomment -%}
+          <div class="product-atc-row">
+            <div class="quantity-selector" role="group" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-action="decrease" aria-label="Decrease quantity">−</button>
+              <input
+                type="number"
+                name="quantity"
+                class="qty-input"
+                value="1"
+                min="1"
+                max="99"
+                aria-label="Quantity"
+              >
+              <button type="button" class="qty-btn" data-action="increase" aria-label="Increase quantity">+</button>
+            </div>
+
+            {%- if current_variant.available -%}
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg"
+                style="flex: 1;"
+                id="ProductAddToCart"
+                aria-label="Add {{ product.title | escape }} to cart"
+              >
+                Add to Cart
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+              </button>
+            {%- else -%}
+              <button type="button" class="btn btn-ghost btn-lg" style="flex: 1;" disabled>
+                Sold Out
+              </button>
+            {%- endif -%}
+          </div>
+
+          {%- comment -%} Buy Now {%- endcomment -%}
+          {%- if current_variant.available -%}
+            <a
+              href="{{ routes.checkout_url }}?variant={{ current_variant.id }}&quantity=1"
+              class="btn btn-outline btn-full"
+              style="margin-top: var(--space-3);"
+              id="ProductBuyNow"
+            >
+              Buy Now
+            </a>
+          {%- endif -%}
+
+        </form>
+
+        {%- comment -%} Trust Badges {%- endcomment -%}
+        <div style="display: flex; gap: var(--space-4); flex-wrap: wrap; padding: var(--space-5); background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl);">
+          <div style="display:flex; align-items:center; gap: var(--space-2); font-size: var(--text-xs); color: var(--color-text-muted);">
+            <span style="color: var(--color-gold);">🚚</span> Free shipping $150+
+          </div>
+          <div style="display:flex; align-items:center; gap: var(--space-2); font-size: var(--text-xs); color: var(--color-text-muted);">
+            <span style="color: var(--color-gold);">🔄</span> 30-day returns
+          </div>
+          <div style="display:flex; align-items:center; gap: var(--space-2); font-size: var(--text-xs); color: var(--color-text-muted);">
+            <span style="color: var(--color-gold);">🔒</span> Secure checkout
+          </div>
+          <div style="display:flex; align-items:center; gap: var(--space-2); font-size: var(--text-xs); color: var(--color-text-muted);">
+            <span style="color: var(--color-gold);">🎁</span> Gift wrapping available
+          </div>
+        </div>
+
+        {%- comment -%} Product Tabs {%- endcomment -%}
+        <div class="product-tabs">
+          <div class="tabs-header" role="tablist">
+            <button class="tab-btn active" data-tab="tab-description" role="tab" aria-selected="true" id="tab-btn-description">Description</button>
+            <button class="tab-btn" data-tab="tab-notes" role="tab" aria-selected="false" id="tab-btn-notes">Fragrance Notes</button>
+            <button class="tab-btn" data-tab="tab-details" role="tab" aria-selected="false" id="tab-btn-details">Details</button>
+            <button class="tab-btn" data-tab="tab-shipping" role="tab" aria-selected="false" id="tab-btn-shipping">Shipping</button>
+          </div>
+
+          <div id="tab-description" class="tab-content active" role="tabpanel" aria-labelledby="tab-btn-description">
+            {%- if product.description != blank -%}
+              <div class="rte" style="font-size: var(--text-base); color: var(--color-text-secondary); line-height: 1.8; font-weight: var(--fw-light);">
+                {{ product.description }}
+              </div>
+            {%- else -%}
+              <p>A symphony of rare and precious ingredients, masterfully composed by our perfumers to create a fragrance that is as unique as it is unforgettable.</p>
+              <p>This extraordinary eau de parfum opens with a burst of bright, citrus notes before revealing its complex floral heart. The base notes linger for hours, leaving an elegant trail wherever you go.</p>
+            {%- endif -%}
+          </div>
+
+          <div id="tab-notes" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-notes">
+            <div class="notes-grid">
+              <div class="note-item">
+                <div class="note-item-layer">Top Notes</div>
+                <div class="note-item-name">{{ product.metafields.custom.top_notes | default: 'Bergamot, Pink Pepper, Cardamom' }}</div>
+              </div>
+              <div class="note-item">
+                <div class="note-item-layer">Heart Notes</div>
+                <div class="note-item-name">{{ product.metafields.custom.heart_notes | default: 'Rose Absolute, Jasmine, Iris' }}</div>
+              </div>
+              <div class="note-item">
+                <div class="note-item-layer">Base Notes</div>
+                <div class="note-item-name">{{ product.metafields.custom.base_notes | default: 'Oud, Ambergris, Sandalwood, Musk' }}</div>
+              </div>
+            </div>
+            <div style="margin-top: var(--space-6);">
+              <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: var(--text-sm); color: var(--color-text-muted);">Sillage</span>
+                  <div style="display:flex; gap:4px;">
+                    {%- for i in (1..5) -%}<div style="width:16px; height:4px; border-radius:2px; background: {%- if i <= 4 -%}var(--color-gold){%- else -%}var(--color-border){%- endif -%};"></div>{%- endfor -%}
+                  </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: var(--text-sm); color: var(--color-text-muted);">Longevity</span>
+                  <div style="display:flex; gap:4px;">
+                    {%- for i in (1..5) -%}<div style="width:16px; height:4px; border-radius:2px; background: {%- if i <= 5 -%}var(--color-gold){%- else -%}var(--color-border){%- endif -%};"></div>{%- endfor -%}
+                  </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: var(--text-sm); color: var(--color-text-muted);">Intensity</span>
+                  <div style="display:flex; gap:4px;">
+                    {%- for i in (1..5) -%}<div style="width:16px; height:4px; border-radius:2px; background: {%- if i <= 3 -%}var(--color-gold){%- else -%}var(--color-border){%- endif -%};"></div>{%- endfor -%}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="tab-details" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-details">
+            <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+              {%- assign details = 'Concentration,Eau de Parfum Intense (30%+)|Origin,France & Middle East|Bottle,Hand-blown crystal flacon|Concentration,12–14 hours longevity|Gender,Unisex|Cruelty-Free,Yes|Vegan,Yes' | split: '|' -%}
+              {%- for detail in details -%}
+                {%- assign parts = detail | split: ',' -%}
+                <div style="display:flex; justify-content:space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border);">
+                  <span style="font-size: var(--text-sm); color: var(--color-text-muted);">{{ parts[0] }}</span>
+                  <span style="font-size: var(--text-sm); color: var(--color-text-primary); font-weight: var(--fw-medium);">{{ parts[1] }}</span>
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+
+          <div id="tab-shipping" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-shipping">
+            <p><strong style="color: var(--color-gold);">Free Standard Shipping</strong> on all orders over $150.</p>
+            <p>Express delivery (2–3 business days) available at checkout. All orders ship in our signature luxury packaging.</p>
+            <p>International shipping available worldwide. Duties and taxes may apply.</p>
+            <p>Returns accepted within 30 days of receipt for unopened, unused products. See our <a href="/policies/refund-policy" style="color: var(--color-gold); text-decoration: underline;">Returns Policy</a> for full details.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    {%- comment -%} Related Products {%- endcomment -%}
+    {%- if section.settings.show_related -%}
+      {%- assign related_products = product.collections.first.products | where: 'id', product.id | first -%}
+      <div style="margin-top: var(--space-24);">
+        <div class="divider-gold"></div>
+        <div style="text-align: center; margin-bottom: var(--space-10);">
+          <p class="section-eyebrow" style="justify-content: center;">Complete the Collection</p>
+          <h2 class="section-title">You May Also Love</h2>
+        </div>
+        <div class="product-grid" style="grid-template-columns: repeat(4, 1fr);">
+          {%- for related in product.collections.first.products limit: 4 -%}
+            {%- unless related.id == product.id -%}
+              {%- render 'product-card', product_card_product: related -%}
+            {%- endunless -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Main",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_related",
+      "label": "Show related products",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

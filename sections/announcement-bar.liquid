@@ -1,0 +1,21 @@
+<div class="announcement-bar" role="status" aria-live="polite">
+  {%- if section.settings.text != blank -%}
+    <p>{{ section.settings.text }}</p>
+  {%- else -%}
+    <p>✦ Free worldwide shipping on orders over $150 &nbsp;|&nbsp; Complimentary samples with every order &nbsp;|&nbsp; Luxury gift wrapping available ✦</p>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement text",
+      "default": "✦ Free worldwide shipping on orders over $150 | Complimentary samples with every order ✦"
+    }
+  ]
+}
+{% endschema %}

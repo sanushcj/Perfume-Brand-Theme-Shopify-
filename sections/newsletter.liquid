@@ -1,0 +1,84 @@
+<section class="newsletter section-padding" id="newsletter" aria-label="Newsletter signup">
+  <div class="container">
+    <div class="newsletter-inner reveal">
+      <div class="newsletter-content">
+        <p class="section-eyebrow" style="justify-content: center;">{{ section.settings.eyebrow | default: 'Stay Connected' }}</p>
+        <h2 class="section-title">{{ section.settings.title | default: 'Join the Inner Circle' }}</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">
+          {{ section.settings.subtitle | default: 'Be the first to know about new releases, exclusive events, and private sales. Members receive complimentary samples with every order.' }}
+        </p>
+
+        <form class="newsletter-form" action="/contact#contact_form" method="post" accept-charset="UTF-8" aria-label="Newsletter signup">
+          <input type="hidden" name="form_type" value="customer">
+          <input type="hidden" name="utf8" value="✓">
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <label for="NewsletterEmail" class="visually-hidden">Email address</label>
+          <input
+            type="email"
+            name="contact[email]"
+            id="NewsletterEmail"
+            class="newsletter-input"
+            placeholder="{{ section.settings.placeholder | default: 'Your email address' }}"
+            required
+            autocomplete="email"
+            aria-label="Email address"
+          >
+          <button type="submit" class="btn btn-primary" id="NewsletterSubmitBtn">
+            {{ section.settings.button_label | default: 'Subscribe' }}
+          </button>
+        </form>
+
+        <p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-4);">
+          {{ section.settings.disclaimer | default: 'No spam, ever. Unsubscribe at any time. By subscribing you agree to our Privacy Policy.' }}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Stay Connected"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Join the Inner Circle"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input placeholder",
+      "default": "Your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter"
+    }
+  ]
+}
+{% endschema %}

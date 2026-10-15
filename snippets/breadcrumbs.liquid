@@ -1,0 +1,30 @@
+{%- assign crumb_type = type | default: '' -%}
+<nav class="breadcrumbs" aria-label="Breadcrumbs">
+  <span class="breadcrumb-item">
+    <a href="{{ routes.root_url }}" style="color: var(--color-text-muted); transition: color var(--transition-fast);" onmouseover="this.style.color='var(--color-gold)'" onmouseout="this.style.color='var(--color-text-muted)'">Home</a>
+  </span>
+
+  {%- if crumb_type == 'product' -%}
+    {%- if product.collections.size > 0 -%}
+      <span class="breadcrumb-item">
+        <a href="{{ product.collections.first.url }}" style="color: var(--color-text-muted); transition: color var(--transition-fast);" onmouseover="this.style.color='var(--color-gold)'" onmouseout="this.style.color='var(--color-text-muted)'">
+          {{ product.collections.first.title }}
+        </a>
+      </span>
+    {%- endif -%}
+    <span class="breadcrumb-item">{{ product.title | truncate: 30 }}</span>
+
+  {%- elsif crumb_type == 'collection' -%}
+    <span class="breadcrumb-item">Shop</span>
+    {%- unless collection.handle == 'all' -%}
+      <span class="breadcrumb-item">{{ collection.title }}</span>
+    {%- endunless -%}
+
+  {%- elsif crumb_type == 'page' -%}
+    <span class="breadcrumb-item">{{ page.title }}</span>
+
+  {%- elsif crumb_type == 'blog' -%}
+    <span class="breadcrumb-item">{{ blog.title }}</span>
+
+  {%- endif -%}
+</nav>

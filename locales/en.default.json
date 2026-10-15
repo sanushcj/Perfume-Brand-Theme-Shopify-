@@ -1,0 +1,61 @@
+{
+  "general": {
+    "title": "Lumière Noir",
+    "description": "Premium luxury perfumes"
+  },
+  "accessibility": {
+    "skip_to_text": "Skip to content"
+  },
+  "layout": {
+    "cart": {
+      "title": "Cart",
+      "empty": "Your cart is empty",
+      "item_count": {
+        "one": "1 item",
+        "other": "{{ count }} items"
+      }
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable",
+      "quantity": {
+        "label": "Quantity"
+      }
+    }
+  },
+  "sections": {
+    "newsletter": {
+      "title": "Join the Inner Circle",
+      "placeholder": "Your email address",
+      "button_label": "Subscribe",
+      "success": "Thank you for subscribing!"
+    },
+    "contact_form": {
+      "post_success": "Thanks for contacting us. We'll be in touch shortly.",
+      "subject": "Subject",
+      "message": "Message",
+      "email": "Email",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "phone": "Phone",
+      "send": "Send Message"
+    }
+  },
+  "navigation": {
+    "breadcrumbs": {
+      "home": "Home"
+    }
+  },
+  "search": {
+    "search": "Search",
+    "placeholder": "Search fragrances...",
+    "no_results": "No results for \"{{ terms }}\"",
+    "results_with_count": {
+      "one": "1 result for \"{{ terms }}\"",
+      "other": "{{ count }} results for \"{{ terms }}\""
+    }
+  }
+}

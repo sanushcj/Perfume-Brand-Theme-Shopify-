@@ -1,0 +1,147 @@
+<section class="testimonials" id="testimonials" aria-label="Customer reviews">
+  <div class="container">
+
+    <div class="testimonials-header reveal">
+      <p class="section-eyebrow">{{ section.settings.eyebrow | default: 'What People Say' }}</p>
+      <h2 class="section-title">{{ section.settings.title | default: 'Loved by Fragrance Connoisseurs' }}</h2>
+    </div>
+
+    <div class="testimonials-slider">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'testimonial' -%}
+          <div class="testimonial-card reveal reveal-delay-{{ forloop.index }}" {{ block.shopify_attributes }}>
+            <div class="testimonial-quote-icon" aria-hidden="true">"</div>
+
+            <div class="stars" aria-label="{{ block.settings.rating | default: 5 }} out of 5 stars">
+              {%- assign rating = block.settings.rating | default: 5 | times: 1 -%}
+              {%- for i in (1..5) -%}
+                <span class="star" aria-hidden="true">
+                  {%- if i <= rating -%}★{%- else -%}☆{%- endif -%}
+                </span>
+              {%- endfor -%}
+            </div>
+
+            <blockquote class="testimonial-text">
+              {{ block.settings.text | default: 'An absolutely extraordinary fragrance. The depth and longevity are unlike anything I have experienced. This is not a perfume — it is a work of art.' }}
+            </blockquote>
+
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" aria-hidden="true">
+                {{ block.settings.name | default: 'A' | slice: 0 }}
+              </div>
+              <div class="testimonial-author-info">
+                <div class="testimonial-author-name">{{ block.settings.name | default: 'Anonymous' }}</div>
+                <div class="testimonial-author-meta">{{ block.settings.location | default: 'Verified Buyer' }}</div>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        {%- comment -%} Default testimonials {%- endcomment -%}
+        {%- assign testimonials = 'Sophia R.|Paris, France|This is not just a fragrance — it is a memory. Nuit Éternelle takes me back to moonlit evenings in Marrakech. I have been wearing it every day for six months.;Marcus D.|New York, USA|I have worn fragrance my entire life, but nothing has drawn compliments quite like Aube Dorée. The sillage is extraordinary. Three people asked me what I was wearing in a single afternoon.;Isabella M.|Milan, Italy|The packaging alone is gallery-worthy. But the scent inside surpasses even that. Perfectly balanced, hauntingly beautiful, and it lasts from morning until midnight. Worth every penny.' | split: ';' -%}
+        {%- for t in testimonials -%}
+          {%- assign parts = t | split: '|' -%}
+          <div class="testimonial-card reveal reveal-delay-{{ forloop.index }}">
+            <div class="testimonial-quote-icon" aria-hidden="true">"</div>
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote class="testimonial-text">{{ parts[2] }}</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">{{ parts[0] | slice: 0 }}</div>
+              <div class="testimonial-author-info">
+                <div class="testimonial-author-name">{{ parts[0] }}</div>
+                <div class="testimonial-author-meta">{{ parts[1] }} · Verified Buyer</div>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "What People Say"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Loved by Fragrance Connoisseurs"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review text"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Reviewer name"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location / Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Sophia R.",
+            "location": "Paris, France",
+            "rating": 5,
+            "text": "This is not just a fragrance — it is a memory. Nuit Éternelle takes me back to moonlit evenings in Marrakech."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Marcus D.",
+            "location": "New York, USA",
+            "rating": 5,
+            "text": "Nothing has drawn compliments quite like Aube Dorée. Three people asked me what I was wearing in a single afternoon."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Isabella M.",
+            "location": "Milan, Italy",
+            "rating": 5,
+            "text": "Perfectly balanced, hauntingly beautiful, and it lasts from morning until midnight. Worth every penny."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

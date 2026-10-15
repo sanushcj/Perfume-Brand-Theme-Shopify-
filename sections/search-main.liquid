@@ -1,0 +1,88 @@
+<div class="search-page">
+  <div class="container">
+
+    <div style="text-align: center; margin-bottom: var(--space-12);">
+      <p class="section-eyebrow" style="justify-content: center;">Find Your Scent</p>
+      <h1 class="section-title">Search</h1>
+    </div>
+
+    <form class="search-form" action="{{ routes.search_url }}" method="get" role="search" aria-label="Search our collection">
+      <input type="hidden" name="type" value="product">
+      <label for="SearchInput" class="visually-hidden">Search</label>
+      <input
+        type="search"
+        name="q"
+        id="SearchInput"
+        class="search-input"
+        placeholder="Search fragrances..."
+        value="{{ search.terms | escape }}"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        aria-label="Search our collection"
+      >
+      <button type="submit" class="search-submit" aria-label="Submit search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="M21 21l-4.35-4.35"/>
+        </svg>
+      </button>
+    </form>
+
+    {%- if search.performed -%}
+      <div style="text-align: center; margin-bottom: var(--space-8);">
+        <p style="color: var(--color-text-muted); font-size: var(--text-sm);">
+          {%- if search.results_count == 0 -%}
+            No results for <strong style="color: var(--color-text-primary);">"{{ search.terms }}"</strong>
+          {%- else -%}
+            {{ search.results_count }} result{%- if search.results_count != 1 -%}s{%- endif -%} for <strong style="color: var(--color-text-primary);">"{{ search.terms }}"</strong>
+          {%- endif -%}
+        </p>
+      </div>
+
+      {%- if search.results.size > 0 -%}
+        <div class="product-grid">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}
+              <div class="reveal">
+                {%- render 'product-card', product_card_product: item -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <div style="text-align: center; padding: var(--space-16) 0;">
+          <div style="font-size: 64px; margin-bottom: var(--space-6);">🔍</div>
+          <h2 style="font-family: var(--font-display); font-size: var(--text-2xl); color: var(--color-text-secondary); margin-bottom: var(--space-4);">No fragrances found</h2>
+          <p style="color: var(--color-text-muted); margin-bottom: var(--space-8);">Try different keywords or browse our full collection below.</p>
+          <a href="{{ routes.collections_url }}/all" class="btn btn-primary">Browse All Fragrances</a>
+        </div>
+      {%- endif -%}
+
+    {%- else -%}
+
+      {%- comment -%} Popular searches {%- endcomment -%}
+      <div style="text-align: center; padding: var(--space-8) 0;">
+        <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-4);">Popular searches</p>
+        <div style="display: flex; gap: var(--space-2); justify-content: center; flex-wrap: wrap;">
+          <a href="{{ routes.search_url }}?type=product&q=oud" class="filter-chip">Oud</a>
+          <a href="{{ routes.search_url }}?type=product&q=rose" class="filter-chip">Rose</a>
+          <a href="{{ routes.search_url }}?type=product&q=musk" class="filter-chip">Musk</a>
+          <a href="{{ routes.search_url }}?type=product&q=flagship" class="filter-chip">Flagship</a>
+          <a href="{{ routes.search_url }}?type=product&q=unisex" class="filter-chip">Unisex</a>
+          <a href="{{ routes.search_url }}?type=product&q=gift" class="filter-chip">Gift Sets</a>
+        </div>
+      </div>
+
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Search Main",
+  "settings": []
+}
+{% endschema %}

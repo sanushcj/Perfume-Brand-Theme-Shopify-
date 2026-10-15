@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "page-contact": {
+      "type": "page-contact",
+      "settings": {
+        "email": "hello@lumierenoir.com",
+        "phone": "+1 (800) 555-NOIR",
+        "address": "12 Rue du Faubourg, Paris, France 75008",
+        "hours": "Mon – Fri: 9am – 6pm CET",
+        "show_map": false
+      }
+    }
+  },
+  "order": ["page-contact"]
+}

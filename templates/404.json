@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "page-404": {
+      "type": "page-404",
+      "settings": {}
+    }
+  },
+  "order": ["page-404"]
+}

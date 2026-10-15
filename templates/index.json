@@ -1,0 +1,167 @@
+{
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "text": "✦ Free worldwide shipping on orders over $150  |  Complimentary samples with every order  |  Luxury gift wrapping available ✦"
+      }
+    },
+    "hero-banner": {
+      "type": "hero-banner",
+      "settings": {
+        "eyebrow_text": "New Arrival 2024",
+        "heading_line1": "The Art of",
+        "heading_line2": "Invisible Luxury",
+        "subheading": "Two masterpieces born from rare ingredients and a century of olfactory tradition. Each bottle holds a story that lingers long after you leave the room.",
+        "cta_primary_label": "Shop Flagships",
+        "cta_secondary_label": "Explore Collection",
+        "stat_1_number": "24h",
+        "stat_1_label": "Longevity",
+        "stat_2_number": "100%",
+        "stat_2_label": "Natural Oils",
+        "stat_3_number": "50+",
+        "stat_3_label": "Rare Ingredients",
+        "badge_title": "Bestseller 2024",
+        "badge_sub": "4.9 ★ 2.4k reviews"
+      }
+    },
+    "featured-flagships": {
+      "type": "featured-collection",
+      "blocks": {
+        "flagship-1": {
+          "type": "flagship",
+          "settings": {
+            "name": "Nuit Éternelle",
+            "category": "Eau de Parfum Intense",
+            "description": "A nocturnal masterpiece built on the darkest, richest oud from the forests of Laos, softened by Bulgarian rose and warm ambergris. Made for those who leave a lasting impression.",
+            "notes": "Oud, Bulgarian Rose, Ambergris, Sandalwood",
+            "price": "$220"
+          }
+        },
+        "flagship-2": {
+          "type": "flagship",
+          "settings": {
+            "name": "Aube Dorée",
+            "category": "Eau de Parfum",
+            "description": "A golden sunrise captured in fragrance — vibrant bergamot opens to reveal jasmine absolute and a heart of warm vetiver, anchored by a silken musk base.",
+            "notes": "Bergamot, Jasmine Absolute, Vetiver, Musk",
+            "price": "$195"
+          }
+        }
+      },
+      "block_order": ["flagship-1", "flagship-2"],
+      "settings": {
+        "eyebrow": "New Releases",
+        "title": "Our Flagship Collection",
+        "subtitle": "Two extraordinary fragrances meticulously crafted from the rarest ingredients the world has to offer.",
+        "show_view_all": true
+      }
+    },
+    "brand-story": {
+      "type": "brand-story",
+      "blocks": {
+        "pillar-1": {
+          "type": "pillar",
+          "settings": {
+            "icon": "🌿",
+            "title": "Natural Origins",
+            "text": "Every ingredient sourced directly from its native habitat, ethically and sustainably."
+          }
+        },
+        "pillar-2": {
+          "type": "pillar",
+          "settings": {
+            "icon": "⚗️",
+            "title": "Master Craftsmanship",
+            "text": "Created by fourth-generation perfumers with decades of olfactory expertise."
+          }
+        },
+        "pillar-3": {
+          "type": "pillar",
+          "settings": {
+            "icon": "🕰️",
+            "title": "Timeless Quality",
+            "text": "Aged to perfection. Every batch rests for a minimum of six months before bottling."
+          }
+        },
+        "pillar-4": {
+          "type": "pillar",
+          "settings": {
+            "icon": "🌍",
+            "title": "Responsibly Made",
+            "text": "Cruelty-free, sustainably sourced, and packaged in recyclable luxury materials."
+          }
+        }
+      },
+      "block_order": ["pillar-1", "pillar-2", "pillar-3", "pillar-4"],
+      "settings": {
+        "eyebrow": "Our Heritage",
+        "title": "Crafted With Purpose, Worn With Intention",
+        "founded_year": "1998",
+        "cta_label": "Read Our Story"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "review-1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "This is not just a fragrance — it is a memory. Nuit Éternelle takes me back to moonlit evenings in Marrakech. I have been wearing it every day for six months and people stop me on the street.",
+            "name": "Sophia R.",
+            "location": "Paris, France"
+          }
+        },
+        "review-2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "I have worn fragrance my entire life, but nothing has drawn compliments quite like Aube Dorée. The sillage is extraordinary. Three people asked me what I was wearing in a single afternoon.",
+            "name": "Marcus D.",
+            "location": "New York, USA"
+          }
+        },
+        "review-3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "The packaging alone is gallery-worthy. But the scent inside surpasses even that. Perfectly balanced, hauntingly beautiful, and it lasts from morning until midnight. Worth every penny.",
+            "name": "Isabella M.",
+            "location": "Milan, Italy"
+          }
+        }
+      },
+      "block_order": ["review-1", "review-2", "review-3"],
+      "settings": {
+        "eyebrow": "What People Say",
+        "title": "Loved by Fragrance Connoisseurs"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Stay Connected",
+        "title": "Join the Inner Circle",
+        "subtitle": "Be the first to know about new releases, exclusive events, and private sales. Members receive complimentary samples with every order.",
+        "placeholder": "Your email address",
+        "button_label": "Subscribe"
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "brand_desc": "Purveyors of rare and exceptional fragrances for those who understand that true luxury is found in the invisible."
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "hero-banner",
+    "featured-flagships",
+    "brand-story",
+    "testimonials",
+    "newsletter",
+    "footer"
+  ]
+}

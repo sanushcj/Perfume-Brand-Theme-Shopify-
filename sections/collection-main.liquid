@@ -1,0 +1,130 @@
+<div class="collection-header">
+  <div class="container">
+    {%- render 'breadcrumbs', type: 'collection' -%}
+    <p class="section-eyebrow" style="justify-content: center;">{{ section.settings.eyebrow | default: 'Our Collection' }}</p>
+    <h1 class="section-title" style="text-align: center;">
+      {{ collection.title | default: 'All Fragrances' }}
+    </h1>
+    {%- if collection.description != blank -%}
+      <p class="section-subtitle" style="text-align: center; margin: var(--space-4) auto 0;">
+        {{ collection.description | strip_html | truncatewords: 30 }}
+      </p>
+    {%- else -%}
+      <p class="section-subtitle" style="text-align: center; margin: var(--space-4) auto 0;">
+        Discover our complete range of premium fragrances — from our celebrated flagship releases to our beloved classic collection, each one a masterpiece in its own right.
+      </p>
+    {%- endif -%}
+  </div>
+</div>
+
+<div class="container section-padding" style="padding-top: var(--space-4);">
+
+  {%- comment -%} Toolbar {%- endcomment -%}
+  <div class="collection-toolbar">
+    <div class="collection-filters" role="group" aria-label="Filter products">
+      <button class="filter-chip active" data-filter="all" id="FilterAll">All</button>
+      {%- assign seen_types = '' -%}
+      {%- for product in collection.products -%}
+        {%- unless product.type == blank or seen_types contains product.type -%}
+          {%- assign seen_types = seen_types | append: product.type | append: ',' -%}
+          <button class="filter-chip" data-filter="{{ product.type | downcase | replace: ' ', '-' }}" id="Filter{{ product.type | downcase | replace: ' ', '-' | replace: "'", '' }}">
+            {{ product.type }}
+          </button>
+        {%- endunless -%}
+      {%- endfor -%}
+      {%- comment -%} Fallback filters if no product types set {%- endcomment -%}
+      {%- if seen_types == blank -%}
+        <button class="filter-chip" data-filter="flagship" id="FilterFlagship">Flagship</button>
+        <button class="filter-chip" data-filter="for-him" id="FilterHim">For Him</button>
+        <button class="filter-chip" data-filter="for-her" id="FilterHer">For Her</button>
+        <button class="filter-chip" data-filter="unisex" id="FilterUnisex">Unisex</button>
+      {%- endif -%}
+    </div>
+
+    <div class="collection-sort">
+      <label for="SortBy" class="sort-label">Sort by</label>
+      <select id="SortBy" class="sort-select" aria-label="Sort products">
+        {%- assign sort_options = 'manual,Featured|price-ascending,Price: Low to High|price-descending,Price: High to Low|title-ascending,A to Z|title-descending,Z to A|created-descending,Newest|best-selling,Best Selling' | split: '|' -%}
+        {%- for option in sort_options -%}
+          {%- assign parts = option | split: ',' -%}
+          <option value="{{ parts[0] }}"{% if collection.sort_by == parts[0] %} selected{% endif %}>{{ parts[1] }}</option>
+        {%- endfor -%}
+      </select>
+    </div>
+
+    <div class="collection-count" aria-live="polite">
+      <span>{{ collection.products_count }} {%- if collection.products_count == 1 -%}product{%- else -%}products{%- endif -%}</span>
+    </div>
+  </div>
+
+  {%- comment -%} Product Grid {%- endcomment -%}
+  {%- if collection.products.size > 0 -%}
+    <div class="product-grid" id="ProductGrid">
+      {%- for product in collection.products -%}
+        <div class="reveal reveal-delay-{{ forloop.index | modulo: 4 | plus: 1 }}">
+          {%- render 'product-card', product_card_product: product -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- comment -%} Pagination {%- endcomment -%}
+    {%- if paginate.pages > 1 -%}
+      <div style="display: flex; justify-content: center; gap: var(--space-2); margin-top: var(--space-12);" aria-label="Pagination">
+        {%- if paginate.previous -%}
+          <a href="{{ paginate.previous.url }}" class="btn btn-outline btn-sm">← Previous</a>
+        {%- endif -%}
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}
+            <a href="{{ part.url }}" class="btn btn-ghost btn-sm">{{ part.title }}</a>
+          {%- else -%}
+            <span class="btn btn-primary btn-sm">{{ part.title }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if paginate.next -%}
+          <a href="{{ paginate.next.url }}" class="btn btn-outline btn-sm">Next →</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+  {%- else -%}
+    <div style="text-align: center; padding: var(--space-24) 0;">
+      <div style="font-size: 64px; margin-bottom: var(--space-6);">🌸</div>
+      <h2 style="font-family: var(--font-display); font-size: var(--text-3xl); color: var(--color-text-secondary); margin-bottom: var(--space-4);">No products found</h2>
+      <p style="color: var(--color-text-muted); margin-bottom: var(--space-8);">Try adjusting your filters or browse our full collection.</p>
+      <a href="{{ routes.collections_url }}/all" class="btn btn-primary">View All Fragrances</a>
+    </div>
+  {%- endif -%}
+
+</div>
+
+<script>
+  // Sort functionality
+  document.getElementById('SortBy')?.addEventListener('change', function() {
+    const url = new URL(window.location.href);
+    url.searchParams.set('sort_by', this.value);
+    window.location.href = url.toString();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Collection Main",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Our Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "default": 24
+    }
+  ]
+}
+{% endschema %}

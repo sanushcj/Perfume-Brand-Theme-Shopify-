@@ -1,0 +1,173 @@
+<section class="brand-story section-padding-lg" id="brand-story" aria-label="Our story">
+  <div class="container">
+    <div class="brand-story-layout">
+
+      {%- comment -%} Visual {%- endcomment -%}
+      <div class="brand-story-visual reveal">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 700 }}"
+            alt="{{ section.settings.image.alt | default: 'Our story' | escape }}"
+            class="brand-story-image"
+            loading="lazy"
+            width="700"
+            height="900"
+          >
+        {%- else -%}
+          <div class="brand-story-image" style="
+            aspect-ratio: 3/4;
+            background: linear-gradient(145deg, #12100e 0%, #1e1810 30%, #251b0e 60%, #12100e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+          ">
+            <div style="font-size: 80px;">✦</div>
+            <div style="font-family: var(--font-display); font-size: var(--text-2xl); color: var(--color-gold); text-align: center; letter-spacing: 0.1em;">Est. {{ section.settings.founded_year | default: '1998' }}</div>
+            <div style="font-size: var(--text-sm); color: var(--color-text-muted); letter-spacing: 0.2em; text-transform: uppercase;">Haute Parfumerie</div>
+          </div>
+        {%- endif -%}
+        <div class="brand-story-accent" aria-hidden="true"></div>
+      </div>
+
+      {%- comment -%} Content {%- endcomment -%}
+      <div class="brand-story-content">
+        <p class="section-eyebrow reveal">{{ section.settings.eyebrow | default: 'Our Heritage' }}</p>
+        <h2 class="section-title reveal reveal-delay-1">{{ section.settings.title | default: 'Crafted With Purpose, Worn With Intention' }}</h2>
+
+        <div class="reveal reveal-delay-2">
+          {%- if section.settings.text != blank -%}
+            <p class="brand-story-text">{{ section.settings.text }}</p>
+          {%- else -%}
+            <p class="brand-story-text">
+              For over two decades, our master perfumers have traveled the world's most remote corners — the oud forests of Southeast Asia, the jasmine fields of Grasse, the ambergris shores of the Maldives — sourcing ingredients that cannot be replicated by science alone.
+            </p>
+            <p class="brand-story-text" style="margin-top: var(--space-4);">
+              Every fragrance we create is a testament to patience. To the belief that true luxury cannot be rushed. That the most beautiful things in life deserve time — time to be found, time to be understood, time to be shared.
+            </p>
+          {%- endif -%}
+        </div>
+
+        <div class="brand-pillars reveal reveal-delay-3">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'pillar' -%}
+              <div class="brand-pillar" {{ block.shopify_attributes }}>
+                <div class="brand-pillar-icon">{{ block.settings.icon | default: '✦' }}</div>
+                <div class="brand-pillar-title">{{ block.settings.title | default: 'Excellence' }}</div>
+                <div class="brand-pillar-text">{{ block.settings.text | default: 'Uncompromising standards in every bottle.' }}</div>
+              </div>
+            {%- endif -%}
+          {%- else -%}
+            <div class="brand-pillar">
+              <div class="brand-pillar-icon">🌿</div>
+              <div class="brand-pillar-title">Natural Origins</div>
+              <div class="brand-pillar-text">Every ingredient sourced directly from its native habitat, ethically and sustainably.</div>
+            </div>
+            <div class="brand-pillar">
+              <div class="brand-pillar-icon">⚗️</div>
+              <div class="brand-pillar-title">Master Craftsmanship</div>
+              <div class="brand-pillar-text">Created by fourth-generation perfumers with decades of olfactory expertise.</div>
+            </div>
+            <div class="brand-pillar">
+              <div class="brand-pillar-icon">🕰️</div>
+              <div class="brand-pillar-title">Timeless Quality</div>
+              <div class="brand-pillar-text">Aged to perfection. Every batch rests for a minimum of six months before bottling.</div>
+            </div>
+            <div class="brand-pillar">
+              <div class="brand-pillar-icon">🌍</div>
+              <div class="brand-pillar-title">Responsibly Made</div>
+              <div class="brand-pillar-text">Cruelty-free, sustainably sourced, and packaged in recyclable luxury materials.</div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if section.settings.cta_label != blank -%}
+          <div class="reveal reveal-delay-4" style="margin-top: var(--space-6);">
+            <a href="{{ section.settings.cta_url | default: '/pages/about' }}" class="btn btn-outline">
+              {{ section.settings.cta_label }}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand Story",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Story image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Our Heritage"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Crafted With Purpose, Worn With Intention"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Story text"
+    },
+    {
+      "type": "text",
+      "id": "founded_year",
+      "label": "Founded year",
+      "default": "1998"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Read Our Story"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Brand Pillar",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji)",
+          "default": "✦"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Story"
+    }
+  ]
+}
+{% endschema %}

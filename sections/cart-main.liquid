@@ -1,0 +1,193 @@
+<div class="cart-page">
+  <div class="container">
+
+    <div style="margin-bottom: var(--space-8);">
+      <p class="section-eyebrow">Your Selection</p>
+      <h1 class="section-title">Shopping Cart</h1>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+
+      <div class="cart-layout">
+
+        {%- comment -%} Cart Items {%- endcomment -%}
+        <div>
+          <div class="cart-header">
+            <p style="font-size: var(--text-sm); color: var(--color-text-muted);">
+              {{ cart.item_count }} {%- if cart.item_count == 1 -%}item{%- else -%}items{%- endif -%}
+            </p>
+          </div>
+
+          {%- for item in cart.items -%}
+            <div class="cart-item" id="CartItem{{ item.index | plus: 1 }}">
+              <a href="{{ item.url }}">
+                {%- if item.image -%}
+                  <img
+                    src="{{ item.image | image_url: width: 200 }}"
+                    alt="{{ item.product.title | escape }}"
+                    class="cart-item-image"
+                    loading="lazy"
+                    width="100"
+                    height="120"
+                  >
+                {%- else -%}
+                  <div class="cart-item-image" style="display:flex; align-items:center; justify-content:center; font-size:32px; background:var(--color-bg-card);">🌸</div>
+                {%- endif -%}
+              </a>
+
+              <div class="cart-item-info">
+                <a href="{{ item.url }}" class="cart-item-name">{{ item.product.title }}</a>
+                {%- unless item.variant.title == 'Default Title' -%}
+                  <div class="cart-item-variant">{{ item.variant.title }}</div>
+                {%- endunless -%}
+
+                {%- if item.original_price != item.final_price -%}
+                  <div style="font-size: var(--text-xs); color: var(--color-success);">
+                    Discount applied
+                  </div>
+                {%- endif -%}
+
+                <div class="cart-item-bottom">
+                  <div class="quantity-selector">
+                    <button
+                      type="button"
+                      class="qty-btn"
+                      data-action="decrease"
+                      data-variant="{{ item.variant_id }}"
+                      data-qty="{{ item.quantity }}"
+                      aria-label="Decrease quantity"
+                    >−</button>
+                    <input
+                      type="number"
+                      class="qty-input"
+                      value="{{ item.quantity }}"
+                      min="0"
+                      max="99"
+                      aria-label="Quantity for {{ item.product.title | escape }}"
+                      data-variant="{{ item.variant_id }}"
+                    >
+                    <button
+                      type="button"
+                      class="qty-btn"
+                      data-action="increase"
+                      data-variant="{{ item.variant_id }}"
+                      data-qty="{{ item.quantity }}"
+                      aria-label="Increase quantity"
+                    >+</button>
+                  </div>
+                  <div class="cart-item-price">{{ item.final_line_price | money }}</div>
+                </div>
+
+                <button
+                  class="cart-item-remove"
+                  data-variant="{{ item.variant_id }}"
+                  aria-label="Remove {{ item.product.title | escape }} from cart"
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          {%- endfor -%}
+
+          <div style="margin-top: var(--space-8);">
+            <a href="{{ routes.collections_url }}/all" class="btn btn-ghost btn-sm">
+              ← Continue Shopping
+            </a>
+          </div>
+        </div>
+
+        {%- comment -%} Cart Summary {%- endcomment -%}
+        <div>
+          <div class="cart-summary">
+            <h2 class="cart-summary-title">Order Summary</h2>
+
+            {%- comment -%} Promo code {%- endcomment -%}
+            <div class="cart-promo">
+              <input
+                type="text"
+                class="cart-promo-input"
+                placeholder="Promo code"
+                id="CartPromoCode"
+                aria-label="Enter promo code"
+              >
+              <button type="button" class="btn btn-outline btn-sm" id="CartPromoApply">Apply</button>
+            </div>
+
+            <div class="cart-summary-rows">
+              <div class="cart-summary-row">
+                <span>Subtotal</span>
+                <span>{{ cart.original_total_price | money }}</span>
+              </div>
+              {%- if cart.total_discount > 0 -%}
+                <div class="cart-summary-row" style="color: var(--color-success);">
+                  <span>Discounts</span>
+                  <span>−{{ cart.total_discount | money }}</span>
+                </div>
+              {%- endif -%}
+              <div class="cart-summary-row">
+                <span>Shipping</span>
+                <span style="color: var(--color-success);">
+                  {%- if cart.total_price >= 15000 -%}
+                    Free
+                  {%- else -%}
+                    Calculated at checkout
+                  {%- endif -%}
+                </span>
+              </div>
+              <div class="cart-summary-row total">
+                <span>Total</span>
+                <span class="value">{{ cart.total_price | money }}</span>
+              </div>
+            </div>
+
+            <div class="cart-checkout-actions">
+              <a
+                href="{{ routes.checkout_url }}"
+                class="btn btn-primary btn-full btn-lg cart-checkout-btn"
+                id="CartCheckoutPage"
+              >
+                Proceed to Checkout
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+
+              {%- if additional_checkout_buttons -%}
+                <div style="position:relative; text-align:center; color: var(--color-text-muted); font-size: var(--text-xs);">
+                  <span style="background: var(--color-bg-card); padding: 0 var(--space-3); position:relative; z-index:1;">or pay with</span>
+                  <hr style="position:absolute; top:50%; left:0; right:0; border:none; border-top:1px solid var(--color-border);">
+                </div>
+                <div class="shopify-payment-button">
+                  {{ content_for_additional_checkout_buttons }}
+                </div>
+              {%- endif -%}
+            </div>
+
+            <p style="font-size: var(--text-xs); color: var(--color-text-muted); text-align:center; margin-top: var(--space-4);">
+              🔒 Secure, encrypted checkout · SSL protected
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    {%- else -%}
+
+      <div style="text-align: center; padding: var(--space-32) 0;">
+        <div style="font-size: 80px; margin-bottom: var(--space-6);">🛒</div>
+        <h2 style="font-family: var(--font-display); font-size: var(--text-4xl); color: var(--color-text-secondary); margin-bottom: var(--space-4);">Your cart is empty</h2>
+        <p style="color: var(--color-text-muted); font-size: var(--text-lg); margin-bottom: var(--space-8);">
+          Discover our exquisite collection of premium fragrances.
+        </p>
+        <a href="{{ routes.collections_url }}/all" class="btn btn-primary btn-lg">Explore Collection</a>
+      </div>
+
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart Main",
+  "settings": []
+}
+{% endschema %}

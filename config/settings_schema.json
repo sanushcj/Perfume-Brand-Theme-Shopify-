@@ -1,0 +1,114 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Lumière Noir",
+    "theme_version": "1.0.0",
+    "theme_author": "Antigravity",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Brand Name",
+        "default": "Lumière Noir"
+      },
+      {
+        "type": "text",
+        "id": "brand_tagline",
+        "label": "Brand Tagline",
+        "default": "Haute Parfumerie"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_gold",
+        "label": "Gold Accent Color",
+        "default": "#c9a84c"
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_announcement_bar",
+        "label": "Show announcement bar",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter_link",
+        "label": "Twitter / X URL"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_link",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest_link",
+        "label": "Pinterest URL"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube_link",
+        "label": "YouTube URL"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image"
+      }
+    ]
+  },
+  {
+    "name": "SEO",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "social_share_image",
+        "label": "Default social sharing image"
+      }
+    ]
+  },
+  {
+    "name": "Custom Code",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "custom_head_code",
+        "label": "Custom <head> code"
+      },
+      {
+        "type": "textarea",
+        "id": "custom_footer_code",
+        "label": "Custom footer code"
+      }
+    ]
+  }
+]

@@ -1,0 +1,21 @@
+<div class="page-404">
+  <div class="page-404-content">
+    <div class="page-404-number" aria-hidden="true">404</div>
+    <p class="section-eyebrow" style="justify-content: center;">Lost in the Mist</p>
+    <h1 class="section-title">This Page Has Evaporated</h1>
+    <p style="font-size: var(--text-lg); color: var(--color-text-muted); max-width: 400px; text-align: center; line-height: 1.7; font-weight: var(--fw-light);">
+      Like an elusive fragrance note, this page seems to have vanished. Let us guide you back.
+    </p>
+    <div style="display: flex; gap: var(--space-4); flex-wrap: wrap; justify-content: center; margin-top: var(--space-4);">
+      <a href="{{ routes.root_url }}" class="btn btn-primary btn-lg">Go Home</a>
+      <a href="{{ routes.collections_url }}/all" class="btn btn-outline btn-lg">Shop Collection</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "404 Page",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "product-main": {
+      "type": "product-main",
+      "settings": {
+        "show_related": true
+      }
+    }
+  },
+  "order": ["product-main"]
+}

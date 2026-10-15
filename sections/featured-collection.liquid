@@ -1,0 +1,308 @@
+{%- assign flagship_collection = collections[section.settings.flagship_collection] -%}
+
+<section class="flagships section-padding-lg" id="flagships" aria-label="Flagship fragrances">
+  <div class="container">
+
+    <div class="flagships-header reveal">
+      <p class="section-eyebrow">{{ section.settings.eyebrow | default: 'New Releases' }}</p>
+      <h2 class="section-title">{{ section.settings.title | default: 'Our Flagship Collection' }}</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">
+        {{ section.settings.subtitle | default: 'Two extraordinary fragrances meticulously crafted from the rarest ingredients the world has to offer. Born for those who refuse to be ordinary.' }}
+      </p>
+    </div>
+
+    <div class="flagship-grid">
+      {%- if section.blocks.size > 0 -%}
+
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'flagship' -%}
+            {%- assign fp = all_products[block.settings.product] -%}
+            <div class="flagship-card reveal reveal-delay-{{ forloop.index }}" {{ block.shopify_attributes }}>
+
+              <div class="flagship-card-visual">
+                {%- if block.settings.image != blank -%}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 800 }}"
+                    alt="{{ block.settings.image.alt | default: fp.title | escape }}"
+                    class="flagship-card-image"
+                    loading="lazy"
+                    width="800"
+                    height="1000"
+                  >
+                {%- elsif fp != blank and fp.featured_image -%}
+                  <img
+                    src="{{ fp.featured_image | image_url: width: 800 }}"
+                    alt="{{ fp.featured_image.alt | default: fp.title | escape }}"
+                    class="flagship-card-image"
+                    loading="lazy"
+                    width="800"
+                    height="1000"
+                  >
+                {%- else -%}
+                  <div style="height:100%; display:flex; align-items:center; justify-content:center; background:linear-gradient(145deg,#12100e,#1e1810); font-size:80px;">
+                    {%- if forloop.index == 1 -%}🌙{%- else -%}🌅{%- endif -%}
+                  </div>
+                {%- endif -%}
+
+                <div class="flagship-card-overlay"></div>
+                <span class="flagship-badge">New Flagship</span>
+              </div>
+
+              <div class="flagship-card-body">
+                <div class="flagship-card-category">
+                  {{ block.settings.category | default: 'Eau de Parfum Intense' }}
+                </div>
+                <h3 class="flagship-card-name">
+                  {{ block.settings.name | default: fp.title | default: 'Signature Fragrance' }}
+                </h3>
+                <p class="flagship-card-desc">
+                  {{ block.settings.description | default: fp.description | strip_html | truncatewords: 35 | default: 'A masterpiece of olfactory art, weaving together rare notes in perfect harmony. This fragrance tells a story of sophistication and timeless elegance.' }}
+                </p>
+
+                {%- if block.settings.notes != blank -%}
+                  <div class="flagship-notes">
+                    {%- assign notes = block.settings.notes | split: ',' -%}
+                    {%- for note in notes -%}
+                      <span class="flagship-note-tag">{{ note | strip }}</span>
+                    {%- endfor -%}
+                  </div>
+                {%- else -%}
+                  <div class="flagship-notes">
+                    <span class="flagship-note-tag">Oud</span>
+                    <span class="flagship-note-tag">Bergamot</span>
+                    <span class="flagship-note-tag">Ambergris</span>
+                    <span class="flagship-note-tag">Rose</span>
+                  </div>
+                {%- endif -%}
+
+                <div class="flagship-card-footer">
+                  <div class="flagship-price">
+                    <span class="flagship-price-label">Starting from</span>
+                    <span class="flagship-price-value">
+                      {%- if fp != blank -%}
+                        {{ fp.price | money }}
+                      {%- else -%}
+                        {{ block.settings.price | default: '$185' }}
+                      {%- endif -%}
+                    </span>
+                  </div>
+                  <a
+                    href="{{ fp.url | default: block.settings.link | default: '/collections/flagship' }}"
+                    class="btn btn-primary"
+                    aria-label="Shop {{ block.settings.name | default: fp.title | default: 'this flagship' }}"
+                  >
+                    Shop Now
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+      {%- else -%}
+
+        {%- comment -%} Fallback: Show first 2 products from flagship collection {%- endcomment -%}
+        {%- if flagship_collection != blank -%}
+          {%- for product in flagship_collection.products limit: 2 -%}
+            <div class="flagship-card reveal reveal-delay-{{ forloop.index }}">
+              <div class="flagship-card-visual">
+                {%- if product.featured_image -%}
+                  <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.featured_image.alt | escape }}" class="flagship-card-image" loading="lazy">
+                {%- else -%}
+                  <div style="height:100%; display:flex; align-items:center; justify-content:center; font-size:80px;">🌸</div>
+                {%- endif -%}
+                <div class="flagship-card-overlay"></div>
+                <span class="flagship-badge">New Flagship</span>
+              </div>
+              <div class="flagship-card-body">
+                <div class="flagship-card-category">{{ product.type | default: 'Eau de Parfum' }}</div>
+                <h3 class="flagship-card-name">{{ product.title }}</h3>
+                <p class="flagship-card-desc">{{ product.description | strip_html | truncatewords: 35 }}</p>
+                <div class="flagship-notes">
+                  <span class="flagship-note-tag">Oud</span>
+                  <span class="flagship-note-tag">Bergamot</span>
+                  <span class="flagship-note-tag">Ambergris</span>
+                </div>
+                <div class="flagship-card-footer">
+                  <div class="flagship-price">
+                    <span class="flagship-price-label">Starting from</span>
+                    <span class="flagship-price-value">{{ product.price | money }}</span>
+                  </div>
+                  <a href="{{ product.url }}" class="btn btn-primary">Shop Now <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          {%- comment -%} Static demo cards {%- endcomment -%}
+          {%- assign demo_flagships = 'Nuit Éternelle,Aube Dorée' | split: ',' -%}
+          {%- assign demo_notes = 'Oud,Rose,Ambergris,Sandalwood|Bergamot,Jasmine,Vetiver,Musk' | split: '|' -%}
+          {%- for name in demo_flagships -%}
+            <div class="flagship-card reveal reveal-delay-{{ forloop.index }}">
+              <div class="flagship-card-visual" style="min-height: 400px;">
+                {%- assign demo_bg = '#12100e' -%}{%- if forloop.index == 2 -%}{%- assign demo_bg = '#1c1208' -%}{%- endif -%}
+                <div style="height:100%; min-height:400px; display:flex; align-items:center; justify-content:center; background:linear-gradient(145deg,{{ demo_bg }},#1e1810); font-size:80px;">
+                  {%- if forloop.index == 1 -%}🌙{%- else -%}🌅{%- endif -%}
+                </div>
+                <div class="flagship-card-overlay"></div>
+                <span class="flagship-badge">New Flagship</span>
+              </div>
+              <div class="flagship-card-body">
+                <div class="flagship-card-category">Eau de Parfum Intense</div>
+                <h3 class="flagship-card-name">{{ name }}</h3>
+                <p class="flagship-card-desc">
+                  {%- if forloop.index == 1 -%}
+                    A nocturnal masterpiece built on the darkest, richest oud from the forests of Laos, softened by Bulgarian rose and warm ambergris. Made for those who leave a lasting impression.
+                  {%- else -%}
+                    A golden sunrise captured in fragrance — vibrant bergamot opens to reveal jasmine absolute and a heart of warm vetiver, anchored by a silken musk base.
+                  {%- endif -%}
+                </p>
+                <div class="flagship-notes">
+                  {%- assign these_notes = demo_notes[forloop.index0] | split: ',' -%}
+                  {%- for note in these_notes -%}
+                    <span class="flagship-note-tag">{{ note }}</span>
+                  {%- endfor -%}
+                </div>
+                <div class="flagship-card-footer">
+                  <div class="flagship-price">
+                    <span class="flagship-price-label">Starting from</span>
+                    <span class="flagship-price-value">{%- if forloop.index == 1 -%}$220{%- else -%}$195{%- endif -%}</span>
+                  </div>
+                  <a href="/collections/flagship" class="btn btn-primary">Shop Now <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_view_all -%}
+      <div style="text-align: center; margin-top: var(--space-12);" class="reveal">
+        <a href="{{ section.settings.view_all_url | default: '/collections/flagship' }}" class="btn btn-outline btn-lg">
+          View All Flagships
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Flagships",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "New Releases"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "Our Flagship Collection"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Section subtitle"
+    },
+    {
+      "type": "collection",
+      "id": "flagship_collection",
+      "label": "Flagship collection (fallback)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show View All button",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "View All URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "flagship",
+      "name": "Flagship Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Override image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name (override)",
+          "default": "Signature Fragrance"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category",
+          "default": "Eau de Parfum Intense"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "notes",
+          "label": "Fragrance notes (comma-separated)",
+          "default": "Oud, Rose, Ambergris, Sandalwood"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price display (override)",
+          "default": "$185"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (override)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Flagships",
+      "blocks": [
+        {
+          "type": "flagship",
+          "settings": {
+            "name": "Nuit Éternelle",
+            "category": "Eau de Parfum Intense",
+            "notes": "Oud, Bulgarian Rose, Ambergris, Sandalwood"
+          }
+        },
+        {
+          "type": "flagship",
+          "settings": {
+            "name": "Aube Dorée",
+            "category": "Eau de Parfum",
+            "notes": "Bergamot, Jasmine Absolute, Vetiver, Musk"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

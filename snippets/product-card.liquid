@@ -1,0 +1,69 @@
+{%- assign product_type = product_card_product.type | downcase -%}
+<article class="product-card" data-type="{{ product_type }}" data-product-id="{{ product_card_product.id }}">
+  <a href="{{ product_card_product.url }}" class="product-card-visual" tabindex="-1" aria-hidden="true">
+
+    {%- comment -%} Badge {%- endcomment -%}
+    {%- if product_card_product.tags contains 'flagship' or product_card_product.tags contains 'new' -%}
+      <span class="product-badge product-badge-new">
+        {%- if product_card_product.tags contains 'flagship' -%}Flagship{%- else -%}New{%- endif -%}
+      </span>
+    {%- elsif product_card_product.compare_at_price > product_card_product.price -%}
+      <span class="product-badge product-badge-sale">Sale</span>
+    {%- endif -%}
+
+    {%- comment -%} Wishlist {%- endcomment -%}
+    <button
+      class="product-card-wishlist"
+      data-product-id="{{ product_card_product.id }}"
+      aria-label="Add {{ product_card_product.title | escape }} to wishlist"
+    >♡</button>
+
+    {%- comment -%} Image {%- endcomment -%}
+    {%- if product_card_product.featured_image -%}
+      <img
+        src="{{ product_card_product.featured_image | image_url: width: 600 }}"
+        alt="{{ product_card_product.featured_image.alt | default: product_card_product.title | escape }}"
+        class="product-card-image"
+        loading="lazy"
+        width="600"
+        height="800"
+      >
+    {%- else -%}
+      <div style="display:flex; align-items:center; justify-content:center; height:100%; font-size:64px; color: var(--color-text-muted);">🌺</div>
+    {%- endif -%}
+
+    {%- comment -%} Hover Actions {%- endcomment -%}
+    <div class="product-card-actions">
+      <button
+        class="btn btn-primary btn-sm btn-full"
+        data-quick-add="{{ product_card_product.variants.first.id }}"
+        aria-label="Quick add {{ product_card_product.title | escape }} to cart"
+      >
+        Add to Cart
+      </button>
+      <a href="{{ product_card_product.url }}" class="btn btn-ghost btn-sm btn-full">View Details</a>
+    </div>
+  </a>
+
+  <div class="product-card-body">
+    <div class="product-card-category">{{ product_card_product.type | default: 'Eau de Parfum' }}</div>
+    <a href="{{ product_card_product.url }}" class="product-card-name">{{ product_card_product.title }}</a>
+    {%- if product_card_product.metafields.custom.fragrance_family != blank -%}
+      <div class="product-card-subtitle">{{ product_card_product.metafields.custom.fragrance_family }}</div>
+    {%- endif -%}
+
+    <div class="product-card-price-row">
+      <div>
+        <span class="product-card-price">{{ product_card_product.price | money }}</span>
+        {%- if product_card_product.compare_at_price > product_card_product.price -%}
+          <span class="product-card-compare-price">{{ product_card_product.compare_at_price | money }}</span>
+        {%- endif -%}
+      </div>
+      {%- if product_card_product.available -%}
+        <span style="font-size: var(--text-xs); color: var(--color-success);">In Stock</span>
+      {%- else -%}
+        <span style="font-size: var(--text-xs); color: var(--color-text-muted);">Sold Out</span>
+      {%- endif -%}
+    </div>
+  </div>
+</article>
