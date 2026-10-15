@@ -20,8 +20,9 @@
         {%- endfor -%}
       {%- else -%}
         {%- comment -%} Seamless Dummy Luxury Products for instant preview {%- endcomment -%}
-        {%- for i in (1..4) -%}
-          <div class="product-grid-col reveal reveal-delay-{{ i }}">
+        {%- assign fallback_count = section.settings.products_to_show | default: 8 -%}
+        {%- for i in (1..fallback_count) -%}
+          <div class="product-grid-col reveal reveal-delay-{{ forloop.index | modulo: 4 | plus: 1 }}">
             {%- render 'product-card', product_card_product: nil, dummy_index: i -%}
           </div>
         {%- endfor -%}

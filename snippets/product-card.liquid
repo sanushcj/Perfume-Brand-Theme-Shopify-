@@ -8,16 +8,46 @@
 {%- assign p = product_card_product -%}
 {%- assign current_variant = p.selected_or_first_available_variant -%}
 
+{%- if p != blank and p.url != blank -%}
+  {%- assign card_url = p.url -%}
+{%- elsif dummy_index == 1 -%}
+  {%- assign card_url = '/products/addicted' -%}
+{%- elsif dummy_index == 2 -%}
+  {%- assign card_url = '/products/ice-of-heaven' -%}
+{%- elsif dummy_index == 3 -%}
+  {%- assign card_url = '/products/rouge-elite' -%}
+{%- elsif dummy_index == 4 -%}
+  {%- assign card_url = '/products/purple-mist' -%}
+{%- elsif dummy_index == 5 -%}
+  {%- assign card_url = '/products/old-money' -%}
+{%- elsif dummy_index == 6 -%}
+  {%- assign card_url = '/products/fallen-star' -%}
+{%- elsif dummy_index == 7 -%}
+  {%- assign card_url = '/products/coffee' -%}
+{%- elsif dummy_index == 8 -%}
+  {%- assign card_url = '/products/toxic' -%}
+{%- else -%}
+  {%- assign card_url = '/products/dark-chocolates' -%}
+{%- endif -%}
+
 <article class="product-card" data-product-id="{{ p.id | default: dummy_index }}">
   <div class="product-card-media-wrapper">
-    <a href="{{ p.url | default: routes.collections_url }}" class="product-card-visual" aria-label="{{ p.title | default: 'Artisanal Perfume' }}">
+    <a href="{{ card_url }}" class="product-card-visual" aria-label="{{ p.title | default: 'Artisanal Perfume' }}">
 
       {%- comment -%} Badges {%- endcomment -%}
       <div class="product-card-badges">
         {%- if p.tags contains 'bestseller' or dummy_index == 1 -%}
-          <span class="product-badge badge-gold">Bestseller</span>
-        {%- elsif p.tags contains 'new' or dummy_index == 2 -%}
-          <span class="product-badge badge-dark">New Extrait</span>
+          <span class="product-badge badge-gold">New Launch</span>
+        {%- elsif p.tags contains 'new' or dummy_index == 2 or dummy_index == 3 -%}
+          <span class="product-badge badge-gold">New Launch</span>
+        {%- elsif dummy_index == 4 or dummy_index == 6 -%}
+          <span class="product-badge badge-dark">Discovery</span>
+        {%- elsif dummy_index == 5 -%}
+          <span class="product-badge badge-dark">Classic</span>
+        {%- elsif dummy_index == 7 -%}
+          <span class="product-badge badge-gold">Gourmand</span>
+        {%- elsif dummy_index == 8 -%}
+          <span class="product-badge badge-dark">Sensual</span>
         {%- elsif p.compare_at_price > p.price -%}
           <span class="product-badge badge-sale">Sale</span>
         {%- endif -%}
@@ -44,10 +74,28 @@
           >
         {%- endif -%}
       {%- else -%}
-        {%- if dummy_index == 2 or dummy_index == 4 -%}
+        {%- if dummy_index == 1 -%}
           <img
-            src="{{ 'product-oud-noir.jpg' | asset_url }}"
-            alt="Oud Noir Extrait de Parfum"
+            src="{{ 'product-addicted.jpg' | asset_url }}"
+            alt="ADDICTED Extrait de Parfum 50ml - AD Perfumes"
+            class="product-card-img product-card-img-primary"
+            loading="lazy"
+            width="600"
+            height="600"
+          >
+        {%- elsif dummy_index == 2 -%}
+          <img
+            src="{{ 'product-ice-of-heaven.jpg' | asset_url }}"
+            alt="Ice of Heaven Extrait de Parfum 50ml - AD Perfumes"
+            class="product-card-img product-card-img-primary"
+            loading="lazy"
+            width="600"
+            height="600"
+          >
+        {%- elsif dummy_index == 3 -%}
+          <img
+            src="{{ 'product-rouge-elite.jpg' | asset_url }}"
+            alt="Rouge Elite Extrait de Parfum 50ml - AD Perfumes"
             class="product-card-img product-card-img-primary"
             loading="lazy"
             width="600"
@@ -55,8 +103,8 @@
           >
         {%- else -%}
           <img
-            src="{{ 'product-santal-blanc.jpg' | asset_url }}"
-            alt="Santal Blanc Eau de Parfum"
+            src="{{ 'discovery-travel-set.jpg' | asset_url }}"
+            alt="AD Perfumes Travel & Pocket Collection (10ml & 20ml)"
             class="product-card-img product-card-img-primary"
             loading="lazy"
             width="600"
@@ -72,9 +120,9 @@
         type="button"
         class="btn btn-primary btn-sm btn-full quick-add-trigger"
         data-variant-id="{{ current_variant.id | default: 'dummy-var' }}"
-        data-product-title="{% if p != blank %}{{ p.title | escape }}{% elsif dummy_index == 1 %}Santal Blanc Extrait{% elsif dummy_index == 2 %}Oud Noir Impérial{% elsif dummy_index == 3 %}Aurora Rose Royale{% else %}Ambre d'Or Solaire{% endif %}"
-        data-product-price="{% if p != blank %}{{ p.price | money }}{% elsif dummy_index == 1 %}$145.00{% elsif dummy_index == 2 %}$185.00{% elsif dummy_index == 3 %}$155.00{% else %}$165.00{% endif %}"
-        data-product-image="{% if p.featured_image %}{{ p.featured_image | image_url: width: 200 }}{% elsif dummy_index == 2 or dummy_index == 4 %}{{ 'product-oud-noir.jpg' | asset_url }}{% else %}{{ 'product-santal-blanc.jpg' | asset_url }}{% endif %}"
+        data-product-title="{% if p != blank %}{{ p.title | escape }}{% elsif dummy_index == 1 %}ADDICTED (50ml){% elsif dummy_index == 2 %}Ice of Heaven (50ml){% elsif dummy_index == 3 %}Rouge Elite (50ml){% elsif dummy_index == 4 %}Purple Mist (20ml){% elsif dummy_index == 5 %}Old Money (20ml){% elsif dummy_index == 6 %}Fallen Star (20ml){% elsif dummy_index == 7 %}Coffee (20ml){% elsif dummy_index == 8 %}Toxic (20ml){% else %}Dark Chocolates (20ml){% endif %}"
+        data-product-price="{% if p != blank %}{{ p.price | money }}{% elsif dummy_index == 1 %}$175.00{% elsif dummy_index == 2 %}$160.00{% elsif dummy_index == 3 %}$165.00{% elsif dummy_index == 4 %}$68.00{% elsif dummy_index == 5 %}$72.00{% elsif dummy_index == 6 %}$65.00{% elsif dummy_index == 7 %}$68.00{% elsif dummy_index == 8 %}$70.00{% else %}$68.00{% endif %}"
+        data-product-image="{% if p.featured_image %}{{ p.featured_image | image_url: width: 200 }}{% elsif dummy_index == 1 %}{{ 'product-addicted.jpg' | asset_url }}{% elsif dummy_index == 2 %}{{ 'product-ice-of-heaven.jpg' | asset_url }}{% elsif dummy_index == 3 %}{{ 'product-rouge-elite.jpg' | asset_url }}{% else %}{{ 'discovery-travel-set.jpg' | asset_url }}{% endif %}"
         aria-label="Add to Bag"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -90,7 +138,13 @@
   <div class="product-card-body">
     <div class="product-card-top-row">
       <span class="product-card-category">
-        {{ p.type | default: 'Eau de Parfum • 100ml' }}
+        {%- if p != blank -%}
+          {{ p.type | default: 'Extrait de Parfum' }}
+        {%- elsif dummy_index <= 3 -%}
+          Extrait de Parfum • 50ml
+        {%- else -%}
+          Pocket Extrait • 10ml & 20ml
+        {%- endif -%}
       </span>
       <div class="product-card-rating">
         <span class="rating-star">★</span>
@@ -99,17 +153,27 @@
     </div>
 
     <h3 class="product-card-title">
-      <a href="{{ p.url | default: routes.collections_url }}">
+      <a href="{{ card_url }}">
         {%- if p != blank -%}
           {{ p.title }}
         {%- elsif dummy_index == 1 -%}
-          Santal Blanc Extrait
+          ADDICTED
         {%- elsif dummy_index == 2 -%}
-          Oud Noir Impérial
+          Ice of Heaven
         {%- elsif dummy_index == 3 -%}
-          Aurora Rose Royale
+          Rouge Elite
+        {%- elsif dummy_index == 4 -%}
+          Purple Mist
+        {%- elsif dummy_index == 5 -%}
+          Old Money
+        {%- elsif dummy_index == 6 -%}
+          Fallen Star
+        {%- elsif dummy_index == 7 -%}
+          Coffee
+        {%- elsif dummy_index == 8 -%}
+          Toxic
         {%- else -%}
-          Ambre d'Or Solaire
+          Dark Chocolates
         {%- endif -%}
       </a>
     </h3>
@@ -118,13 +182,23 @@
       {%- if p.metafields.custom.notes != blank -%}
         <span>{{ p.metafields.custom.notes }}</span>
       {%- elsif dummy_index == 1 -%}
-        <span>Sandalwood · Cardamom · Ambergris</span>
+        <span>Saffron · Smoky Woods · Leathery Resins</span>
       {%- elsif dummy_index == 2 -%}
-        <span>Smoked Oud · Leather · Saffron</span>
+        <span>Frozen Apple · Marine Accord · Driftwood</span>
       {%- elsif dummy_index == 3 -%}
-        <span>Grasse Rose · Peony · White Musk</span>
+        <span>Saffron · Caramelized Amber · Cedarwood</span>
+      {%- elsif dummy_index == 4 -%}
+        <span>Saffron · Sweet Citrus · Smooth Oud</span>
+      {%- elsif dummy_index == 5 -%}
+        <span>Cypress · Warm Amber · Oakmoss & Vetiver</span>
+      {%- elsif dummy_index == 6 -%}
+        <span>Bergamot · Black Tea · Ceylon Cinnamon</span>
+      {%- elsif dummy_index == 7 -%}
+        <span>Roasted Espresso · Sweet Cream · Vanilla</span>
+      {%- elsif dummy_index == 8 -%}
+        <span>Lavender · Cardamom · Rich Tobacco & Vanilla</span>
       {%- else -%}
-        <span>Tonka Bean · Bourbon Vanilla · Amber</span>
+        <span>Bitter Orange · Cocoa · Hazelnut Praline</span>
       {%- endif -%}
     </div>
 
@@ -137,13 +211,20 @@
           {%- endif -%}
         {%- else -%}
           <span class="product-card-price">
-            {%- if dummy_index == 1 -%}$145.00
-            {%- elsif dummy_index == 2 -%}$185.00
-            {%- elsif dummy_index == 3 -%}$155.00
-            {%- else -%}$165.00
+            {%- if dummy_index == 1 -%}$175.00
+            {%- elsif dummy_index == 2 -%}$160.00
+            {%- elsif dummy_index == 3 -%}$165.00
+            {%- elsif dummy_index == 4 -%}$68.00
+            {%- elsif dummy_index == 5 -%}$72.00
+            {%- elsif dummy_index == 6 -%}$65.00
+            {%- elsif dummy_index == 7 -%}$68.00
+            {%- elsif dummy_index == 8 -%}$70.00
+            {%- else -%}$68.00
             {%- endif -%}
           </span>
-          <span class="product-card-compare-price">$195.00</span>
+          <span class="product-card-compare-price">
+            {%- if dummy_index <= 3 -%}$195.00{%- else -%}$85.00{%- endif -%}
+          </span>
         {%- endif -%}
       </div>
       <span class="product-card-stock-status">24h Projection</span>

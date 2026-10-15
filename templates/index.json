@@ -3,44 +3,44 @@
     "hero-banner": {
       "type": "hero-banner",
       "settings": {
-        "eyebrow_text": "HAUTE PARFUMERIE • PARIS",
-        "heading_line1": "The Art of",
-        "heading_line2": "Invisible Luxury",
-        "subheading": "Crafted with the rarest French fragrance essences and aged to absolute perfection. Fragrances that evoke memories and command presence.",
-        "cta_primary_label": "Shop Best Sellers",
-        "cta_secondary_label": "Explore Collections",
+        "eyebrow_text": "AFTER DREAMS • HAUTE PARFUMERIE",
+        "heading_line1": "Born in the Silence",
+        "heading_line2": "After Dreams",
+        "subheading": "When subconscious reverie transforms into an enduring aura. Discover the newly launched flagship extraits — ADDICTED, Ice of Heaven, and Rouge Elite — crafted with rare absolutes for unmatched presence.",
+        "cta_primary_label": "Explore New Flagships",
+        "cta_secondary_label": "Discover Travel Editions",
         "stat_1_number": "24h+",
-        "stat_1_label": "Longevity",
+        "stat_1_label": "Extrait Longevity",
         "stat_2_number": "100%",
-        "stat_2_label": "Pure French Oils",
-        "stat_3_number": "Cruelty",
-        "stat_3_label": "Free & Vegan",
-        "badge_title": "Rated 4.9/5 by 12,000+ Connoisseurs",
-        "badge_sub": "“Best sillage and longevity I have ever worn.”"
+        "stat_2_label": "Rare Natural Absolutes",
+        "stat_3_number": "Pure",
+        "stat_3_label": "Artisanal Blends",
+        "badge_title": "Rated 4.9/5 by Connoisseurs Worldwide",
+        "badge_sub": "“The scent that awakens when daylight begins.”"
       }
     },
     "category-spotlight": {
       "type": "category-spotlight",
       "settings": {
-        "eyebrow": "Curated Collections",
-        "title": "Explore By Scent Signature",
-        "subtitle": "Immerse yourself in artisanal compositions tailored for the discerning connoisseur.",
-        "men_badge": "COLLECTION POUR HOMME",
-        "men_title": "Discover Top Perfumes for Men",
-        "men_desc": "Commanding compositions with notes of smoky oud, cedarwood, ambergris, and black spices designed for timeless presence.",
-        "men_btn_label": "Shop Men's Fragrances",
-        "women_badge": "COLLECTION POUR FEMME",
-        "women_title": "Discover Top Perfumes for Women",
-        "women_desc": "Ethereal bouquets of Grasse rose, crystalline jasmine, solar bergamot, and warm Madagascar vanilla accords.",
-        "women_btn_label": "Shop Women's Fragrances"
+        "eyebrow": "Atelier Collections",
+        "title": "Two Worlds of Invisible Luxury",
+        "subtitle": "From our newly unveiled 50ml Flagship Extraits to our versatile 10ml & 20ml Travel and Pocket editions.",
+        "men_badge": "NEW LAUNCH • 50ML EXTRAIT",
+        "men_title": "The Flagship Trinity",
+        "men_desc": "Newly unveiled statement flacons: ADDICTED, Ice of Heaven, and Rouge Elite. Formulated at 30%+ Extrait concentration for 24h lasting sillage.",
+        "men_btn_label": "Explore 50ml Flagships",
+        "women_badge": "POCKET & TRAVEL LUXURY • 10ML / 20ML",
+        "women_title": "The Discovery & Travel Series",
+        "women_desc": "Six captivating everyday signatures — from roasted Coffee and sweet Purple Mist to the aristocratic allure of Old Money, Fallen Star, and Toxic.",
+        "women_btn_label": "Explore 10ml & 20ml Editions"
       }
     },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
-        "eyebrow": "Our Signature Blends",
-        "title": "Best Sellers & Icons",
-        "subtitle": "Experience the most coveted fragrances, meticulously distilled and aged for unmatched depth.",
+        "eyebrow": "Artisanal Masterpieces",
+        "title": "Newly Launched & Best Sellers",
+        "subtitle": "Experience our newest 50ml Flagships alongside timeless 10ml & 20ml pocket signatures.",
         "products_to_show": 8,
         "show_view_all": true,
         "view_all_label": "View All Fragrances"
@@ -51,7 +51,7 @@
       "settings": {
         "eyebrow": "Olfactory Notes",
         "title": "Find Your Scent Family",
-        "subtitle": "From deep oriental resins to effervescent citrus, explore each unique accord."
+        "subtitle": "From deep smoky woods to glacial fresh aquatics and decadent roasted gourmands."
       }
     },
     "brand-story": {
@@ -61,8 +61,8 @@
           "type": "pillar",
           "settings": {
             "icon": "🌿",
-            "title": "100% French Oils",
-            "text": "Every botanical extract distilled ethically in Grasse, the perfume capital of the world."
+            "title": "Rare Essences",
+            "text": "Every botanical extract distilled ethically in Grasse and the Far East, the capitals of perfumery."
           }
         },
         "pillar-2": {
@@ -77,15 +77,15 @@
           "type": "pillar",
           "settings": {
             "icon": "✨",
-            "title": "Clean & Hypoallergenic",
-            "text": "Formulated without toxic phthalates, parabens, or harsh synthetics. 100% vegan."
+            "title": "After Dreams Philosophy",
+            "text": "Scents crafted to capture that ethereal moment when dreams transition into awakening reality."
           }
         },
         "pillar-4": {
           "type": "pillar",
           "settings": {
             "icon": "🎁",
-            "title": "Complimentary Samples",
+            "title": "Complimentary Discovery Vials",
             "text": "Every bottle arrives with 2 complimentary discovery vials and signature velvet packaging."
           }
         }
@@ -97,10 +97,11 @@
         "pillar-4"
       ],
       "settings": {
-        "eyebrow": "Atelier Craftsmanship",
-        "title": "Crafted With Purpose, Worn With Intention",
-        "founded_year": "1998",
-        "cta_label": "Discover Our Atelier"
+        "eyebrow": "The Lore of AD Perfumes",
+        "title": "Crafted in the Hours After Dreams",
+        "text": "Behind the initials AD Perfumes lies our quiet philosophy: After Dreams. True luxury is born at the boundary where nocturnal reverie dissolves into daylight, leaving behind sensory memories that cannot be spoken, only worn. Every Extrait de Parfum is distilled to capture that fleeting perfection.",
+        "founded_year": "2024",
+        "cta_label": "Explore The Atelier"
       }
     },
     "testimonials": {
@@ -110,7 +111,7 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "text": "This is not just a fragrance — it is a magnetic aura. Santal Blanc is my daily signature; strangers literally stop me on the subway asking what I am wearing.",
+            "text": "ADDICTED is pure hypnosis. That smoky saffron and oud dry-down lasts a full 24 hours on my skin and coat. AD Perfumes has created an instant icon.",
             "name": "Sophia Laurent",
             "location": "Paris, France"
           }
@@ -119,7 +120,7 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "text": "Oud Noir Impérial has the most intoxicating dry-down I have ever experienced. Lasts a full 24 hours on skin and days on my wool coat. Incredible quality.",
+            "text": "Ice of Heaven has the cleanest, most invigorating glacial aquatic opening I have ever smelled. Crisp, icy, and draws compliments everywhere.",
             "name": "Alexander Vance",
             "location": "London, UK"
           }
@@ -128,7 +129,7 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "text": "The packaging is reminiscent of a fine jewelry house, and the scent inside surpasses even that. Clean, luminous, and undeniably luxurious.",
+            "text": "Rouge Elite feels like warm liquid gold. The caramelized amber and cedarwood aura is rich, decadent, and impossible to forget.",
             "name": "Elena Rostova",
             "location": "New York, USA"
           }
@@ -141,7 +142,7 @@
       ],
       "settings": {
         "eyebrow": "Verified Connoisseurs",
-        "title": "Loved by Over 50,000 Fragrance Lovers"
+        "title": "Loved by Over 50,000 Fragrance Enthusiasts"
       }
     },
     "newsletter": {

@@ -17,7 +17,7 @@
           {%- if section.settings.men_image != blank -%}
             <img
               src="{{ section.settings.men_image | image_url: width: 900 }}"
-              alt="{{ section.settings.men_title | default: 'Top Perfumes for Men' | escape }}"
+              alt="{{ section.settings.men_title | default: 'The Flagship Trinity' | escape }}"
               class="spotlight-image"
               loading="lazy"
               width="900"
@@ -25,8 +25,8 @@
             >
           {%- else -%}
             <img
-              src="{{ 'men-fragrance.jpg' | asset_url }}"
-              alt="Discover Top Perfumes for Men"
+              src="{{ 'product-rouge-elite.jpg' | asset_url }}"
+              alt="The Flagship Trinity - AD Perfumes"
               class="spotlight-image"
               loading="lazy"
               width="900"
@@ -37,14 +37,14 @@
         </div>
 
         <div class="spotlight-content">
-          <span class="spotlight-badge">{{ section.settings.men_badge | default: 'COLLECTION POUR HOMME' }}</span>
-          <h3 class="spotlight-heading">{{ section.settings.men_title | default: 'Discover Top Perfumes for Men' }}</h3>
+          <span class="spotlight-badge">{{ section.settings.men_badge | default: 'NEW LAUNCH • 50ML EXTRAIT' }}</span>
+          <h3 class="spotlight-heading">{{ section.settings.men_title | default: 'The Flagship Trinity' }}</h3>
           <p class="spotlight-desc">
             {{ section.settings.men_desc | default: 'Commanding compositions with notes of smoky oud, cedarwood, ambergris, and black spices designed for timeless presence.' }}
           </p>
           <div class="spotlight-action">
-            <a href="{{ section.settings.men_url | default: routes.collections_url | append: '/men' }}" class="btn btn-outline-white">
-              {{ section.settings.men_btn_label | default: 'Shop Men' }}
+            <a href="{{ section.settings.men_url | default: routes.collections_url | append: '/flagship' }}" class="btn btn-outline-white">
+              {{ section.settings.men_btn_label | default: 'Explore Flagships' }}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -59,7 +59,7 @@
           {%- if section.settings.women_image != blank -%}
             <img
               src="{{ section.settings.women_image | image_url: width: 900 }}"
-              alt="{{ section.settings.women_title | default: 'Top Perfumes for Women' | escape }}"
+              alt="{{ section.settings.women_title | default: 'The Discovery & Travel Series' | escape }}"
               class="spotlight-image"
               loading="lazy"
               width="900"
@@ -67,8 +67,8 @@
             >
           {%- else -%}
             <img
-              src="{{ 'women-fragrance.jpg' | asset_url }}"
-              alt="Discover Top Perfumes for Women"
+              src="{{ 'discovery-travel-set.jpg' | asset_url }}"
+              alt="The Discovery & Travel Series - AD Perfumes"
               class="spotlight-image"
               loading="lazy"
               width="900"
