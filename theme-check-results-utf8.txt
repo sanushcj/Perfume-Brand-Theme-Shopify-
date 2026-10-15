@@ -1,0 +1,253 @@
+﻿node.exe : Γò¡ΓöÇ info ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓò
+«
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Γò¡ΓöÇ info ΓöÇ...ΓöÇΓöÇΓöÇΓöÇΓò«:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Γöé                                                                              Γöé
+Γöé  :\Users\sanus\Documents\Antigravity\perfume-theme\config\settings_schema.j  Γöé
+Γöé  son                                                                         Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [error]: ValidJSON                                                          Γöé
+Γöé  String is not a URI: URI expected.                                          Γöé
+Γöé                                                                              Γöé
+Γöé  7  "theme_documentation_url": "",                                           Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [error]: ValidJSON                                                          Γöé
+Γöé  String is not a URI: URI expected.                                          Γöé
+Γöé                                                                              Γöé
+Γöé  8  "theme_support_url": ""                                                  Γöé
+Γöé                                                                              Γöé
+Γò░ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓ
+ò»
+
+Γò¡ΓöÇ info ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓò«
+Γöé                                                                              Γöé
+Γöé  :\Users\sanus\Documents\Antigravity\perfume-theme\layout\theme.liquid       Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [warning]: RemoteAsset                                                      Γöé
+Γöé  Asset should be served by the Shopify CDN for better performance.           Γöé
+Γöé                                                                              Γöé
+Γöé  26  <link rel="preconnect" href="https://fonts.googleapis.com">             Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [warning]: RemoteAsset                                                      Γöé
+Γöé  Asset should be served by the Shopify CDN for better performance.           Γöé
+Γöé                                                                              Γöé
+Γöé  27  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    Γöé
+Γöé                                                                              Γöé
+Γò░ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓ
+ò»
+
+Γò¡ΓöÇ info ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓò«
+Γöé                                                                              Γöé
+Γöé  :\Users\sanus\Documents\Antigravity\perfume-theme\sections\collection-main  Γöé
+Γöé  .liquid                                                                     Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [warning]: UndefinedObject                                                  Γöé
+Γöé  Unknown object 'paginate' used.                                             Γöé
+Γöé                                                                              Γöé
+Γöé  74  <a href="{{ paginate.previous.url }}" class="btn btn-outline btn-sm">ΓåÉ  Γöé
+Γöé   Previous</a>                                                               Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [warning]: UndefinedObject                                                  Γöé
+Γöé  Unknown object 'paginate' used.                                             Γöé
+Γöé                                                                              Γöé
+Γöé  73  {%- if paginate.previous -%}                                            Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [warning]: UndefinedObject                                                  Γöé
+Γöé  Unknown object 'paginate' used.                                             Γöé
+Γöé                                                                              Γöé
+Γöé  76  {%- for part in paginate.parts -%}                                      Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [warning]: UndefinedObject                                                  Γöé
+Γöé  Unknown object 'paginate' used.                                             Γöé
+Γöé                                                                              Γöé
+Γöé  84  <a href="{{ paginate.next.url }}" class="btn btn-outline btn-sm">Next   Γöé
+Γöé  ΓåÆ</a>                                                                       Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [warning]: UndefinedObject                                                  Γöé
+Γöé  Unknown object 'paginate' used.                                             Γöé
+Γöé                                                                              Γöé
+Γöé  83  {%- if paginate.next -%}                                                Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [warning]: UndefinedObject                                                  Γöé
+Γöé  Unknown object 'paginate' used.                                             Γöé
+Γöé                                                                              Γöé
+Γöé  71  {%- if paginate.pages > 1 -%}                                           Γöé
+Γöé                                                                              Γöé
+Γò░ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓ
+ò»
+
+Γò¡ΓöÇ info ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓò«
+Γöé                                                                              Γöé
+Γöé  :\Users\sanus\Documents\Antigravity\perfume-theme\sections\featured-collec  Γöé
+Γöé  tion.liquid                                                                 Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [error]: ImgWidthAndHeight                                                  Γöé
+Γöé  Missing width and height attributes on img tag                              Γöé
+Γöé                                                                              Γöé
+Γöé  112  <img src="{{ product.featured_image | image_url: width: 800 }}"        Γöé
+Γöé  alt="{{ product.featured_image.alt | escape }}"                             Γöé
+Γöé  class="flagship-card-image" loading="lazy">                                 Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [warning]: HardcodedRoutes                                                  Γöé
+Γöé  Use routes object {{ routes.collections_url }} instead of hardcoding        Γöé
+Γöé  /collections                                                                Γöé
+Γöé                                                                              Γöé
+Γöé  173  <a href="/collections/flagship" class="btn btn-primary">Shop Now <svg  Γöé
+Γöé   width="14" height="14" viewBox="0 0 24 24" fill="none"                     Γöé
+Γöé  stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7         Γöé
+Γöé  7"/></svg></a>                                                              Γöé
+Γöé                                                                              Γöé
+Γò░ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓ
+ò»
+
+Γò¡ΓöÇ info ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓò«
+Γöé                                                                              Γöé
+Γöé  :\Users\sanus\Documents\Antigravity\perfume-theme\sections\footer.liquid    Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [error]: ImgWidthAndHeight                                                  Γöé
+Γöé  Missing width and height attributes on img tag                              Γöé
+Γöé                                                                              Γöé
+Γöé  9  <img src="{{ section.settings.logo | image_url: width: 160 }}" alt="{{   Γöé
+Γöé  shop.name }}" style="max-height: 40px; width: auto;">                       Γöé
+Γöé                                                                              Γöé
+Γò░ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓ
+ò»
+
+Γò¡ΓöÇ info ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓò«
+Γöé                                                                              Γöé
+Γöé  :\Users\sanus\Documents\Antigravity\perfume-theme\sections\page-about.liqu  Γöé
+Γöé  id                                                                          Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [error]: ImgWidthAndHeight                                                  Γöé
+Γöé  Missing width and height attributes on img tag                              Γöé
+Γöé                                                                              Γöé
+Γöé  17      <img                                                                Γöé
+Γöé  18        src="{{ section.settings.hero_image | image_url: width: 1400 }}"  Γöé
+Γöé  19        alt="{{ section.settings.hero_image.alt | default: 'Our atelier'  Γöé
+Γöé   | escape }}"                                                               Γöé
+Γöé  20        style="width: 100%; border-radius: var(--radius-2xl);             Γöé
+Γöé  max-height: 600px; object-fit: cover;"                                      Γöé
+Γöé  21        loading="lazy"                                                    Γöé
+Γöé  22      >                                                                   Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [error]: ImgWidthAndHeight                                                  Γöé
+Γöé  Missing width and height attributes on img tag                              Γöé
+Γöé                                                                              Γöé
+Γöé  97  <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{   Γöé
+Γöé  block.settings.name }}" style="width:100%; aspect-ratio:3/2;                Γöé
+Γöé  object-fit:cover;">                                                         Γöé
+Γöé                                                                              Γöé
+Γò░ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓ
+ò»
+
+Γò¡ΓöÇ info ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓò«
+Γöé                                                                              Γöé
+Γöé  :\Users\sanus\Documents\Antigravity\perfume-theme\sections\product-main.li  Γöé
+Γöé  quid                                                                        Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [error]: LiquidHTMLSyntaxError                                              Γöé
+Γöé  Syntax is not supported                                                     Γöé
+Γöé                                                                              Γöé
+Γöé  116  aria-checked="{{ option.selected_value == value }}"                    Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [warning]: UnusedAssign                                                     Γöé
+Γöé  The variable 'related_products' is assigned but not used                    Γöé
+Γöé                                                                              Γöé
+Γöé  277  {%- assign related_products = product.collections.first.products |     Γöé
+Γöé  where: 'id', product.id | first -%}                                         Γöé
+Γöé                                                                              Γöé
+Γò░ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓ
+ò»
+
+Γò¡ΓöÇ info ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓò«
+Γöé                                                                              Γöé
+Γöé  :\Users\sanus\Documents\Antigravity\perfume-theme\snippets\meta-tags.liqui  Γöé
+Γöé  d                                                                           Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [warning]: OrphanedSnippet                                                  Γöé
+Γöé  This snippet is not referenced by any other files                           Γöé
+Γöé                                                                              Γöé
+Γöé  1  <meta property="og:url" content="{{ canonical_url }}">                   Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [warning]: AssetPreload                                                     Γöé
+Γöé  For better performance, prefer using the preload argument of the            Γöé
+Γöé  stylesheet_tag filter                                                       Γöé
+Γöé                                                                              Γöé
+Γöé  35  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Int  Γöé
+Γöé  er:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:ital,w  Γöé
+Γöé  ght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" as="style"            Γöé
+Γöé  onload="this.onload=null;this.rel='stylesheet'">                            Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [warning]: RemoteAsset                                                      Γöé
+Γöé  Asset should be served by the Shopify CDN for better performance.           Γöé
+Γöé                                                                              Γöé
+Γöé  35  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Int  Γöé
+Γöé  er:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:ital,w  Γöé
+Γöé  ght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" as="style"            Γöé
+Γöé  onload="this.onload=null;this.rel='stylesheet'">                            Γöé
+Γöé                                                                              Γöé
+Γöé                                                                              Γöé
+Γöé  [warning]: RemoteAsset                                                      Γöé
+Γöé  Asset should be served by the Shopify CDN for better performance.           Γöé
+Γöé                                                                              Γöé
+Γöé  36  <noscript><link rel="stylesheet"                                        Γöé
+Γöé  href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;  Γöé
+Γöé  500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,  Γöé
+Γöé  700;1,400;1,500&display=swap"></noscript>                                   Γöé
+Γöé                                                                              Γöé
+Γò░ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓ
+ò»
+
+Γò¡ΓöÇ info ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓò«
+Γöé                                                                              Γöé
+Γöé  Theme Check Summary.                                                        Γöé
+Γöé                                                                              Γöé
+Γöé  32 files inspected with 21 total offenses found across 8 files.             Γöé
+Γöé  7 errors.                                                                   Γöé
+Γöé  14 warnings.                                                                Γöé
+Γöé                                                                              Γöé
+Γò░ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö
+ÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓ
+ò»
+
