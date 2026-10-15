@@ -109,7 +109,7 @@
             <div class="flagship-card reveal reveal-delay-{{ forloop.index }}">
               <div class="flagship-card-visual">
                 {%- if product.featured_image -%}
-                  <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.featured_image.alt | escape }}" class="flagship-card-image" loading="lazy">
+                  <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.featured_image.alt | escape }}" class="flagship-card-image" loading="lazy" width="800" height="1000">
                 {%- else -%}
                   <div style="height:100%; display:flex; align-items:center; justify-content:center; font-size:80px;">🌸</div>
                 {%- endif -%}
@@ -170,7 +170,7 @@
                     <span class="flagship-price-label">Starting from</span>
                     <span class="flagship-price-value">{%- if forloop.index == 1 -%}$220{%- else -%}$195{%- endif -%}</span>
                   </div>
-                  <a href="/collections/flagship" class="btn btn-primary">Shop Now <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                  <a href="{{ routes.collections_url }}/flagship" class="btn btn-primary">Shop Now <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                 </div>
               </div>
             </div>

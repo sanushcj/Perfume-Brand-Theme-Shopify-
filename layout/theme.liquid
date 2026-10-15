@@ -5,38 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  {%- if page_description -%}
-    <meta name="description" content="{{ page_description | escape }}">
-  {%- else -%}
-    <meta name="description" content="{{ shop.description | default: 'Premium luxury perfumes crafted for the discerning soul.' | escape }}">
-  {%- endif -%}
-
-  {%- if settings.social_share_image -%}
-    <meta property="og:image" content="{{ settings.social_share_image | image_url: width: 1200 }}">
-  {%- endif -%}
-
-  <meta property="og:url" content="{{ canonical_url }}">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="{{ page_title | default: shop.name }}">
-  <meta property="og:site_name" content="{{ shop.name }}">
-  <meta property="og:description" content="{{ page_description | default: shop.description }}">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <link rel="canonical" href="{{ canonical_url }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  {%- if settings.favicon -%}
-    <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png">
-    <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
-  {%- endif -%}
-
   <title>
     {{ page_title }}
     {%- if current_tags -%} &ndash; tagged "{{ current_tags | join: ', ' }}"{%- endif -%}
     {%- if current_page != 1 -%} &ndash; Page {{ current_page }}{%- endif -%}
     {%- unless page_title contains shop.name -%} &ndash; {{ shop.name }}{%- endunless -%}
   </title>
+
+  {%- render 'meta-tags' -%}
 
   {{ content_for_header }}
 

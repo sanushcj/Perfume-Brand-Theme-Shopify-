@@ -1,11 +1,10 @@
-[
   {
     "name": "theme_info",
-    "theme_name": "Lumière Noir",
+    "theme_name": "L'Élixir Atelier",
     "theme_version": "1.0.0",
-    "theme_author": "Antigravity",
-    "theme_documentation_url": "",
-    "theme_support_url": ""
+    "theme_author": "Antigravity Luxury",
+    "theme_documentation_url": "https://help.shopify.com",
+    "theme_support_email": "support@lelixir-atelier.com"
   },
   {
     "name": "Brand",
@@ -14,35 +13,53 @@
         "type": "text",
         "id": "brand_name",
         "label": "Brand Name",
-        "default": "Lumière Noir"
+        "default": "L'ÉLIXIR ATELIER"
       },
       {
         "type": "text",
         "id": "brand_tagline",
         "label": "Brand Tagline",
-        "default": "Haute Parfumerie"
+        "default": "Haute Parfumerie Paris"
       }
     ]
   },
   {
-    "name": "Colors",
+    "name": "Colors & Aesthetics",
     "settings": [
       {
         "type": "color",
-        "id": "color_gold",
-        "label": "Gold Accent Color",
-        "default": "#c9a84c"
+        "id": "color_primary",
+        "label": "Primary Accent Color",
+        "default": "#C5A059"
+      },
+      {
+        "type": "color",
+        "id": "color_dark",
+        "label": "Dark Obsidian Tone",
+        "default": "#0C0E12"
+      },
+      {
+        "type": "color",
+        "id": "color_light",
+        "label": "Light Canvas Tone",
+        "default": "#FFFFFF"
       }
     ]
   },
   {
-    "name": "Header",
+    "name": "Cart Drawer",
     "settings": [
       {
-        "type": "checkbox",
-        "id": "show_announcement_bar",
-        "label": "Show announcement bar",
-        "default": true
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free Shipping Threshold (Amount)",
+        "default": 100
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_message",
+        "label": "Free Shipping Success Message",
+        "default": "🎉 You qualify for Free Worldwide Express Delivery!"
       }
     ]
   },
@@ -87,7 +104,7 @@
     ]
   },
   {
-    "name": "SEO",
+    "name": "SEO & Social Sharing",
     "settings": [
       {
         "type": "image_picker",

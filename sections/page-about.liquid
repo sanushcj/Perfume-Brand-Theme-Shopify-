@@ -17,6 +17,8 @@
     <img
       src="{{ section.settings.hero_image | image_url: width: 1400 }}"
       alt="{{ section.settings.hero_image.alt | default: 'Our atelier' | escape }}"
+      width="1400"
+      height="600"
       style="width: 100%; border-radius: var(--radius-2xl); max-height: 600px; object-fit: cover;"
       loading="lazy"
     >
@@ -94,7 +96,7 @@
         <div class="reveal reveal-delay-{{ forloop.index }}" {{ block.shopify_attributes }}>
           <div style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); overflow: hidden; transition: all var(--transition-base);" onmouseover="this.style.borderColor='var(--color-border-strong)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor=''; this.style.transform=''">
             {%- if block.settings.image != blank -%}
-              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name }}" style="width:100%; aspect-ratio:3/2; object-fit:cover;">
+              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name }}" width="600" height="400" loading="lazy" style="width:100%; aspect-ratio:3/2; object-fit:cover;">
             {%- else -%}
               <div style="width:100%; aspect-ratio:3/2; background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-card) 100%); display:flex; align-items:center; justify-content:center; font-size:64px;">
                 {%- if forloop.index == 1 -%}🧪{%- elsif forloop.index == 2 -%}🌿{%- else -%}⚗️{%- endif -%}

@@ -57,43 +57,44 @@
     </div>
   </div>
 
-  {%- comment -%} Product Grid {%- endcomment -%}
-  {%- if collection.products.size > 0 -%}
-    <div class="product-grid" id="ProductGrid">
-      {%- for product in collection.products -%}
-        <div class="reveal reveal-delay-{{ forloop.index | modulo: 4 | plus: 1 }}">
-          {%- render 'product-card', product_card_product: product -%}
-        </div>
-      {%- endfor -%}
-    </div>
-
-    {%- comment -%} Pagination {%- endcomment -%}
-    {%- if paginate.pages > 1 -%}
-      <div style="display: flex; justify-content: center; gap: var(--space-2); margin-top: var(--space-12);" aria-label="Pagination">
-        {%- if paginate.previous -%}
-          <a href="{{ paginate.previous.url }}" class="btn btn-outline btn-sm">← Previous</a>
-        {%- endif -%}
-        {%- for part in paginate.parts -%}
-          {%- if part.is_link -%}
-            <a href="{{ part.url }}" class="btn btn-ghost btn-sm">{{ part.title }}</a>
-          {%- else -%}
-            <span class="btn btn-primary btn-sm">{{ part.title }}</span>
-          {%- endif -%}
+  {%- paginate collection.products by section.settings.products_per_page -%}
+    {%- if collection.products.size > 0 -%}
+      <div class="product-grid" id="ProductGrid">
+        {%- for product in collection.products -%}
+          <div class="reveal reveal-delay-{{ forloop.index | modulo: 4 | plus: 1 }}">
+            {%- render 'product-card', product_card_product: product -%}
+          </div>
         {%- endfor -%}
-        {%- if paginate.next -%}
-          <a href="{{ paginate.next.url }}" class="btn btn-outline btn-sm">Next →</a>
-        {%- endif -%}
+      </div>
+
+      {%- comment -%} Pagination {%- endcomment -%}
+      {%- if paginate.pages > 1 -%}
+        <div style="display: flex; justify-content: center; gap: var(--space-2); margin-top: var(--space-12);" aria-label="Pagination">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" class="btn btn-outline btn-sm">← Previous</a>
+          {%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <a href="{{ part.url }}" class="btn btn-ghost btn-sm">{{ part.title }}</a>
+            {%- else -%}
+              <span class="btn btn-primary btn-sm">{{ part.title }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="btn btn-outline btn-sm">Next →</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+    {%- else -%}
+      <div style="text-align: center; padding: var(--space-24) 0;">
+        <div style="font-size: 64px; margin-bottom: var(--space-6);">🌸</div>
+        <h2 style="font-family: var(--font-display); font-size: var(--text-3xl); color: var(--color-text-secondary); margin-bottom: var(--space-4);">No products found</h2>
+        <p style="color: var(--color-text-muted); margin-bottom: var(--space-8);">Try adjusting your filters or browse our full collection.</p>
+        <a href="{{ routes.collections_url }}/all" class="btn btn-primary">View All Fragrances</a>
       </div>
     {%- endif -%}
-
-  {%- else -%}
-    <div style="text-align: center; padding: var(--space-24) 0;">
-      <div style="font-size: 64px; margin-bottom: var(--space-6);">🌸</div>
-      <h2 style="font-family: var(--font-display); font-size: var(--text-3xl); color: var(--color-text-secondary); margin-bottom: var(--space-4);">No products found</h2>
-      <p style="color: var(--color-text-muted); margin-bottom: var(--space-8);">Try adjusting your filters or browse our full collection.</p>
-      <a href="{{ routes.collections_url }}/all" class="btn btn-primary">View All Fragrances</a>
-    </div>
-  {%- endif -%}
+  {%- endpaginate -%}
 
 </div>
 

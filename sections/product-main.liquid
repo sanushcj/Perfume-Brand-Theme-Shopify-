@@ -113,7 +113,7 @@
                         aria-label="{{ value }}"
                       {% endif %}
                       role="radio"
-                      aria-checked="{{ option.selected_value == value }}"
+                      aria-checked="{% if option.selected_value == value %}true{% else %}false{% endif %}"
                     >
                       {{ value }}
                     </button>
@@ -274,7 +274,6 @@
 
     {%- comment -%} Related Products {%- endcomment -%}
     {%- if section.settings.show_related -%}
-      {%- assign related_products = product.collections.first.products | where: 'id', product.id | first -%}
       <div style="margin-top: var(--space-24);">
         <div class="divider-gold"></div>
         <div style="text-align: center; margin-bottom: var(--space-10);">

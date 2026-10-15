@@ -6,7 +6,7 @@
       <div class="footer-brand">
         <a href="{{ routes.root_url }}" aria-label="{{ shop.name }} - Home">
           {%- if section.settings.logo != blank -%}
-            <img src="{{ section.settings.logo | image_url: width: 160 }}" alt="{{ shop.name }}" style="max-height: 40px; width: auto;">
+            <img src="{{ section.settings.logo | image_url: width: 160 }}" alt="{{ shop.name }}" width="160" height="40" loading="lazy" style="max-height: 40px; width: auto;">
           {%- else -%}
             <div class="nav-logo" style="text-decoration: none;">
               <span class="nav-logo-name">{{ settings.brand_name | default: shop.name }}</span>
