@@ -1,60 +1,57 @@
 {
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "settings": {
-        "text": "✦ Free worldwide shipping on orders over $150  |  Complimentary samples with every order  |  Luxury gift wrapping available ✦"
-      }
-    },
     "hero-banner": {
       "type": "hero-banner",
       "settings": {
-        "eyebrow_text": "New Arrival 2024",
+        "eyebrow_text": "HAUTE PARFUMERIE • PARIS",
         "heading_line1": "The Art of",
         "heading_line2": "Invisible Luxury",
-        "subheading": "Two masterpieces born from rare ingredients and a century of olfactory tradition. Each bottle holds a story that lingers long after you leave the room.",
-        "cta_primary_label": "Shop Flagships",
-        "cta_secondary_label": "Explore Collection",
-        "stat_1_number": "24h",
+        "subheading": "Crafted with the rarest French fragrance essences and aged to absolute perfection. Fragrances that evoke memories and command presence.",
+        "cta_primary_label": "Shop Best Sellers",
+        "cta_secondary_label": "Explore Collections",
+        "stat_1_number": "24h+",
         "stat_1_label": "Longevity",
         "stat_2_number": "100%",
-        "stat_2_label": "Natural Oils",
-        "stat_3_number": "50+",
-        "stat_3_label": "Rare Ingredients",
-        "badge_title": "Bestseller 2024",
-        "badge_sub": "4.9 ★ 2.4k reviews"
+        "stat_2_label": "Pure French Oils",
+        "stat_3_number": "Cruelty",
+        "stat_3_label": "Free & Vegan",
+        "badge_title": "Rated 4.9/5 by 12,000+ Connoisseurs",
+        "badge_sub": "“Best sillage and longevity I have ever worn.”"
       }
     },
-    "featured-flagships": {
-      "type": "featured-collection",
-      "blocks": {
-        "flagship-1": {
-          "type": "flagship",
-          "settings": {
-            "name": "Nuit Éternelle",
-            "category": "Eau de Parfum Intense",
-            "description": "A nocturnal masterpiece built on the darkest, richest oud from the forests of Laos, softened by Bulgarian rose and warm ambergris. Made for those who leave a lasting impression.",
-            "notes": "Oud, Bulgarian Rose, Ambergris, Sandalwood",
-            "price": "$220"
-          }
-        },
-        "flagship-2": {
-          "type": "flagship",
-          "settings": {
-            "name": "Aube Dorée",
-            "category": "Eau de Parfum",
-            "description": "A golden sunrise captured in fragrance — vibrant bergamot opens to reveal jasmine absolute and a heart of warm vetiver, anchored by a silken musk base.",
-            "notes": "Bergamot, Jasmine Absolute, Vetiver, Musk",
-            "price": "$195"
-          }
-        }
-      },
-      "block_order": ["flagship-1", "flagship-2"],
+    "category-spotlight": {
+      "type": "category-spotlight",
       "settings": {
-        "eyebrow": "New Releases",
-        "title": "Our Flagship Collection",
-        "subtitle": "Two extraordinary fragrances meticulously crafted from the rarest ingredients the world has to offer.",
-        "show_view_all": true
+        "eyebrow": "Curated Collections",
+        "title": "Explore By Scent Signature",
+        "subtitle": "Immerse yourself in artisanal compositions tailored for the discerning connoisseur.",
+        "men_badge": "COLLECTION POUR HOMME",
+        "men_title": "Discover Top Perfumes for Men",
+        "men_desc": "Commanding compositions with notes of smoky oud, cedarwood, ambergris, and black spices designed for timeless presence.",
+        "men_btn_label": "Shop Men's Fragrances",
+        "women_badge": "COLLECTION POUR FEMME",
+        "women_title": "Discover Top Perfumes for Women",
+        "women_desc": "Ethereal bouquets of Grasse rose, crystalline jasmine, solar bergamot, and warm Madagascar vanilla accords.",
+        "women_btn_label": "Shop Women's Fragrances"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Our Signature Blends",
+        "title": "Best Sellers & Icons",
+        "subtitle": "Experience the most coveted fragrances, meticulously distilled and aged for unmatched depth.",
+        "products_to_show": 8,
+        "show_view_all": true,
+        "view_all_label": "View All Fragrances"
+      }
+    },
+    "fragrance-families": {
+      "type": "fragrance-families",
+      "settings": {
+        "eyebrow": "Olfactory Notes",
+        "title": "Find Your Scent Family",
+        "subtitle": "From deep oriental resins to effervescent citrus, explore each unique accord."
       }
     },
     "brand-story": {
@@ -64,41 +61,46 @@
           "type": "pillar",
           "settings": {
             "icon": "🌿",
-            "title": "Natural Origins",
-            "text": "Every ingredient sourced directly from its native habitat, ethically and sustainably."
+            "title": "100% French Oils",
+            "text": "Every botanical extract distilled ethically in Grasse, the perfume capital of the world."
           }
         },
         "pillar-2": {
           "type": "pillar",
           "settings": {
-            "icon": "⚗️",
-            "title": "Master Craftsmanship",
-            "text": "Created by fourth-generation perfumers with decades of olfactory expertise."
+            "icon": "⏳",
+            "title": "24h Enduring Longevity",
+            "text": "High concentration Extrait de Parfum formulated to project effortlessly from day to night."
           }
         },
         "pillar-3": {
           "type": "pillar",
           "settings": {
-            "icon": "🕰️",
-            "title": "Timeless Quality",
-            "text": "Aged to perfection. Every batch rests for a minimum of six months before bottling."
+            "icon": "✨",
+            "title": "Clean & Hypoallergenic",
+            "text": "Formulated without toxic phthalates, parabens, or harsh synthetics. 100% vegan."
           }
         },
         "pillar-4": {
           "type": "pillar",
           "settings": {
-            "icon": "🌍",
-            "title": "Responsibly Made",
-            "text": "Cruelty-free, sustainably sourced, and packaged in recyclable luxury materials."
+            "icon": "🎁",
+            "title": "Complimentary Samples",
+            "text": "Every bottle arrives with 2 complimentary discovery vials and signature velvet packaging."
           }
         }
       },
-      "block_order": ["pillar-1", "pillar-2", "pillar-3", "pillar-4"],
+      "block_order": [
+        "pillar-1",
+        "pillar-2",
+        "pillar-3",
+        "pillar-4"
+      ],
       "settings": {
-        "eyebrow": "Our Heritage",
+        "eyebrow": "Atelier Craftsmanship",
         "title": "Crafted With Purpose, Worn With Intention",
         "founded_year": "1998",
-        "cta_label": "Read Our Story"
+        "cta_label": "Discover Our Atelier"
       }
     },
     "testimonials": {
@@ -108,8 +110,8 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "text": "This is not just a fragrance — it is a memory. Nuit Éternelle takes me back to moonlit evenings in Marrakech. I have been wearing it every day for six months and people stop me on the street.",
-            "name": "Sophia R.",
+            "text": "This is not just a fragrance — it is a magnetic aura. Santal Blanc is my daily signature; strangers literally stop me on the subway asking what I am wearing.",
+            "name": "Sophia Laurent",
             "location": "Paris, France"
           }
         },
@@ -117,51 +119,50 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "text": "I have worn fragrance my entire life, but nothing has drawn compliments quite like Aube Dorée. The sillage is extraordinary. Three people asked me what I was wearing in a single afternoon.",
-            "name": "Marcus D.",
-            "location": "New York, USA"
+            "text": "Oud Noir Impérial has the most intoxicating dry-down I have ever experienced. Lasts a full 24 hours on skin and days on my wool coat. Incredible quality.",
+            "name": "Alexander Vance",
+            "location": "London, UK"
           }
         },
         "review-3": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "text": "The packaging alone is gallery-worthy. But the scent inside surpasses even that. Perfectly balanced, hauntingly beautiful, and it lasts from morning until midnight. Worth every penny.",
-            "name": "Isabella M.",
-            "location": "Milan, Italy"
+            "text": "The packaging is reminiscent of a fine jewelry house, and the scent inside surpasses even that. Clean, luminous, and undeniably luxurious.",
+            "name": "Elena Rostova",
+            "location": "New York, USA"
           }
         }
       },
-      "block_order": ["review-1", "review-2", "review-3"],
+      "block_order": [
+        "review-1",
+        "review-2",
+        "review-3"
+      ],
       "settings": {
-        "eyebrow": "What People Say",
-        "title": "Loved by Fragrance Connoisseurs"
+        "eyebrow": "Verified Connoisseurs",
+        "title": "Loved by Over 50,000 Fragrance Lovers"
       }
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "eyebrow": "Stay Connected",
-        "title": "Join the Inner Circle",
-        "subtitle": "Be the first to know about new releases, exclusive events, and private sales. Members receive complimentary samples with every order.",
-        "placeholder": "Your email address",
-        "button_label": "Subscribe"
-      }
-    },
-    "footer": {
-      "type": "footer",
-      "settings": {
-        "brand_desc": "Purveyors of rare and exceptional fragrances for those who understand that true luxury is found in the invisible."
+        "eyebrow": "Private Members",
+        "title": "Join the Atelier Circle",
+        "subtitle": "Receive 10% off your inaugural order and private invitations to limited-edition small batch releases.",
+        "placeholder": "Enter your email address",
+        "button_label": "Claim 10% Off",
+        "disclaimer": "Complimentary shipping on orders over $100. Instant coupon delivered to your inbox."
       }
     }
   },
   "order": [
-    "announcement-bar",
     "hero-banner",
-    "featured-flagships",
+    "category-spotlight",
+    "featured-collection",
+    "fragrance-families",
     "brand-story",
     "testimonials",
-    "newsletter",
-    "footer"
+    "newsletter"
   ]
 }

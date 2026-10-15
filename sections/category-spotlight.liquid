@@ -1,0 +1,208 @@
+<section class="category-spotlight section-padding" id="category-spotlight" aria-label="Curated fragrance collections">
+  <div class="container">
+
+    <div class="section-header text-center reveal">
+      <p class="section-eyebrow" style="justify-content: center;">{{ section.settings.eyebrow | default: 'Curated Collections' }}</p>
+      <h2 class="section-title">{{ section.settings.title | default: 'Explore By Scent Signature' }}</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">
+        {{ section.settings.subtitle | default: 'Immerse yourself in artisanal compositions tailored for the discerning connoisseur.' }}
+      </p>
+    </div>
+
+    <div class="spotlight-grid">
+
+      {%- comment -%} Card 1: Men's Fragrances {%- endcomment -%}
+      <div class="spotlight-card reveal reveal-delay-1">
+        <div class="spotlight-media">
+          {%- if section.settings.men_image != blank -%}
+            <img
+              src="{{ section.settings.men_image | image_url: width: 900 }}"
+              alt="{{ section.settings.men_title | default: 'Top Perfumes for Men' | escape }}"
+              class="spotlight-image"
+              loading="lazy"
+              width="900"
+              height="750"
+            >
+          {%- else -%}
+            <img
+              src="{{ 'men-fragrance.jpg' | asset_url }}"
+              alt="Discover Top Perfumes for Men"
+              class="spotlight-image"
+              loading="lazy"
+              width="900"
+              height="750"
+            >
+          {%- endif -%}
+          <div class="spotlight-overlay"></div>
+        </div>
+
+        <div class="spotlight-content">
+          <span class="spotlight-badge">{{ section.settings.men_badge | default: 'COLLECTION POUR HOMME' }}</span>
+          <h3 class="spotlight-heading">{{ section.settings.men_title | default: 'Discover Top Perfumes for Men' }}</h3>
+          <p class="spotlight-desc">
+            {{ section.settings.men_desc | default: 'Commanding compositions with notes of smoky oud, cedarwood, ambergris, and black spices designed for timeless presence.' }}
+          </p>
+          <div class="spotlight-action">
+            <a href="{{ section.settings.men_url | default: routes.collections_url | append: '/men' }}" class="btn btn-outline-white">
+              {{ section.settings.men_btn_label | default: 'Shop Men' }}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {%- comment -%} Card 2: Women's Fragrances {%- endcomment -%}
+      <div class="spotlight-card reveal reveal-delay-2">
+        <div class="spotlight-media">
+          {%- if section.settings.women_image != blank -%}
+            <img
+              src="{{ section.settings.women_image | image_url: width: 900 }}"
+              alt="{{ section.settings.women_title | default: 'Top Perfumes for Women' | escape }}"
+              class="spotlight-image"
+              loading="lazy"
+              width="900"
+              height="750"
+            >
+          {%- else -%}
+            <img
+              src="{{ 'women-fragrance.jpg' | asset_url }}"
+              alt="Discover Top Perfumes for Women"
+              class="spotlight-image"
+              loading="lazy"
+              width="900"
+              height="750"
+            >
+          {%- endif -%}
+          <div class="spotlight-overlay"></div>
+        </div>
+
+        <div class="spotlight-content">
+          <span class="spotlight-badge">{{ section.settings.women_badge | default: 'COLLECTION POUR FEMME' }}</span>
+          <h3 class="spotlight-heading">{{ section.settings.women_title | default: 'Discover Top Perfumes for Women' }}</h3>
+          <p class="spotlight-desc">
+            {{ section.settings.women_desc | default: 'Ethereal bouquets of Grasse rose, crystalline jasmine, solar bergamot, and warm Madagascar vanilla accords.' }}
+          </p>
+          <div class="spotlight-action">
+            <a href="{{ section.settings.women_url | default: routes.collections_url | append: '/women' }}" class="btn btn-outline-white">
+              {{ section.settings.women_btn_label | default: 'Shop Women' }}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Category Spotlight",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Curated Collections"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "Explore By Scent Signature"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Section subtitle",
+      "default": "Immerse yourself in artisanal compositions tailored for the discerning connoisseur."
+    },
+    {
+      "type": "header",
+      "content": "Men's Spotlight"
+    },
+    {
+      "type": "image_picker",
+      "id": "men_image",
+      "label": "Men's Banner Image"
+    },
+    {
+      "type": "text",
+      "id": "men_badge",
+      "label": "Men's Badge",
+      "default": "COLLECTION POUR HOMME"
+    },
+    {
+      "type": "text",
+      "id": "men_title",
+      "label": "Men's Title",
+      "default": "Discover Top Perfumes for Men"
+    },
+    {
+      "type": "textarea",
+      "id": "men_desc",
+      "label": "Men's Description",
+      "default": "Commanding compositions with notes of smoky oud, cedarwood, ambergris, and black spices designed for timeless presence."
+    },
+    {
+      "type": "url",
+      "id": "men_url",
+      "label": "Men's Link URL"
+    },
+    {
+      "type": "text",
+      "id": "men_btn_label",
+      "label": "Men's Button Label",
+      "default": "Shop Men"
+    },
+    {
+      "type": "header",
+      "content": "Women's Spotlight"
+    },
+    {
+      "type": "image_picker",
+      "id": "women_image",
+      "label": "Women's Banner Image"
+    },
+    {
+      "type": "text",
+      "id": "women_badge",
+      "label": "Women's Badge",
+      "default": "COLLECTION POUR FEMME"
+    },
+    {
+      "type": "text",
+      "id": "women_title",
+      "label": "Women's Title",
+      "default": "Discover Top Perfumes for Women"
+    },
+    {
+      "type": "textarea",
+      "id": "women_desc",
+      "label": "Women's Description",
+      "default": "Ethereal bouquets of Grasse rose, crystalline jasmine, solar bergamot, and warm Madagascar vanilla accords."
+    },
+    {
+      "type": "url",
+      "id": "women_url",
+      "label": "Women's Link URL"
+    },
+    {
+      "type": "text",
+      "id": "women_btn_label",
+      "label": "Women's Button Label",
+      "default": "Shop Women"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Spotlight"
+    }
+  ]
+}
+{% endschema %}

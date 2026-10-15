@@ -1,28 +1,51 @@
 <div class="cart-drawer-overlay" id="CartDrawerOverlay"></div>
 
-<div class="cart-drawer" id="CartDrawer" role="dialog" aria-modal="true" aria-label="Shopping cart">
+<div class="cart-drawer" id="CartDrawer" role="dialog" aria-modal="true" aria-label="Shopping bag">
 
   <div class="cart-drawer-header">
-    <h2 class="cart-drawer-title">Your Cart</h2>
-    <button class="nav-action-btn" data-cart-close aria-label="Close cart">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+    <div class="cart-drawer-header-left">
+      <h2 class="cart-drawer-title">Shopping Bag</h2>
+      <span class="cart-drawer-count" id="CartDrawerCount">({{ cart.item_count }})</span>
+    </div>
+    <button class="cart-drawer-close" data-cart-close aria-label="Close cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <path d="M18 6L6 18M6 6l12 12"/>
       </svg>
     </button>
   </div>
 
+  {%- comment -%} Free Shipping Progress Bar {%- endcomment -%}
+  {%- assign threshold = settings.free_shipping_threshold | default: 100 | times: 100 -%}
+  <div class="cart-shipping-bar" id="CartShippingBar" data-threshold="{{ threshold }}">
+    {%- if cart.total_price >= threshold -%}
+      <p class="shipping-bar-text">✨ {{ settings.free_shipping_message | default: 'You qualify for Free Worldwide Express Delivery!' }}</p>
+      <div class="shipping-bar-progress-container"><div class="shipping-bar-progress" style="width: 100%;"></div></div>
+    {%- else -%}
+      {%- assign remaining = threshold | minus: cart.total_price -%}
+      <p class="shipping-bar-text">Add <strong>{{ remaining | money }}</strong> more to unlock <strong>Free Express Delivery</strong></p>
+      {%- assign progress = cart.total_price | times: 100 | divided_by: threshold -%}
+      <div class="shipping-bar-progress-container"><div class="shipping-bar-progress" style="width: {{ progress }}%;"></div></div>
+    {%- endif -%}
+  </div>
+
   <div class="cart-drawer-body" id="CartDrawerBody">
     {%- if cart.item_count == 0 -%}
-      <div class="cart-drawer-empty">
-        <div class="cart-drawer-empty-icon">🛒</div>
-        <p style="font-size: var(--text-base); font-weight: var(--fw-medium); color: var(--color-text-secondary);">Your cart is empty</p>
-        <p style="font-size: var(--text-sm); color: var(--color-text-muted);">Add some fragrances to get started</p>
-        <a href="{{ routes.collections_url }}/all" class="btn btn-outline btn-sm" data-cart-close>Explore Collection</a>
+      <div class="cart-drawer-empty" id="CartDrawerEmpty">
+        <div class="cart-drawer-empty-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+        </div>
+        <p class="cart-empty-title">Your shopping bag is empty</p>
+        <p class="cart-empty-sub">Discover our signature fragrances and elevate your scent presence.</p>
+        <a href="{{ routes.collections_url }}" class="btn btn-primary btn-sm" data-cart-close>Explore Fragrances</a>
       </div>
     {%- else -%}
       {%- for item in cart.items -%}
         <div class="cart-drawer-item" data-variant-id="{{ item.variant_id }}">
-          <a href="{{ item.url }}">
+          <a href="{{ item.url }}" class="cart-drawer-item-img-link">
             {%- if item.image -%}
               <img
                 src="{{ item.image | image_url: width: 200 }}"
@@ -30,47 +53,61 @@
                 class="cart-drawer-item-image"
                 loading="lazy"
                 width="80"
-                height="96"
+                height="80"
               >
             {%- else -%}
-              <div class="cart-drawer-item-image" style="background: var(--color-bg-card); display:flex; align-items:center; justify-content:center; color: var(--color-text-muted); font-size: 24px;">🌸</div>
+              <img
+                src="{{ 'product-santal-blanc.jpg' | asset_url }}"
+                alt="{{ item.product.title | escape }}"
+                class="cart-drawer-item-image"
+                loading="lazy"
+                width="80"
+                height="80"
+              >
             {%- endif -%}
           </a>
           <div class="cart-drawer-item-info">
-            <a href="{{ item.url }}" class="cart-drawer-item-name">{{ item.product.title }}</a>
+            <div class="cart-drawer-item-top">
+              <a href="{{ item.url }}" class="cart-drawer-item-name">{{ item.product.title }}</a>
+              <button class="cart-item-remove" data-variant="{{ item.variant_id }}" aria-label="Remove {{ item.product.title }} from bag">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+              </button>
+            </div>
             {%- unless item.variant.title == 'Default Title' -%}
               <div class="cart-drawer-item-variant">{{ item.variant.title }}</div>
             {%- endunless -%}
             <div class="cart-drawer-item-bottom">
-              <div class="quantity-selector" style="transform: scale(0.85); transform-origin: left;">
-                <button class="qty-btn" data-action="decrease" data-variant="{{ item.variant_id }}" data-qty="{{ item.quantity }}" aria-label="Decrease quantity">−</button>
-                <span style="padding: 0 var(--space-2); font-size: var(--text-sm); color: var(--color-text-primary); min-width: 20px; text-align: center;">{{ item.quantity }}</span>
-                <button class="qty-btn" data-action="increase" data-variant="{{ item.variant_id }}" data-qty="{{ item.quantity }}" aria-label="Increase quantity">+</button>
+              <div class="quantity-selector cart-qty">
+                <button type="button" class="qty-btn" data-action="decrease" data-variant="{{ item.variant_id }}" data-qty="{{ item.quantity }}" aria-label="Decrease quantity">−</button>
+                <span class="qty-display">{{ item.quantity }}</span>
+                <button type="button" class="qty-btn" data-action="increase" data-variant="{{ item.variant_id }}" data-qty="{{ item.quantity }}" aria-label="Increase quantity">+</button>
               </div>
               <div class="cart-drawer-item-price">{{ item.final_line_price | money }}</div>
             </div>
-            <button class="cart-item-remove" data-variant="{{ item.variant_id }}" style="font-size:11px; margin-top: 6px;" aria-label="Remove {{ item.product.title }} from cart">Remove</button>
           </div>
         </div>
       {%- endfor -%}
     {%- endif -%}
   </div>
 
-  {%- if cart.item_count > 0 -%}
-    <div class="cart-drawer-footer">
-      <div class="cart-drawer-total">
-        <span class="cart-drawer-total-label">Subtotal</span>
-        <span class="cart-drawer-total-value" id="CartDrawerTotal">{{ cart.total_price | money }}</span>
-      </div>
-      <p style="font-size: var(--text-xs); color: var(--color-text-muted); text-align:center; margin-bottom: var(--space-3);">Shipping & taxes calculated at checkout</p>
-      <a href="{{ routes.checkout_url }}" class="btn btn-primary btn-full cart-checkout-btn" id="CartCheckoutBtn">
-        Checkout
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </a>
-      <a href="{{ routes.cart_url }}" class="btn btn-ghost btn-full btn-sm" data-cart-close>View Full Cart</a>
+  <div class="cart-drawer-footer" id="CartDrawerFooter" {% if cart.item_count == 0 %}style="display: none;"{% endif %}>
+    <div class="cart-drawer-total">
+      <span class="cart-drawer-total-label">Subtotal</span>
+      <span class="cart-drawer-total-value" id="CartDrawerTotal">{{ cart.total_price | money }}</span>
     </div>
-  {%- endif -%}
+    <p class="cart-drawer-note">Taxes and express shipping calculated at checkout</p>
+    <a href="{{ routes.checkout_url }}" class="btn btn-primary btn-full cart-checkout-btn" id="CartCheckoutBtn">
+      <span>Proceed to Checkout</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+    <div class="cart-drawer-trust">
+      <span>🔒 256-Bit SSL Secure Checkout</span>
+      <span>✦ 30-Day Guarantee</span>
+    </div>
+  </div>
 
 </div>

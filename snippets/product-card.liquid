@@ -1,69 +1,152 @@
-{%- assign product_type = product_card_product.type | downcase -%}
-<article class="product-card" data-type="{{ product_type }}" data-product-id="{{ product_card_product.id }}">
-  <a href="{{ product_card_product.url }}" class="product-card-visual" tabindex="-1" aria-hidden="true">
+{%- comment -%}
+  Renders a luxury product card with fallback dummy data, rating, notes, and quick add.
+  Accepts:
+  - product_card_product: {Object} Product object (optional)
+  - dummy_index: {Number} Optional fallback index (1 to 4)
+{%- endcomment -%}
 
-    {%- comment -%} Badge {%- endcomment -%}
-    {%- if product_card_product.tags contains 'flagship' or product_card_product.tags contains 'new' -%}
-      <span class="product-badge product-badge-new">
-        {%- if product_card_product.tags contains 'flagship' -%}Flagship{%- else -%}New{%- endif -%}
-      </span>
-    {%- elsif product_card_product.compare_at_price > product_card_product.price -%}
-      <span class="product-badge product-badge-sale">Sale</span>
-    {%- endif -%}
+{%- assign p = product_card_product -%}
+{%- assign current_variant = p.selected_or_first_available_variant -%}
 
-    {%- comment -%} Wishlist {%- endcomment -%}
-    <button
-      class="product-card-wishlist"
-      data-product-id="{{ product_card_product.id }}"
-      aria-label="Add {{ product_card_product.title | escape }} to wishlist"
-    >♡</button>
+<article class="product-card" data-product-id="{{ p.id | default: dummy_index }}">
+  <div class="product-card-media-wrapper">
+    <a href="{{ p.url | default: routes.collections_url }}" class="product-card-visual" aria-label="{{ p.title | default: 'Artisanal Perfume' }}">
 
-    {%- comment -%} Image {%- endcomment -%}
-    {%- if product_card_product.featured_image -%}
-      <img
-        src="{{ product_card_product.featured_image | image_url: width: 600 }}"
-        alt="{{ product_card_product.featured_image.alt | default: product_card_product.title | escape }}"
-        class="product-card-image"
-        loading="lazy"
-        width="600"
-        height="800"
-      >
-    {%- else -%}
-      <div style="display:flex; align-items:center; justify-content:center; height:100%; font-size:64px; color: var(--color-text-muted);">🌺</div>
-    {%- endif -%}
-
-    {%- comment -%} Hover Actions {%- endcomment -%}
-    <div class="product-card-actions">
-      <button
-        class="btn btn-primary btn-sm btn-full"
-        data-quick-add="{{ product_card_product.variants.first.id }}"
-        aria-label="Quick add {{ product_card_product.title | escape }} to cart"
-      >
-        Add to Cart
-      </button>
-      <a href="{{ product_card_product.url }}" class="btn btn-ghost btn-sm btn-full">View Details</a>
-    </div>
-  </a>
-
-  <div class="product-card-body">
-    <div class="product-card-category">{{ product_card_product.type | default: 'Eau de Parfum' }}</div>
-    <a href="{{ product_card_product.url }}" class="product-card-name">{{ product_card_product.title }}</a>
-    {%- if product_card_product.metafields.custom.fragrance_family != blank -%}
-      <div class="product-card-subtitle">{{ product_card_product.metafields.custom.fragrance_family }}</div>
-    {%- endif -%}
-
-    <div class="product-card-price-row">
-      <div>
-        <span class="product-card-price">{{ product_card_product.price | money }}</span>
-        {%- if product_card_product.compare_at_price > product_card_product.price -%}
-          <span class="product-card-compare-price">{{ product_card_product.compare_at_price | money }}</span>
+      {%- comment -%} Badges {%- endcomment -%}
+      <div class="product-card-badges">
+        {%- if p.tags contains 'bestseller' or dummy_index == 1 -%}
+          <span class="product-badge badge-gold">Bestseller</span>
+        {%- elsif p.tags contains 'new' or dummy_index == 2 -%}
+          <span class="product-badge badge-dark">New Extrait</span>
+        {%- elsif p.compare_at_price > p.price -%}
+          <span class="product-badge badge-sale">Sale</span>
         {%- endif -%}
       </div>
-      {%- if product_card_product.available -%}
-        <span style="font-size: var(--text-xs); color: var(--color-success);">In Stock</span>
+
+      {%- comment -%} Images with secondary hover {%- endcomment -%}
+      {%- if p.featured_image -%}
+        <img
+          src="{{ p.featured_image | image_url: width: 600 }}"
+          alt="{{ p.featured_image.alt | default: p.title | escape }}"
+          class="product-card-img product-card-img-primary"
+          loading="lazy"
+          width="600"
+          height="600"
+        >
+        {%- if p.images.size > 1 -%}
+          <img
+            src="{{ p.images[1] | image_url: width: 600 }}"
+            alt="{{ p.images[1].alt | default: p.title | escape }}"
+            class="product-card-img product-card-img-secondary"
+            loading="lazy"
+            width="600"
+            height="600"
+          >
+        {%- endif -%}
       {%- else -%}
-        <span style="font-size: var(--text-xs); color: var(--color-text-muted);">Sold Out</span>
+        {%- if dummy_index == 2 or dummy_index == 4 -%}
+          <img
+            src="{{ 'product-oud-noir.jpg' | asset_url }}"
+            alt="Oud Noir Extrait de Parfum"
+            class="product-card-img product-card-img-primary"
+            loading="lazy"
+            width="600"
+            height="600"
+          >
+        {%- else -%}
+          <img
+            src="{{ 'product-santal-blanc.jpg' | asset_url }}"
+            alt="Santal Blanc Eau de Parfum"
+            class="product-card-img product-card-img-primary"
+            loading="lazy"
+            width="600"
+            height="600"
+          >
+        {%- endif -%}
       {%- endif -%}
+    </a>
+
+    {%- comment -%} Quick Add Button on Hover / Mobile Bar {%- endcomment -%}
+    <div class="product-card-actions">
+      <button
+        type="button"
+        class="btn btn-primary btn-sm btn-full quick-add-trigger"
+        data-variant-id="{{ current_variant.id | default: 'dummy-var' }}"
+        data-product-title="{% if p != blank %}{{ p.title | escape }}{% elsif dummy_index == 1 %}Santal Blanc Extrait{% elsif dummy_index == 2 %}Oud Noir Impérial{% elsif dummy_index == 3 %}Aurora Rose Royale{% else %}Ambre d'Or Solaire{% endif %}"
+        data-product-price="{% if p != blank %}{{ p.price | money }}{% elsif dummy_index == 1 %}$145.00{% elsif dummy_index == 2 %}$185.00{% elsif dummy_index == 3 %}$155.00{% else %}$165.00{% endif %}"
+        data-product-image="{% if p.featured_image %}{{ p.featured_image | image_url: width: 200 }}{% elsif dummy_index == 2 or dummy_index == 4 %}{{ 'product-oud-noir.jpg' | asset_url }}{% else %}{{ 'product-santal-blanc.jpg' | asset_url }}{% endif %}"
+        aria-label="Add to Bag"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span>Quick Add</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="product-card-body">
+    <div class="product-card-top-row">
+      <span class="product-card-category">
+        {{ p.type | default: 'Eau de Parfum • 100ml' }}
+      </span>
+      <div class="product-card-rating">
+        <span class="rating-star">★</span>
+        <span class="rating-score">4.9</span>
+      </div>
+    </div>
+
+    <h3 class="product-card-title">
+      <a href="{{ p.url | default: routes.collections_url }}">
+        {%- if p != blank -%}
+          {{ p.title }}
+        {%- elsif dummy_index == 1 -%}
+          Santal Blanc Extrait
+        {%- elsif dummy_index == 2 -%}
+          Oud Noir Impérial
+        {%- elsif dummy_index == 3 -%}
+          Aurora Rose Royale
+        {%- else -%}
+          Ambre d'Or Solaire
+        {%- endif -%}
+      </a>
+    </h3>
+
+    <div class="product-card-notes">
+      {%- if p.metafields.custom.notes != blank -%}
+        <span>{{ p.metafields.custom.notes }}</span>
+      {%- elsif dummy_index == 1 -%}
+        <span>Sandalwood · Cardamom · Ambergris</span>
+      {%- elsif dummy_index == 2 -%}
+        <span>Smoked Oud · Leather · Saffron</span>
+      {%- elsif dummy_index == 3 -%}
+        <span>Grasse Rose · Peony · White Musk</span>
+      {%- else -%}
+        <span>Tonka Bean · Bourbon Vanilla · Amber</span>
+      {%- endif -%}
+    </div>
+
+    <div class="product-card-price-row">
+      <div class="price-container">
+        {%- if p != blank -%}
+          <span class="product-card-price">{{ p.price | money }}</span>
+          {%- if p.compare_at_price > p.price -%}
+            <span class="product-card-compare-price">{{ p.compare_at_price | money }}</span>
+          {%- endif -%}
+        {%- else -%}
+          <span class="product-card-price">
+            {%- if dummy_index == 1 -%}$145.00
+            {%- elsif dummy_index == 2 -%}$185.00
+            {%- elsif dummy_index == 3 -%}$155.00
+            {%- else -%}$165.00
+            {%- endif -%}
+          </span>
+          <span class="product-card-compare-price">$195.00</span>
+        {%- endif -%}
+      </div>
+      <span class="product-card-stock-status">24h Projection</span>
     </div>
   </div>
 </article>

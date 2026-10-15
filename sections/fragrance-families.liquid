@@ -1,0 +1,80 @@
+<section class="fragrance-families section-padding bg-warm" id="fragrance-families" aria-label="Fragrance families">
+  <div class="container">
+
+    <div class="section-header text-center reveal">
+      <p class="section-eyebrow" style="justify-content: center;">{{ section.settings.eyebrow | default: 'Olfactory Notes' }}</p>
+      <h2 class="section-title">{{ section.settings.title | default: 'Find Your Scent Family' }}</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">
+        {{ section.settings.subtitle | default: 'From deep oriental resins to effervescent citrus, explore each unique accord.' }}
+      </p>
+    </div>
+
+    <div class="families-grid">
+
+      <div class="family-card reveal reveal-delay-1">
+        <div class="family-icon">🪵</div>
+        <h3 class="family-name">Woody & Oud</h3>
+        <p class="family-desc">Rich cedarwood, aged Cambodian oud, sandalwood, and smoky vetiver.</p>
+        <span class="family-pill">Intense & Magnetic</span>
+        <a href="{{ routes.collections_url }}/all" class="family-link" aria-label="Browse Woody and Oud fragrances">Explore Accords →</a>
+      </div>
+
+      <div class="family-card reveal reveal-delay-2">
+        <div class="family-icon">🌹</div>
+        <h3 class="family-name">Floral & Rose</h3>
+        <p class="family-desc">Grasse rose petals, sambac jasmine, iris powder, and white blossom.</p>
+        <span class="family-pill">Luminous & Romantic</span>
+        <a href="{{ routes.collections_url }}/all" class="family-link" aria-label="Browse Floral fragrances">Explore Accords →</a>
+      </div>
+
+      <div class="family-card reveal reveal-delay-3">
+        <div class="family-icon">🌊</div>
+        <h3 class="family-name">Fresh & Aquatic</h3>
+        <p class="family-desc">Calabrian bergamot, sea mineral breeze, green tea, and crisp neroli.</p>
+        <span class="family-pill">Invigorating & Clean</span>
+        <a href="{{ routes.collections_url }}/all" class="family-link" aria-label="Browse Fresh and Aquatic fragrances">Explore Accords →</a>
+      </div>
+
+      <div class="family-card reveal reveal-delay-4">
+        <div class="family-icon">✨</div>
+        <h3 class="family-name">Amber & Vanilla</h3>
+        <p class="family-desc">Golden benzoin, Madagascar bourbon vanilla, tonka bean, and warm spice.</p>
+        <span class="family-pill">Sensual & Cozy</span>
+        <a href="{{ routes.collections_url }}/all" class="family-link" aria-label="Browse Amber and Vanilla fragrances">Explore Accords →</a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Fragrance Families",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Olfactory Notes"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Find Your Scent Family"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "From deep oriental resins to effervescent citrus, explore each unique accord."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fragrance Families"
+    }
+  ]
+}
+{% endschema %}
