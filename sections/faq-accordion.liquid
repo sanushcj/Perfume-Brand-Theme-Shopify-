@@ -1,0 +1,131 @@
+<section class="faq-section section-padding" id="faq-{{ section.id }}" aria-label="Frequently Asked Questions">
+  <div class="container max-w-narrow">
+
+    <div class="section-header text-center reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="section-eyebrow justify-center">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="section-title">{{ section.settings.title | default: 'Fragrance Guidance & FAQs' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="section-subtitle max-w-prose">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="faq-accordion-list">
+      {%- for block in section.blocks -%}
+        <details class="faq-item accordion-item" {{ block.shopify_attributes }}{% if forloop.first %} open{% endif %}>
+          <summary class="faq-summary accordion-summary">
+            <span class="faq-question">{{ block.settings.question }}</span>
+            <span class="accordion-arrow">▼</span>
+          </summary>
+          <div class="faq-content accordion-content">
+            <p>{{ block.settings.answer }}</p>
+          </div>
+        </details>
+      {%- else -%}
+        <details class="faq-item accordion-item" open>
+          <summary class="faq-summary accordion-summary">
+            <span class="faq-question">What is the difference between The Signature Collection and The Discovery Collection?</span>
+            <span class="accordion-arrow">▼</span>
+          </summary>
+          <div class="faq-content accordion-content">
+            <p>The Signature Collection features our three flagship fragrances — ADDICTED, Ice of Heaven, and Rouge Elite — presented in 50ml statement flacons. The Discovery Collection includes our six smaller-format scents (Purple Mist, Old Money, Fallen Star, Coffee, Toxic, and Dark Chocolates) offered in 10ml and 20ml formats for pocket portability and scent exploration.</p>
+          </div>
+        </details>
+        <details class="faq-item accordion-item">
+          <summary class="faq-summary accordion-summary">
+            <span class="faq-question">Where does AD PERFUMES currently provide dispatch and service?</span>
+            <span class="accordion-arrow">▼</span>
+          </summary>
+          <div class="faq-content accordion-content">
+            <p>We currently provide customer dispatch and services across Kerala, Karnataka, and the United Arab Emirates (UAE). For order inquiries or customer assistance, reach us at +91 89213 62927 or Connect.adperfumes@gmail.com.</p>
+          </div>
+        </details>
+        <details class="faq-item accordion-item">
+          <summary class="faq-summary accordion-summary">
+            <span class="faq-question">How should I store my perfumes to maintain their fragrance profile?</span>
+            <span class="accordion-arrow">▼</span>
+          </summary>
+          <div class="faq-content accordion-content">
+            <p>Store your bottles in a cool, dry place away from direct sunlight, excess humidity, and sudden temperature shifts. Keeping your flacons upright in their original presentation box preserves the delicate top notes and overall integrity of the fragrance oils.</p>
+          </div>
+        </details>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Fragrance FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Client Assistance"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Fragrance Guidance & FAQs"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Answers to frequent inquiries regarding our fragrance collections, bottle sizes, and care."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How do I choose between different perfume formats?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Choose 50ml flacons from The Signature Collection for everyday signature wear, or 10ml/20ml editions from The Discovery Collection for travel and pocket portability."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fragrance FAQ",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the difference between The Signature Collection and The Discovery Collection?",
+            "answer": "The Signature Collection features our three flagship fragrances — ADDICTED, Ice of Heaven, and Rouge Elite — presented in 50ml statement flacons. The Discovery Collection includes our six smaller-format scents (Purple Mist, Old Money, Fallen Star, Coffee, Toxic, and Dark Chocolates) offered in 10ml and 20ml formats for pocket portability and scent exploration."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where does AD PERFUMES currently provide dispatch and service?",
+            "answer": "We currently provide customer dispatch and services across Kerala, Karnataka, and the United Arab Emirates (UAE). For order inquiries or customer assistance, reach us at +91 89213 62927 or Connect.adperfumes@gmail.com."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How should I store my perfumes to maintain their fragrance profile?",
+            "answer": "Store your bottles in a cool, dry place away from direct sunlight, excess humidity, and sudden temperature shifts. Keeping your flacons upright in their original presentation box preserves the delicate top notes and overall integrity of the fragrance oils."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,108 @@
+{%- assign target_col = collections[section.settings.collection] -%}
+
+<section class="collection-showcase section-padding" id="signature-{{ section.id }}" aria-label="The Signature Collection">
+  <div class="container">
+
+    <div class="section-header text-center reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="section-eyebrow justify-center">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="section-title">{{ section.settings.title | default: 'The Signature Collection' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="section-subtitle max-w-prose">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="product-grid product-grid-3" id="SignatureGrid-{{ section.id }}">
+      {%- if target_col != blank and target_col.products.size > 0 -%}
+        {%- for product in target_col.products limit: section.settings.products_to_show -%}
+          <div class="reveal reveal-delay-{{ forloop.index }}">
+            {%- render 'product-card', product_card_product: product -%}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Onboarding clean preview for the 3 flagship perfumes {%- endcomment -%}
+        {%- for i in (1..3) -%}
+          <div class="reveal reveal-delay-{{ i }}">
+            {%- render 'product-card', product_card_product: nil, dummy_index: i -%}
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_view_all -%}
+      {%- assign btn_destination = section.settings.custom_url | default: target_col.url | default: '/collections' -%}
+      <div class="section-footer-cta text-center reveal">
+        <a href="{{ btn_destination }}" class="btn btn-outline btn-md">
+          <span>{{ section.settings.view_all_label | default: 'Explore Signature Perfumes' }}</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "The Signature Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "FLAGSHIP 50ML EXTRAITS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "The Signature Collection"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Description",
+      "default": "Experience our three flagship creations: ADDICTED, Ice of Heaven, and Rouge Elite. Formulated for profound character and lasting sillage."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Shopify Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Maximum Products to Show",
+      "min": 3,
+      "max": 12,
+      "step": 3,
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show View Collection Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "Button Label",
+      "default": "Explore Signature Perfumes"
+    },
+    {
+      "type": "url",
+      "id": "custom_url",
+      "label": "Custom URL Destination (Optional)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "The Signature Collection"
+    }
+  ]
+}
+{% endschema %}

@@ -1,106 +1,108 @@
-<section class="hero" id="hero" aria-label="Hero banner">
-  <div class="hero-bg" aria-hidden="true"></div>
-
+<section class="hero-section" id="hero-{{ section.id }}" aria-label="Hero">
   <div class="container hero-container">
-    <div class="hero-content">
+    <div class="hero-grid">
 
-      {%- comment -%} Text Column {%- endcomment -%}
-      <div class="hero-text reveal">
-        <div class="hero-pill">
-          <span class="hero-pill-dot"></span>
-          <span>{{ section.settings.eyebrow_text | default: 'HAUTE PARFUMERIE • PARIS' }}</span>
-        </div>
+      {%- comment -%} Hero Narrative Column {%- endcomment -%}
+      <div class="hero-content reveal">
+        {%- if section.settings.eyebrow != blank -%}
+          <div class="hero-pill">
+            <span class="hero-pill-dot"></span>
+            <span>{{ section.settings.eyebrow }}</span>
+          </div>
+        {%- endif -%}
 
-        <h1 class="hero-title">
-          {%- if section.settings.heading_line1 != blank -%}
-            {{ section.settings.heading_line1 }}
-          {%- else -%}
-            The Art of
-          {%- endif -%}
-          <span class="hero-title-accent">
-            {%- if section.settings.heading_line2 != blank -%}
-              {{ section.settings.heading_line2 }}
-            {%- else -%}
-              Invisible Luxury
-            {%- endif -%}
-          </span>
+        <h1 class="hero-heading">
+          <span class="hero-heading-main">{{ section.settings.heading_line1 | default: 'Distinctive Fragrances' }}</span>
+          <span class="hero-heading-accent">{{ section.settings.heading_line2 | default: 'Crafted with Precision' }}</span>
         </h1>
 
-        <p class="hero-description">
-          {{ section.settings.subheading | default: 'Crafted with the rarest French fragrance essences and aged to absolute perfection. Fragrances that evoke memories and command presence.' }}
+        <p class="hero-subheading">
+          {{ section.settings.subheading | default: 'Explore our portfolio of artisanal fragrances — from our commanding 50ml Signature Collection to versatile 10ml & 20ml Discovery editions.' }}
         </p>
 
-        <div class="hero-actions">
-          <a
-            href="{{ section.settings.cta_primary_url | default: routes.collections_url }}"
-            class="btn btn-primary btn-lg"
-            id="HeroPrimaryBtn"
-          >
-            {{ section.settings.cta_primary_label | default: 'Shop Best Sellers' }}
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
-          <a
-            href="{{ section.settings.cta_secondary_url | default: '#category-spotlight' }}"
-            class="btn btn-outline btn-lg"
-            id="HeroSecondaryBtn"
-          >
-            {{ section.settings.cta_secondary_label | default: 'Explore Collections' }}
-          </a>
+        <div class="hero-cta-group">
+          {%- if section.settings.cta_primary_label != blank -%}
+            {%- assign primary_target = section.settings.cta_primary_url | default: section.settings.primary_collection.url -%}
+            <a
+              href="{{ primary_target | default: routes.all_products_collection_url | default: '/collections/all' }}"
+              class="btn btn-primary btn-lg"
+              id="HeroPrimaryAction"
+            >
+              <span>{{ section.settings.cta_primary_label }}</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          {%- endif -%}
+
+          {%- if section.settings.cta_secondary_label != blank -%}
+            {%- assign secondary_target = section.settings.cta_secondary_url | default: section.settings.secondary_collection.url -%}
+            {%- if secondary_target != blank -%}
+              <a
+                href="{{ secondary_target }}"
+                class="btn btn-outline btn-lg"
+                id="HeroSecondaryAction"
+              >
+                <span>{{ section.settings.cta_secondary_label }}</span>
+              </a>
+            {%- endif -%}
+          {%- endif -%}
         </div>
 
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <span class="hero-stat-number">{{ section.settings.stat_1_number | default: '24h+' }}</span>
-            <span class="hero-stat-label">{{ section.settings.stat_1_label | default: 'Longevity' }}</span>
+        {%- if section.settings.show_highlights -%}
+          <div class="hero-highlights-row">
+            <div class="hero-highlight-item">
+              <span class="highlight-title">{{ section.settings.highlight_1_title | default: '3 Flagships' }}</span>
+              <span class="highlight-desc">{{ section.settings.highlight_1_desc | default: 'The Signature 50ml' }}</span>
+            </div>
+            <div class="hero-highlight-divider"></div>
+            <div class="hero-highlight-item">
+              <span class="highlight-title">{{ section.settings.highlight_2_title | default: '6 Editions' }}</span>
+              <span class="highlight-desc">{{ section.settings.highlight_2_desc | default: 'The Discovery 10ml & 20ml' }}</span>
+            </div>
+            <div class="hero-highlight-divider"></div>
+            <div class="hero-highlight-item">
+              <span class="highlight-title">{{ section.settings.highlight_3_title | default: 'Regional' }}</span>
+              <span class="highlight-desc">{{ section.settings.highlight_3_desc | default: 'Kerala, Karnataka & UAE' }}</span>
+            </div>
           </div>
-          <div class="hero-stat-divider"></div>
-          <div class="hero-stat">
-            <span class="hero-stat-number">{{ section.settings.stat_2_number | default: '100%' }}</span>
-            <span class="hero-stat-label">{{ section.settings.stat_2_label | default: 'Pure French Oils' }}</span>
-          </div>
-          <div class="hero-stat-divider"></div>
-          <div class="hero-stat">
-            <span class="hero-stat-number">{{ section.settings.stat_3_number | default: 'Cruelty' }}</span>
-            <span class="hero-stat-label">{{ section.settings.stat_3_label | default: 'Free & Vegan' }}</span>
-          </div>
-        </div>
+        {%- endif -%}
       </div>
 
-      {%- comment -%} Visual Column {%- endcomment -%}
+      {%- comment -%} Hero Visual Media Column {%- endcomment -%}
       <div class="hero-visual reveal reveal-delay-2">
-        <div class="hero-image-wrapper">
+        <div class="hero-media-wrapper">
           {%- if section.settings.hero_image != blank -%}
             <img
-              src="{{ section.settings.hero_image | image_url: width: 1000 }}"
-              alt="{{ section.settings.hero_image.alt | default: 'Artisanal Perfume Flacon' | escape }}"
-              class="hero-image"
+              src="{{ section.settings.hero_image | image_url: width: 1200 }}"
+              alt="{{ section.settings.hero_image.alt | default: 'AD PERFUMES Flacon' | escape }}"
+              class="hero-media-img"
               loading="eager"
               fetchpriority="high"
               width="1000"
-              height="1100"
+              height="1150"
             >
           {%- else -%}
             <img
               src="{{ 'hero-perfume.jpg' | asset_url }}"
-              alt="Artisanal French Perfume"
-              class="hero-image"
+              alt="AD PERFUMES Luxury Fragrance"
+              class="hero-media-img"
               loading="eager"
               fetchpriority="high"
               width="1000"
-              height="1100"
+              height="1150"
             >
           {%- endif -%}
 
-          {%- comment -%} Floating Glass Card {%- endcomment -%}
-          <div class="hero-floating-card">
-            <div class="hero-stars">
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          {%- if section.settings.floating_badge_text != blank -%}
+            <div class="hero-floating-glass-card">
+              <span class="glass-icon">✦</span>
+              <div class="glass-text-group">
+                <span class="glass-title">{{ section.settings.floating_badge_text | default: 'Artisanal Perfume' }}</span>
+                <span class="glass-sub">{{ section.settings.floating_badge_sub | default: 'Crafted by AD PERFUMES' }}</span>
+              </div>
             </div>
-            <div class="hero-floating-title">{{ section.settings.badge_title | default: 'Rated 4.9/5 by 12,000+ Connoisseurs' }}</div>
-            <div class="hero-floating-sub">{{ section.settings.badge_sub | default: '“Best sillage and longevity I have ever worn.”' }}</div>
-          </div>
+          {%- endif -%}
         </div>
       </div>
 
@@ -114,49 +116,71 @@
   "settings": [
     {
       "type": "text",
-      "id": "eyebrow_text",
-      "label": "Eyebrow text",
-      "default": "HAUTE PARFUMERIE • PARIS"
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "AD PERFUMES • HAUTE PARFUMERIE"
     },
     {
       "type": "text",
       "id": "heading_line1",
-      "label": "Heading line 1",
-      "default": "The Art of"
+      "label": "Heading Line 1",
+      "default": "Distinctive Fragrances"
     },
     {
       "type": "text",
       "id": "heading_line2",
-      "label": "Heading line 2 (accent font)",
-      "default": "Invisible Luxury"
+      "label": "Heading Line 2 (Accent)",
+      "default": "Crafted with Precision"
     },
     {
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading",
-      "default": "Crafted with the rarest French fragrance essences and aged to absolute perfection. Fragrances that evoke memories and command presence."
+      "default": "Explore our portfolio of artisanal fragrances — from our commanding 50ml Signature Collection to versatile 10ml & 20ml Discovery editions."
+    },
+    {
+      "type": "header",
+      "content": "Primary Call to Action"
     },
     {
       "type": "text",
       "id": "cta_primary_label",
-      "label": "Primary button text",
-      "default": "Shop Best Sellers"
+      "label": "Primary Button Label",
+      "default": "Explore The Signature Collection"
+    },
+    {
+      "type": "collection",
+      "id": "primary_collection",
+      "label": "Primary Collection Destination"
     },
     {
       "type": "url",
       "id": "cta_primary_url",
-      "label": "Primary button link"
+      "label": "Custom URL Override (Optional)"
+    },
+    {
+      "type": "header",
+      "content": "Secondary Call to Action"
     },
     {
       "type": "text",
       "id": "cta_secondary_label",
-      "label": "Secondary button text",
-      "default": "Explore Collections"
+      "label": "Secondary Button Label",
+      "default": "Discover Travel Formats"
+    },
+    {
+      "type": "collection",
+      "id": "secondary_collection",
+      "label": "Secondary Collection Destination"
     },
     {
       "type": "url",
       "id": "cta_secondary_url",
-      "label": "Secondary button link"
+      "label": "Custom URL Override (Optional)"
+    },
+    {
+      "type": "header",
+      "content": "Visual & Image"
     },
     {
       "type": "image_picker",
@@ -164,60 +188,62 @@
       "label": "Hero Image"
     },
     {
-      "type": "header",
-      "content": "Key Metrics"
+      "type": "text",
+      "id": "floating_badge_text",
+      "label": "Floating Card Title",
+      "default": "Artisanal Perfumery"
     },
     {
       "type": "text",
-      "id": "stat_1_number",
-      "label": "Stat 1 Number",
-      "default": "24h+"
-    },
-    {
-      "type": "text",
-      "id": "stat_1_label",
-      "label": "Stat 1 Label",
-      "default": "Longevity"
-    },
-    {
-      "type": "text",
-      "id": "stat_2_number",
-      "label": "Stat 2 Number",
-      "default": "100%"
-    },
-    {
-      "type": "text",
-      "id": "stat_2_label",
-      "label": "Stat 2 Label",
-      "default": "Pure French Oils"
-    },
-    {
-      "type": "text",
-      "id": "stat_3_number",
-      "label": "Stat 3 Number",
-      "default": "Cruelty"
-    },
-    {
-      "type": "text",
-      "id": "stat_3_label",
-      "label": "Stat 3 Label",
-      "default": "Free & Vegan"
+      "id": "floating_badge_sub",
+      "label": "Floating Card Subtitle",
+      "default": "Your Fragrance. Your Vision. Your Brand."
     },
     {
       "type": "header",
-      "content": "Floating Review Badge"
+      "content": "Highlights Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_highlights",
+      "label": "Show Highlights Below CTAs",
+      "default": true
     },
     {
       "type": "text",
-      "id": "badge_title",
-      "label": "Badge Title",
-      "default": "Rated 4.9/5 by 12,000+ Connoisseurs"
+      "id": "highlight_1_title",
+      "label": "Highlight 1 Title",
+      "default": "3 Flagships"
     },
     {
       "type": "text",
-      "id": "badge_sub",
-      "label": "Badge Quote",
-      "default": "“Best sillage and longevity I have ever worn.”"
+      "id": "highlight_1_desc",
+      "label": "Highlight 1 Description",
+      "default": "The Signature 50ml"
+    },
+    {
+      "type": "text",
+      "id": "highlight_2_title",
+      "label": "Highlight 2 Title",
+      "default": "6 Editions"
+    },
+    {
+      "type": "text",
+      "id": "highlight_2_desc",
+      "label": "Highlight 2 Description",
+      "default": "The Discovery 10ml & 20ml"
+    },
+    {
+      "type": "text",
+      "id": "highlight_3_title",
+      "label": "Highlight 3 Title",
+      "default": "Regional"
+    },
+    {
+      "type": "text",
+      "id": "highlight_3_desc",
+      "label": "Highlight 3 Description",
+      "default": "Kerala, Karnataka & UAE"
     }
   ],
   "presets": [

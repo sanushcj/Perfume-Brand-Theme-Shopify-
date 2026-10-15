@@ -12,11 +12,29 @@
     {%- unless page_title contains shop.name -%} &ndash; {{ shop.name }}{%- endunless -%}
   </title>
 
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+
   {%- render 'meta-tags' -%}
 
   {{ content_for_header }}
 
   {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  <style>
+    :root {
+      {%- if settings.color_gold != blank -%}--color-gold: {{ settings.color_gold }};{%- endif -%}
+      {%- if settings.color_bg_body != blank -%}--color-bg: {{ settings.color_bg_body }};{%- endif -%}
+      {%- if settings.color_bg_card != blank -%}--color-bg-card: {{ settings.color_bg_card }};{%- endif -%}
+      {%- if settings.color_bg_dark != blank -%}--color-bg-dark: {{ settings.color_bg_dark }};{%- endif -%}
+      {%- if settings.color_text_primary != blank -%}--color-text-primary: {{ settings.color_text_primary }};{%- endif -%}
+      {%- if settings.color_text_muted != blank -%}--color-text-muted: {{ settings.color_text_muted }};{%- endif -%}
+      {%- if settings.color_border != blank -%}--color-border: {{ settings.color_border }};{%- endif -%}
+    }
+  </style>
 
   <script>document.documentElement.className = document.documentElement.className.replace('no-js','js');</script>
 
@@ -34,6 +52,7 @@
 
   {%- render 'mobile-nav' -%}
   {%- render 'cart-drawer' -%}
+  {%- render 'search-modal' -%}
 
   <main id="MainContent" role="main" tabindex="-1">
     {{ content_for_layout }}

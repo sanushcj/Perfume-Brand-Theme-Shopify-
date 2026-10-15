@@ -1,36 +1,55 @@
-<section class="newsletter section-padding" id="newsletter" aria-label="Newsletter signup">
+<section class="newsletter section-padding" id="newsletter-{{ section.id }}" aria-label="Newsletter">
   <div class="container">
     <div class="newsletter-inner reveal">
-      <div class="newsletter-content">
-        <p class="section-eyebrow" style="justify-content: center;">{{ section.settings.eyebrow | default: 'Stay Connected' }}</p>
-        <h2 class="section-title">{{ section.settings.title | default: 'Join the Inner Circle' }}</h2>
-        <p class="section-subtitle" style="margin: 0 auto;">
-          {{ section.settings.subtitle | default: 'Be the first to know about new releases, exclusive events, and private sales. Members receive complimentary samples with every order.' }}
-        </p>
+      <div class="newsletter-content text-center">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="section-eyebrow justify-center">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
 
-        <form class="newsletter-form" action="/contact#contact_form" method="post" accept-charset="UTF-8" aria-label="Newsletter signup">
-          <input type="hidden" name="form_type" value="customer">
-          <input type="hidden" name="utf8" value="✓">
+        <h2 class="section-title">{{ section.settings.title | default: 'Stay Connected With AD PERFUMES' }}</h2>
+
+        {%- if section.settings.subtitle != blank -%}
+          <p class="section-subtitle max-w-prose">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+
+        {%- form 'customer', class: 'newsletter-form', id: 'NewsletterForm' -%}
           <input type="hidden" name="contact[tags]" value="newsletter">
-          <label for="NewsletterEmail" class="visually-hidden">Email address</label>
-          <input
-            type="email"
-            name="contact[email]"
-            id="NewsletterEmail"
-            class="newsletter-input"
-            placeholder="{{ section.settings.placeholder | default: 'Your email address' }}"
-            required
-            autocomplete="email"
-            aria-label="Email address"
-          >
-          <button type="submit" class="btn btn-primary" id="NewsletterSubmitBtn">
-            {{ section.settings.button_label | default: 'Subscribe' }}
-          </button>
-        </form>
 
-        <p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-4);">
-          {{ section.settings.disclaimer | default: 'No spam, ever. Unsubscribe at any time. By subscribing you agree to our Privacy Policy.' }}
-        </p>
+          {%- if form.posted_successfully? -%}
+            <div class="newsletter-message success" role="alert">
+              ✓ Thank you for subscribing to AD PERFUMES!
+            </div>
+          {%- else -%}
+            <div class="newsletter-input-group">
+              <label for="NewsletterEmail-{{ section.id }}" class="visually-hidden">Email address</label>
+              <input
+                type="email"
+                name="contact[email]"
+                id="NewsletterEmail-{{ section.id }}"
+                class="newsletter-input"
+                placeholder="{{ section.settings.placeholder | default: 'Enter your email address' }}"
+                required
+                autocomplete="email"
+                aria-label="Email address"
+              >
+              <button type="submit" class="btn btn-primary" id="NewsletterSubmitBtn">
+                <span>{{ section.settings.button_label | default: 'Subscribe' }}</span>
+              </button>
+            </div>
+
+            {%- if form.errors -%}
+              <div class="newsletter-message error" role="alert">
+                {{ form.errors.translated_fields['email'] }} {{ form.errors.messages['email'] }}
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endform -%}
+
+        {%- if section.settings.disclaimer != blank -%}
+          <p class="newsletter-disclaimer">
+            {{ section.settings.disclaimer }}
+          </p>
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -43,36 +62,38 @@
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "Stay Connected"
+      "label": "Eyebrow Text",
+      "default": "AD PERFUMES Bulletin"
     },
     {
       "type": "text",
       "id": "title",
-      "label": "Title",
-      "default": "Join the Inner Circle"
+      "label": "Heading",
+      "default": "Join the AD PERFUMES Circle"
     },
     {
       "type": "textarea",
       "id": "subtitle",
-      "label": "Subtitle"
+      "label": "Subtitle",
+      "default": "Subscribe for early announcements, new fragrance releases, and exclusive boutique updates."
     },
     {
       "type": "text",
       "id": "placeholder",
-      "label": "Input placeholder",
-      "default": "Your email address"
+      "label": "Input Placeholder",
+      "default": "Enter your email address"
     },
     {
       "type": "text",
       "id": "button_label",
-      "label": "Button label",
+      "label": "Button Label",
       "default": "Subscribe"
     },
     {
       "type": "text",
       "id": "disclaimer",
-      "label": "Disclaimer text"
+      "label": "Disclaimer Text",
+      "default": "Your privacy is respected. You can unsubscribe at any time."
     }
   ],
   "presets": [

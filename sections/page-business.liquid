@@ -1,0 +1,109 @@
+<div class="business-services-page" data-section-id="{{ section.id }}" data-section-type="page-business">
+  <div class="container max-w-prose section-padding">
+
+    <div class="business-header text-center">
+      <span class="section-eyebrow justify-center">{{ section.settings.eyebrow | default: 'PREMIUM FRAGRANCE & BRANDING SOLUTIONS' }}</span>
+      <h1 class="section-title">{{ section.settings.title | default: 'AD PERFUMES' }}</h1>
+      <p class="section-subtitle">{{ section.settings.tagline | default: 'Your Fragrance. Your Vision. Your Brand.' }}</p>
+    </div>
+
+    <div class="business-intro-card">
+      <p>
+        At <strong>AD Perfumes</strong>, we offer a wide variety of fragrances and complete customization solutions for individuals, businesses, and emerging perfume brands.
+      </p>
+    </div>
+
+    <div class="business-services-grid">
+      <h2 class="business-section-heading">Our Services Include:</h2>
+      <div class="service-pill-list">
+        <div class="service-pill-item">
+          <span class="service-icon">🌿</span>
+          <span class="service-title">A wide range of premium fragrances</span>
+        </div>
+        <div class="service-pill-item">
+          <span class="service-icon">✨</span>
+          <span class="service-title">Customized fragrance solutions</span>
+        </div>
+        <div class="service-pill-item">
+          <span class="service-icon">🎁</span>
+          <span class="service-title">Premium gift packing and personalized gifting</span>
+        </div>
+        <div class="service-pill-item">
+          <span class="service-icon">🏷️</span>
+          <span class="service-title">Private-label perfume branding</span>
+        </div>
+        <div class="service-pill-item">
+          <span class="service-icon">🧴</span>
+          <span class="service-title">Perfume bottles and packaging solutions</span>
+        </div>
+        <div class="service-pill-item">
+          <span class="service-icon">💎</span>
+          <span class="service-title">Premium packaging and brand presentation</span>
+        </div>
+        <div class="service-pill-item">
+          <span class="service-icon">🤝</span>
+          <span class="service-title">Fragrance solutions for retailers, entrepreneurs, and companies</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="business-cta-box text-center">
+      <h3 class="cta-box-title">Build Your Own Perfume Brand with AD Perfumes!</h3>
+      <p class="cta-box-desc">
+        From fragrance selection to bottles, packaging, and branding, we help bring your vision to life.
+      </p>
+
+      <div class="business-serving-badge">
+        <span>📍 Currently Serving: <strong>Kerala, Karnataka & UAE</strong></span>
+      </div>
+
+      <div class="partnership-inquiry">
+        <h4>Looking for Business Partnerships?</h4>
+        <p>If you're planning to launch your own perfume brand, expand your business, or explore customized fragrance solutions, let's connect.</p>
+
+        <div class="contact-links-stack">
+          <a href="tel:+918921362927" class="btn btn-outline btn-md">
+            <span>📞 Call: +91 89213 62927</span>
+          </a>
+          <a href="mailto:Connect.adperfumes@gmail.com" class="btn btn-primary btn-md">
+            <span>📧 Email: Connect.adperfumes@gmail.com</span>
+          </a>
+          <a href="https://instagram.com/ad_.perfumes" target="_blank" rel="noopener" class="btn btn-outline btn-md">
+            <span>📲 Instagram: @ad_.perfumes</span>
+          </a>
+        </div>
+      </div>
+
+      <p class="business-closing-tagline">
+        AD PERFUMES — Your Vision. Our Fragrance Expertise.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Business Services",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "PREMIUM FRAGRANCE & BRANDING SOLUTIONS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "AD PERFUMES"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Your Fragrance. Your Vision. Your Brand."
+    }
+  ]
+}
+{% endschema %}

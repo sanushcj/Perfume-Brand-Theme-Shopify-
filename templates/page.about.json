@@ -2,36 +2,11 @@
   "sections": {
     "page-about": {
       "type": "page-about",
-      "blocks": {
-        "team-1": {
-          "type": "team_member",
-          "settings": {
-            "name": "Isabelle Morel",
-            "role": "Master Nose & Founder",
-            "bio": "Trained under the great houses of Grasse, Isabelle founded the atelier in 1998 after fifteen years in haute parfumerie. Her philosophy: a fragrance must tell a story."
-          }
-        },
-        "team-2": {
-          "type": "team_member",
-          "settings": {
-            "name": "Henri Beaumont",
-            "role": "Senior Perfumer",
-            "bio": "A graduate of ISIPCA Versailles, Henri specialises in Oriental and Woody compositions. He oversees our flagship collection development."
-          }
-        },
-        "team-3": {
-          "type": "team_member",
-          "settings": {
-            "name": "Amara Singh",
-            "role": "Raw Materials Expert",
-            "bio": "Amara travels the world sourcing our most precious ingredients, maintaining relationships with growers in over 20 countries."
-          }
-        }
-      },
-      "block_order": ["team-1", "team-2", "team-3"],
       "settings": {
-        "eyebrow": "Our Story",
-        "hero_title": "Where Tradition Meets Artistry"
+        "eyebrow": "Haute Parfumerie",
+        "title": "The World of AD PERFUMES",
+        "tagline": "Your Fragrance. Your Vision. Your Brand.",
+        "narrative_heading": "Crafted for Distinctive Presence"
       }
     }
   },

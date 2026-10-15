@@ -1,185 +1,194 @@
-<div class="cart-page">
+<div class="cart-page" data-section-id="{{ section.id }}" data-section-type="cart">
   <div class="container">
 
-    <div style="margin-bottom: var(--space-8);">
-      <p class="section-eyebrow">Your Selection</p>
-      <h1 class="section-title">Shopping Cart</h1>
+    <div class="cart-page-header">
+      <p class="section-eyebrow">Your Fragrance Selection</p>
+      <h1 class="section-title">Shopping Bag</h1>
     </div>
 
     {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate id="CartMainForm" class="cart-form">
+        <div class="cart-layout">
 
-      <div class="cart-layout">
+          {%- comment -%} Cart Items Table / Cards {%- endcomment -%}
+          <div class="cart-items-column">
+            <div class="cart-items-header">
+              <span class="cart-count-badge">
+                {{ cart.item_count }} {%- if cart.item_count == 1 -%}item{%- else -%}items{%- endif -%} in your bag
+              </span>
+            </div>
 
-        {%- comment -%} Cart Items {%- endcomment -%}
-        <div>
-          <div class="cart-header">
-            <p style="font-size: var(--text-sm); color: var(--color-text-muted);">
-              {{ cart.item_count }} {%- if cart.item_count == 1 -%}item{%- else -%}items{%- endif -%}
-            </p>
+            <div class="cart-items-list" id="CartMainItemsList">
+              {%- for item in cart.items -%}
+                <div class="cart-item-row" data-line-key="{{ item.key }}" data-line-index="{{ forloop.index }}">
+
+                  <a href="{{ item.url }}" class="cart-item-media">
+                    {%- if item.image -%}
+                      <img
+                        src="{{ item.image | image_url: width: 220 }}"
+                        alt="{{ item.product.title | escape }}"
+                        class="cart-item-img"
+                        loading="lazy"
+                        width="100"
+                        height="125"
+                      >
+                    {%- else -%}
+                      <div class="cart-item-placeholder">✦</div>
+                    {%- endif -%}
+                  </a>
+
+                  <div class="cart-item-details">
+                    <div class="cart-item-title-row">
+                      <a href="{{ item.url }}" class="cart-item-name">{{ item.product.title }}</a>
+                      <button
+                        type="button"
+                        class="cart-item-remove-btn cart-page-remove-btn"
+                        data-line-key="{{ item.key }}"
+                        data-line-index="{{ forloop.index }}"
+                        aria-label="Remove {{ item.product.title | escape }}"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M18 6L6 18M6 6l12 12"/>
+                        </svg>
+                      </button>
+                    </div>
+
+                    {%- unless item.variant.title == 'Default Title' or item.variant.title == blank -%}
+                      <div class="cart-item-variant-label">{{ item.variant.title }}</div>
+                    {%- endunless -%}
+
+                    <div class="cart-item-unit-price">
+                      <span>{{ item.price | money }}</span>
+                      {%- if item.original_price > item.price -%}
+                        <s>{{ item.original_price | money }}</s>
+                      {%- endif -%}
+                    </div>
+
+                    <div class="cart-item-actions-row">
+                      <div class="quantity-selector cart-qty-selector">
+                        <button
+                          type="button"
+                          class="qty-btn"
+                          data-action="decrease"
+                          data-line-key="{{ item.key }}"
+                          data-qty="{{ item.quantity }}"
+                          aria-label="Decrease quantity"
+                        >−</button>
+                        <input
+                          type="number"
+                          name="updates[]"
+                          class="qty-input"
+                          id="updates_{{ item.key }}"
+                          value="{{ item.quantity }}"
+                          min="0"
+                          max="99"
+                          aria-label="Quantity for {{ item.product.title | escape }}"
+                          data-line-key="{{ item.key }}"
+                        >
+                        <button
+                          type="button"
+                          class="qty-btn"
+                          data-action="increase"
+                          data-line-key="{{ item.key }}"
+                          data-qty="{{ item.quantity }}"
+                          aria-label="Increase quantity"
+                        >+</button>
+                      </div>
+
+                      <div class="cart-item-total-price">
+                        {{ item.final_line_price | money }}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              {%- endfor -%}
+            </div>
+
+            <div class="cart-return-actions">
+              <a href="{{ section.settings.continue_shopping_url | default: routes.all_products_collection_url | default: '/collections/all' }}" class="btn btn-outline btn-sm">
+                ← Continue Shopping
+              </a>
+            </div>
           </div>
 
-          {%- for item in cart.items -%}
-            <div class="cart-item" id="CartItem{{ item.index | plus: 1 }}">
-              <a href="{{ item.url }}">
-                {%- if item.image -%}
-                  <img
-                    src="{{ item.image | image_url: width: 200 }}"
-                    alt="{{ item.product.title | escape }}"
-                    class="cart-item-image"
-                    loading="lazy"
-                    width="100"
-                    height="120"
-                  >
-                {%- else -%}
-                  <div class="cart-item-image" style="display:flex; align-items:center; justify-content:center; font-size:32px; background:var(--color-bg-card);">🌸</div>
-                {%- endif -%}
-              </a>
+          {%- comment -%} Cart Order Summary Column {%- endcomment -%}
+          <div class="cart-summary-column">
+            <div class="cart-summary-card">
+              <h2 class="cart-summary-heading">Order Summary</h2>
 
-              <div class="cart-item-info">
-                <a href="{{ item.url }}" class="cart-item-name">{{ item.product.title }}</a>
-                {%- unless item.variant.title == 'Default Title' -%}
-                  <div class="cart-item-variant">{{ item.variant.title }}</div>
-                {%- endunless -%}
+              {%- if section.settings.show_notes -%}
+                <div class="cart-summary-note-wrap">
+                  <label for="CartPageNote" class="cart-note-label">Gift Message / Order Note:</label>
+                  <textarea
+                    name="note"
+                    id="CartPageNote"
+                    class="cart-note-textarea"
+                    rows="3"
+                    placeholder="Provide bespoke instructions or a personal gift card message..."
+                  >{{ cart.note }}</textarea>
+                </div>
+              {%- endif -%}
 
-                {%- if item.original_price != item.final_price -%}
-                  <div style="font-size: var(--text-xs); color: var(--color-success);">
-                    Discount applied
-                  </div>
-                {%- endif -%}
-
-                <div class="cart-item-bottom">
-                  <div class="quantity-selector">
-                    <button
-                      type="button"
-                      class="qty-btn"
-                      data-action="decrease"
-                      data-variant="{{ item.variant_id }}"
-                      data-qty="{{ item.quantity }}"
-                      aria-label="Decrease quantity"
-                    >−</button>
-                    <input
-                      type="number"
-                      class="qty-input"
-                      value="{{ item.quantity }}"
-                      min="0"
-                      max="99"
-                      aria-label="Quantity for {{ item.product.title | escape }}"
-                      data-variant="{{ item.variant_id }}"
-                    >
-                    <button
-                      type="button"
-                      class="qty-btn"
-                      data-action="increase"
-                      data-variant="{{ item.variant_id }}"
-                      data-qty="{{ item.quantity }}"
-                      aria-label="Increase quantity"
-                    >+</button>
-                  </div>
-                  <div class="cart-item-price">{{ item.final_line_price | money }}</div>
+              <div class="cart-summary-breakdown">
+                <div class="summary-row">
+                  <span>Subtotal</span>
+                  <span id="CartPageSubtotal">{{ cart.total_price | money }}</span>
                 </div>
 
+                {%- if cart.total_discount > 0 -%}
+                  <div class="summary-row summary-discount">
+                    <span>Discounts</span>
+                    <span>−{{ cart.total_discount | money }}</span>
+                  </div>
+                {%- endif -%}
+
+                <div class="summary-row">
+                  <span>Regional Delivery</span>
+                  <span>Calculated at checkout</span>
+                </div>
+
+                <div class="summary-row summary-total">
+                  <span>Estimated Total</span>
+                  <span class="total-amount" id="CartPageTotal">{{ cart.total_price | money }}</span>
+                </div>
+              </div>
+
+              <div class="cart-summary-actions">
                 <button
-                  class="cart-item-remove"
-                  data-variant="{{ item.variant_id }}"
-                  aria-label="Remove {{ item.product.title | escape }} from cart"
+                  type="submit"
+                  name="checkout"
+                  class="btn btn-primary btn-full btn-lg cart-checkout-submit"
+                  id="CartPageCheckoutBtn"
                 >
-                  Remove
+                  Proceed to Checkout
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
                 </button>
               </div>
-            </div>
-          {%- endfor -%}
 
-          <div style="margin-top: var(--space-8);">
-            <a href="{{ routes.collections_url }}/all" class="btn btn-ghost btn-sm">
-              ← Continue Shopping
-            </a>
+              <div class="cart-guarantee-box">
+                <div class="guarantee-item">🔒 Official Shopify Secure Checkout</div>
+                <div class="guarantee-item">🚚 Regional Support: Kerala, Karnataka & UAE</div>
+              </div>
+
+            </div>
           </div>
+
         </div>
-
-        {%- comment -%} Cart Summary {%- endcomment -%}
-        <div>
-          <div class="cart-summary">
-            <h2 class="cart-summary-title">Order Summary</h2>
-
-            {%- comment -%} Promo code {%- endcomment -%}
-            <div class="cart-promo">
-              <input
-                type="text"
-                class="cart-promo-input"
-                placeholder="Promo code"
-                id="CartPromoCode"
-                aria-label="Enter promo code"
-              >
-              <button type="button" class="btn btn-outline btn-sm" id="CartPromoApply">Apply</button>
-            </div>
-
-            <div class="cart-summary-rows">
-              <div class="cart-summary-row">
-                <span>Subtotal</span>
-                <span>{{ cart.original_total_price | money }}</span>
-              </div>
-              {%- if cart.total_discount > 0 -%}
-                <div class="cart-summary-row" style="color: var(--color-success);">
-                  <span>Discounts</span>
-                  <span>−{{ cart.total_discount | money }}</span>
-                </div>
-              {%- endif -%}
-              <div class="cart-summary-row">
-                <span>Shipping</span>
-                <span style="color: var(--color-success);">
-                  {%- if cart.total_price >= 15000 -%}
-                    Free
-                  {%- else -%}
-                    Calculated at checkout
-                  {%- endif -%}
-                </span>
-              </div>
-              <div class="cart-summary-row total">
-                <span>Total</span>
-                <span class="value">{{ cart.total_price | money }}</span>
-              </div>
-            </div>
-
-            <div class="cart-checkout-actions">
-              <a
-                href="{{ routes.checkout_url }}"
-                class="btn btn-primary btn-full btn-lg cart-checkout-btn"
-                id="CartCheckoutPage"
-              >
-                Proceed to Checkout
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-
-              {%- if additional_checkout_buttons -%}
-                <div style="position:relative; text-align:center; color: var(--color-text-muted); font-size: var(--text-xs);">
-                  <span style="background: var(--color-bg-card); padding: 0 var(--space-3); position:relative; z-index:1;">or pay with</span>
-                  <hr style="position:absolute; top:50%; left:0; right:0; border:none; border-top:1px solid var(--color-border);">
-                </div>
-                <div class="shopify-payment-button">
-                  {{ content_for_additional_checkout_buttons }}
-                </div>
-              {%- endif -%}
-            </div>
-
-            <p style="font-size: var(--text-xs); color: var(--color-text-muted); text-align:center; margin-top: var(--space-4);">
-              🔒 Secure, encrypted checkout · SSL protected
-            </p>
-          </div>
-        </div>
-
-      </div>
-
+      </form>
     {%- else -%}
-
-      <div style="text-align: center; padding: var(--space-32) 0;">
-        <div style="font-size: 80px; margin-bottom: var(--space-6);">🛒</div>
-        <h2 style="font-family: var(--font-display); font-size: var(--text-4xl); color: var(--color-text-secondary); margin-bottom: var(--space-4);">Your cart is empty</h2>
-        <p style="color: var(--color-text-muted); font-size: var(--text-lg); margin-bottom: var(--space-8);">
-          Discover our exquisite collection of premium fragrances.
+      <div class="cart-empty-view text-center">
+        <div class="cart-empty-icon">✦</div>
+        <h2 class="cart-empty-heading">Your Shopping Bag is Empty</h2>
+        <p class="cart-empty-text">
+          {{ section.settings.empty_cart_text | default: 'Discover our artisanal 50ml Flagships and versatile Discovery editions to find your next signature scent.' }}
         </p>
-        <a href="{{ routes.collections_url }}/all" class="btn btn-primary btn-lg">Explore Collection</a>
+        <a href="{{ section.settings.continue_shopping_url | default: routes.all_products_collection_url | default: '/collections/all' }}" class="btn btn-primary btn-lg">
+          Explore Fragrances
+        </a>
       </div>
-
     {%- endif -%}
 
   </div>
@@ -187,7 +196,25 @@
 
 {% schema %}
 {
-  "name": "Cart Main",
-  "settings": []
+  "name": "Cart Page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_notes",
+      "label": "Enable Order / Gift Notes",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "continue_shopping_url",
+      "label": "Continue Shopping Destination"
+    },
+    {
+      "type": "text",
+      "id": "empty_cart_text",
+      "label": "Empty Bag Description",
+      "default": "Discover our artisanal 50ml Flagships and versatile Discovery editions to find your next signature scent."
+    }
+  ]
 }
 {% endschema %}

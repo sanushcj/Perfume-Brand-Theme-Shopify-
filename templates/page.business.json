@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "page-business": {
+      "type": "page-business",
+      "settings": {
+        "eyebrow": "PREMIUM FRAGRANCE & BRANDING SOLUTIONS",
+        "title": "AD PERFUMES",
+        "tagline": "Your Fragrance. Your Vision. Your Brand."
+      }
+    }
+  },
+  "order": ["page-business"]
+}

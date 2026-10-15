@@ -1,80 +1,101 @@
-<header class="site-header" id="SiteHeader" role="banner">
-  <nav class="nav-inner" aria-label="Main navigation">
+<header class="site-header{% if section.settings.sticky_header %} sticky-header{% endif %}" id="SiteHeader" role="banner">
+  <div class="container nav-container">
+    <nav class="nav-inner" aria-label="Main Navigation">
 
-    {%- comment -%} Hamburger (mobile) {%- endcomment -%}
-    <button class="hamburger" id="HamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="MobileNav">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+      {%- comment -%} Mobile Hamburger Button {%- endcomment -%}
+      <button class="hamburger" id="HamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="MobileNav">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
 
-    {%- comment -%} Logo {%- endcomment -%}
-    <a href="{{ routes.root_url }}" class="nav-logo" aria-label="{{ shop.name }} - Home">
-      {%- if section.settings.logo != blank -%}
-        <img
-          src="{{ section.settings.logo | image_url: width: 200 }}"
-          alt="{{ shop.name }}"
-          width="120"
-          height="auto"
-          loading="eager"
-          style="max-height: 44px; width: auto;"
-        >
-      {%- else -%}
-        <span class="nav-logo-name">{{ section.settings.brand_name | default: shop.name }}</span>
-        <span class="nav-logo-tagline">{{ section.settings.brand_tagline | default: 'Haute Parfumerie' }}</span>
-      {%- endif -%}
-    </a>
-
-    {%- comment -%} Desktop Links {%- endcomment -%}
-    <div class="nav-links" role="navigation">
-      {%- for link in linklists[section.settings.menu].links -%}
-        <a
-          href="{{ link.url }}"
-          class="nav-link{% if link.active %} active{% endif %}"
-          {% if link.active %}aria-current="page"{% endif %}
-        >
-          {{ link.title }}
-        </a>
-      {%- else -%}
-        <a href="{{ routes.root_url }}" class="nav-link">Home</a>
-        <a href="{{ routes.collections_url }}/all" class="nav-link">Shop</a>
-        <a href="{{ routes.collections_url }}/flagship" class="nav-link">Flagship</a>
-        <a href="{{ pages['about'].url }}" class="nav-link">About</a>
-        <a href="{{ pages['contact'].url }}" class="nav-link">Contact</a>
-      {%- endfor -%}
-    </div>
-
-    {%- comment -%} Actions {%- endcomment -%}
-    <div class="nav-actions">
-      <a href="{{ routes.search_url }}" class="nav-action-btn" aria-label="Search" data-search-toggle>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/>
-          <path d="M21 21l-4.35-4.35"/>
-        </svg>
+      {%- comment -%} Brand Logo {%- endcomment -%}
+      <a href="{{ routes.root_url }}" class="nav-logo" aria-label="{{ shop.name }} - Home">
+        {%- if section.settings.logo != blank -%}
+          <img
+            src="{{ section.settings.logo | image_url: width: 300 }}"
+            alt="{{ shop.name }}"
+            width="{{ section.settings.logo_max_width | default: 130 }}"
+            height="auto"
+            loading="eager"
+            style="max-width: {{ section.settings.logo_max_width | default: 130 }}px; height: auto;"
+          >
+        {%- elsif settings.brand_logo != blank -%}
+          <img
+            src="{{ settings.brand_logo | image_url: width: 300 }}"
+            alt="{{ shop.name }}"
+            width="{{ settings.logo_width | default: 130 }}"
+            height="auto"
+            loading="eager"
+            style="max-width: {{ settings.logo_width | default: 130 }}px; height: auto;"
+          >
+        {%- else -%}
+          <span class="nav-logo-name">{{ section.settings.brand_name | default: settings.brand_name | default: shop.name }}</span>
+          <span class="nav-logo-tagline">{{ section.settings.brand_tagline | default: settings.brand_tagline | default: 'Your Fragrance. Your Vision. Your Brand.' }}</span>
+        {%- endif -%}
       </a>
 
-      {%- if shop.customer_accounts_enabled -%}
-        <a href="{{ routes.account_url }}" class="nav-action-btn" aria-label="Account">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
+      {%- comment -%} Desktop Navigation Links {%- endcomment -%}
+      <div class="nav-links" role="navigation">
+        {%- assign header_menu = section.settings.menu | default: 'main-menu' -%}
+        {%- if linklists[header_menu].links.size > 0 -%}
+          {%- for link in linklists[header_menu].links -%}
+            <a
+              href="{{ link.url }}"
+              class="nav-link{% if link.active %} active{% endif %}"
+              {% if link.active %}aria-current="page"{% endif %}
+            >
+              {{ link.title }}
+            </a>
+          {%- endfor -%}
+        {%- else -%}
+          <a href="{{ routes.root_url }}" class="nav-link">Home</a>
+          <a href="{{ routes.all_products_collection_url | default: '/collections/all' }}" class="nav-link">All Fragrances</a>
+          <a href="{{ routes.search_url }}" class="nav-link">Search</a>
+          <a href="/pages/contact" class="nav-link">Contact</a>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Header Actions {%- endcomment -%}
+      <div class="nav-actions">
+        {%- if section.settings.show_search != false -%}
+          <button type="button" class="nav-action-btn" aria-label="Search Fragrances" data-search-toggle>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="M21 21l-4.35-4.35"/>
+            </svg>
+          </button>
+        {%- endif -%}
+
+        {%- if shop.customer_accounts_enabled and section.settings.show_account != false -%}
+          <a href="{{ routes.account_url }}" class="nav-action-btn" aria-label="My Account">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </a>
+        {%- endif -%}
+
+        <button
+          type="button"
+          class="nav-action-btn nav-cart-btn"
+          aria-label="Shopping Bag ({{ cart.item_count }} items)"
+          data-cart-open
+          id="HeaderCartBtn"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
           </svg>
-        </a>
-      {%- endif -%}
+          <span class="cart-count{% if cart.item_count > 0 %} visible{% endif %}" id="HeaderCartCount" aria-live="polite">
+            {{ cart.item_count }}
+          </span>
+        </button>
+      </div>
 
-      <button class="nav-action-btn" aria-label="Cart ({{ cart.item_count }} items)" data-cart-open>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <path d="M16 10a4 4 0 01-8 0"/>
-        </svg>
-        <span class="cart-count{% if cart.item_count > 0 %} visible{% endif %}" aria-live="polite" aria-label="Cart item count">
-          {{ cart.item_count }}
-        </span>
-      </button>
-    </div>
-
-  </nav>
+    </nav>
+  </div>
 </header>
 
 {% schema %}
@@ -84,25 +105,52 @@
     {
       "type": "image_picker",
       "id": "logo",
-      "label": "Logo image"
+      "label": "Logo Image"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "label": "Custom Logo Width (px)",
+      "min": 60,
+      "max": 300,
+      "step": 10,
+      "default": 130
     },
     {
       "type": "text",
       "id": "brand_name",
-      "label": "Brand name (if no logo)",
-      "default": "Lumière Noir"
+      "label": "Brand Name (if no logo uploaded)",
+      "default": "AD PERFUMES"
     },
     {
       "type": "text",
       "id": "brand_tagline",
-      "label": "Brand tagline",
-      "default": "Haute Parfumerie"
+      "label": "Brand Tagline",
+      "default": "Your Fragrance. Your Vision. Your Brand."
     },
     {
       "type": "link_list",
       "id": "menu",
-      "label": "Navigation menu",
+      "label": "Navigation Menu",
       "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_header",
+      "label": "Sticky Header on Scroll",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show Search Button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show Account Link",
+      "default": true
     }
   ]
 }

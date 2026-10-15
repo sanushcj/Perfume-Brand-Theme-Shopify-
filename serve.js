@@ -18,7 +18,7 @@ const engine = new Liquid({
   strictVariables: false
 });
 
-// Ignore schema tag
+// Ignore Liquid schema tag
 engine.registerTag('schema', {
   parse: function(tagToken, remainTokens) {
     this.tokens = [];
@@ -128,7 +128,7 @@ engine.registerTag('section', {
   }
 });
 
-// Shopify filters
+// Shopify standard filters
 engine.registerFilter('asset_url', v => `/assets/${v}`);
 engine.registerFilter('stylesheet_tag', v => `<link rel="stylesheet" href="${v}">`);
 engine.registerFilter('script_tag', v => `<script src="${v}"></script>`);
@@ -148,341 +148,257 @@ engine.registerFilter('truncatewords', (v, n) => {
   const words = String(v || '').split(/\s+/);
   return words.length > n ? words.slice(0, n).join(' ') + '...' : v;
 });
+engine.registerFilter('default_errors', v => '<div class="errors">Please review required fields</div>');
 
-// In-Memory Database for AD Perfumes
+// ============================================================
+// AD PERFUMES — Complete 9-Perfume Genuine Storefront Catalog
+// ============================================================
 const PRODUCTS = [
+  // A. THE SIGNATURE COLLECTION (3 Flagship 50ml Perfumes)
   {
-    id: 1,
+    id: 101,
     handle: 'addicted',
     title: 'ADDICTED',
     type: 'Extrait de Parfum • 50ml',
     price: 17500,
-    compare_at_price: 22000,
+    compare_at_price: 21000,
     available: true,
     url: '/products/addicted',
-    tags: ['flagship', 'new', 'bestseller', 'woody'],
-    featured_image: { src: '/assets/product-addicted.jpg', alt: 'ADDICTED Extrait de Parfum 50ml' },
+    tags: ['signature', 'flagship', '50ml', 'woody', 'saffron'],
+    featured_image: { src: '/assets/product-addicted.jpg', alt: 'ADDICTED Extrait de Parfum 50ml — AD PERFUMES' },
     images: [
       { src: '/assets/product-addicted.jpg', alt: 'ADDICTED 50ml Front View' },
-      { src: '/assets/discovery-travel-set.jpg', alt: 'ADDICTED Travel Editions' }
+      { src: '/assets/hero-perfume.jpg', alt: 'AD PERFUMES Atelier Bottle' }
     ],
-    description: `
-      <p class="lead"><strong>Experience dark, opulent allure.</strong> This warm, sensual fragrance carries a distinctly Middle Eastern character.</p>
-      <p>Deep, smoky, and resinous woods blend seamlessly with the warm, spicy, and leathery touch of saffron. A true statement piece by <strong>AD Perfumes</strong> for those who want to leave a lasting impression long <strong>After Dreams</strong> fade.</p>
-    `,
-    metafields: {
-      custom: {
-        subtitle: 'Dark Opulent Woods & Saffron',
-        top_notes: 'Crimson Saffron, Pink Peppercorn, Wild Thyme, Warm Spices',
-        heart_notes: 'Smoky Cedarwood, Aged Resins, Handcrafted Leather, Frankincense',
-        base_notes: 'Rare Cambodian Oud, Golden Ambergris, Patchouli, Dark Musk'
-      },
-      reviews: { rating_count: '2.8k' }
-    },
+    description: `Experience dark, opulent allure. This warm, sensual fragrance carries a distinctly Middle Eastern character. Deep, smoky, and resinous woods blend seamlessly with the warm, spicy, and leathery touch of saffron. A true statement piece by AD Perfumes for those who want to leave a lasting impression.`,
     options_with_values: [
-      { name: 'Size', selected_value: '50ml Extrait', values: ['50ml Extrait', '20ml Travel Spray', '10ml Pocket Flacon'] }
+      { name: 'Size', selected_value: '50ml', values: ['50ml'] }
     ],
     variants: [
-      { id: 'var-addicted-50', title: '50ml Extrait', price: 17500, compare_at_price: 22000, available: true },
-      { id: 'var-addicted-20', title: '20ml Travel Spray', price: 6800, compare_at_price: 8500, available: true },
-      { id: 'var-addicted-10', title: '10ml Pocket Flacon', price: 4200, compare_at_price: 5000, available: true }
+      { id: 1011, title: '50ml', price: 17500, compare_at_price: 21000, available: true, options: ['50ml'] }
     ],
-    selected_or_first_available_variant: { id: 'var-addicted-50', title: '50ml Extrait', price: 17500, compare_at_price: 22000, available: true }
+    selected_or_first_available_variant: { id: 1011, title: '50ml', price: 17500, compare_at_price: 21000, available: true, options: ['50ml'] }
   },
   {
-    id: 2,
+    id: 102,
     handle: 'ice-of-heaven',
     title: 'Ice of Heaven',
     type: 'Extrait de Parfum • 50ml',
     price: 16000,
-    compare_at_price: 20000,
+    compare_at_price: 0, // Tests product without compare_at_price
     available: true,
     url: '/products/ice-of-heaven',
-    tags: ['flagship', 'new', 'aquatic', 'fresh'],
-    featured_image: { src: '/assets/product-ice-of-heaven.jpg', alt: 'Ice of Heaven Extrait de Parfum 50ml' },
+    tags: ['signature', 'flagship', '50ml', 'aquatic', 'fresh'],
+    featured_image: { src: '/assets/product-ice-of-heaven.jpg', alt: 'Ice of Heaven Extrait de Parfum 50ml — AD PERFUMES' },
     images: [
-      { src: '/assets/product-ice-of-heaven.jpg', alt: 'Ice of Heaven 50ml Glacial Flacon' }
+      { src: '/assets/product-ice-of-heaven.jpg', alt: 'Ice of Heaven 50ml Flacon' }
     ],
-    description: `
-      <p class="lead"><strong>Dive into a fresh, aquatic embrace.</strong> It opens with an invigorating blast of frozen apple, lemon, bergamot, and star anise, melting into an icy marine heart with orange blossom and plum.</p>
-      <p>Grounded by driftwood, moss, amber, and musk, this <strong>AD Perfumes</strong> creation is the ultimate cool refresh — like waking to arctic clarity <strong>After Dreams</strong>.</p>
-    `,
-    metafields: {
-      custom: {
-        subtitle: 'Glacial Fresh Marine & Crisp Apple',
-        top_notes: 'Frozen Green Apple, Amalfi Lemon, Italian Bergamot, Star Anise',
-        heart_notes: 'Icy Marine Accords, Grasse Orange Blossom, Mirabelle Plum',
-        base_notes: 'Coastal Driftwood, French Oakmoss, White Amber, Cashmere Musk'
-      },
-      reviews: { rating_count: '1.9k' }
-    },
+    description: `Dive into a fresh, aquatic embrace. It opens with an invigorating blast of frozen apple, lemon, bergamot, and star anise, melting into an icy marine heart with orange blossom and plum. Grounded by driftwood, moss, amber, and musk, this AD Perfumes creation is the ultimate cool refresh.`,
     options_with_values: [
-      { name: 'Size', selected_value: '50ml Extrait', values: ['50ml Extrait', '20ml Travel Spray', '10ml Pocket Flacon'] }
+      { name: 'Size', selected_value: '50ml', values: ['50ml'] }
     ],
     variants: [
-      { id: 'var-ice-50', title: '50ml Extrait', price: 16000, compare_at_price: 20000, available: true }
+      { id: 1021, title: '50ml', price: 16000, compare_at_price: 0, available: true, options: ['50ml'] }
     ],
-    selected_or_first_available_variant: { id: 'var-ice-50', title: '50ml Extrait', price: 16000, compare_at_price: 20000, available: true }
+    selected_or_first_available_variant: { id: 1021, title: '50ml', price: 16000, compare_at_price: 0, available: true, options: ['50ml'] }
   },
   {
-    id: 3,
+    id: 103,
     handle: 'rouge-elite',
     title: 'Rouge Elite',
     type: 'Extrait de Parfum • 50ml',
     price: 16500,
-    compare_at_price: 21000,
+    compare_at_price: 19500,
     available: true,
     url: '/products/rouge-elite',
-    tags: ['flagship', 'new', 'amber', 'gourmand'],
-    featured_image: { src: '/assets/product-rouge-elite.jpg', alt: 'Rouge Elite Extrait de Parfum 50ml' },
+    tags: ['signature', 'flagship', '50ml', 'amber', 'saffron'],
+    featured_image: { src: '/assets/product-rouge-elite.jpg', alt: 'Rouge Elite Extrait de Parfum 50ml — AD PERFUMES' },
     images: [
-      { src: '/assets/product-rouge-elite.jpg', alt: 'Rouge Elite Ruby Crystal Flacon' }
+      { src: '/assets/product-rouge-elite.jpg', alt: 'Rouge Elite 50ml Crystal Flacon' }
     ],
-    description: `
-      <p class="lead"><strong>Discover sophisticated warmth.</strong> Bright top notes of saffron and bergamot give way to a decadent heart of amber, caramelized sugar, and soft florals.</p>
-      <p>Resting on a base of cedarwood, woody amber, and musk, it’s an elegant signature scent crafted by <strong>AD Perfumes</strong> for the golden daylight <strong>After Dreams</strong>.</p>
-    `,
-    metafields: {
-      custom: {
-        subtitle: 'Luminous Saffron & Caramelized Amber',
-        top_notes: 'Persian Saffron Threads, Sparkling Bergamot, Blood Orange Sparkle',
-        heart_notes: 'Golden Resin Amber, Caramelized Sugar Crust, Jasmine Blossom',
-        base_notes: 'Virginian Cedarwood, Woody Ambergris, White Fir Balsam, Silken Musk'
-      },
-      reviews: { rating_count: '3.1k' }
-    },
+    description: `Discover sophisticated warmth. Bright top notes of saffron and bergamot give way to a decadent heart of amber, caramelized sugar, and soft florals. Resting on a base of cedarwood, woody amber, and musk, it’s an elegant signature scent crafted by AD Perfumes.`,
     options_with_values: [
-      { name: 'Size', selected_value: '50ml Extrait', values: ['50ml Extrait', '20ml Travel Spray', '10ml Pocket Flacon'] }
+      { name: 'Size', selected_value: '50ml', values: ['50ml'] }
     ],
     variants: [
-      { id: 'var-rouge-50', title: '50ml Extrait', price: 16500, compare_at_price: 21000, available: true }
+      { id: 1031, title: '50ml', price: 16500, compare_at_price: 19500, available: true, options: ['50ml'] }
     ],
-    selected_or_first_available_variant: { id: 'var-rouge-50', title: '50ml Extrait', price: 16500, compare_at_price: 21000, available: true }
+    selected_or_first_available_variant: { id: 1031, title: '50ml', price: 16500, compare_at_price: 19500, available: true, options: ['50ml'] }
   },
+
+  // B. THE DISCOVERY COLLECTION (6 Smaller-Format Fragrances: 10ml & 20ml Variants)
   {
-    id: 4,
+    id: 104,
     handle: 'purple-mist',
     title: 'Purple Mist',
-    type: 'Pocket Extrait • 20ml / 10ml',
-    price: 6800,
-    compare_at_price: 8500,
+    type: 'Pocket Extrait • 10ml / 20ml',
+    price: 4200,
+    compare_at_price: 5000,
     available: true,
     url: '/products/purple-mist',
-    tags: ['discovery', 'travel', 'spicy', 'oud'],
-    featured_image: { src: '/assets/discovery-travel-set.jpg', alt: 'Purple Mist Travel Edition' },
-    images: [{ src: '/assets/discovery-travel-set.jpg', alt: 'Purple Mist Atomizer' }],
-    description: `
-      <p class="lead"><strong>A spicy, sweet, and elegant blend.</strong> Saffron and sweet citrus open into smooth oud and warm spices, settling on a soft amber and woody base.</p>
-      <p>A mysterious mist by <strong>AD Perfumes</strong>, capturing the mystical haze that hovers just <strong>After Dreams</strong>.</p>
-    `,
-    metafields: {
-      custom: {
-        subtitle: 'Mystic Saffron & Smooth Agarwood',
-        top_notes: 'Sweet Mandarin, Saffron Threads, Bergamot Zest',
-        heart_notes: 'Smooth Agarwood (Oud), Warm Nutmeg, Crushed Cinnamon',
-        base_notes: 'Golden Amber, Soft Cedarwood, Cashmere Woods'
-      },
-      reviews: { rating_count: '1.4k' }
-    },
+    tags: ['discovery', 'travel', '10ml', '20ml', 'oud', 'spicy'],
+    featured_image: { src: '/assets/discovery-travel-set.jpg', alt: 'Purple Mist — AD PERFUMES' },
+    images: [{ src: '/assets/discovery-travel-set.jpg', alt: 'Purple Mist Edition' }],
+    description: `A spicy, sweet, and elegant blend. Saffron and sweet citrus open into smooth oud and warm spices, settling on a soft amber and woody base. A mysterious mist from AD Perfumes.`,
     options_with_values: [
-      { name: 'Size', selected_value: '20ml Travel Spray', values: ['20ml Travel Spray', '10ml Pocket Flacon'] }
+      { name: 'Size', selected_value: '20ml', values: ['10ml', '20ml'] }
     ],
-    variants: [{ id: 'var-purple-20', title: '20ml Travel Spray', price: 6800, compare_at_price: 8500, available: true }],
-    selected_or_first_available_variant: { id: 'var-purple-20', title: '20ml Travel Spray', price: 6800, compare_at_price: 8500, available: true }
+    variants: [
+      { id: 1041, title: '10ml', price: 4200, compare_at_price: 5000, available: true, options: ['10ml'] },
+      { id: 1042, title: '20ml', price: 6800, compare_at_price: 8200, available: true, options: ['20ml'] }
+    ],
+    selected_or_first_available_variant: { id: 1042, title: '20ml', price: 6800, compare_at_price: 8200, available: true, options: ['20ml'] }
   },
   {
-    id: 5,
+    id: 105,
     handle: 'old-money',
     title: 'Old Money',
-    type: 'Pocket Extrait • 20ml / 10ml',
-    price: 7200,
-    compare_at_price: 9000,
+    type: 'Pocket Extrait • 10ml / 20ml',
+    price: 4500,
+    compare_at_price: 0,
     available: true,
     url: '/products/old-money',
-    tags: ['discovery', 'classic', 'chypre', 'woody'],
-    featured_image: { src: '/assets/discovery-travel-set.jpg', alt: 'Old Money Travel Edition' },
-    images: [{ src: '/assets/discovery-travel-set.jpg', alt: 'Old Money Atomizer' }],
-    description: `
-      <p class="lead"><strong>Sophisticated and earthy.</strong> Fresh green notes of fir and cypress blend into warm amber and soft incense, finishing with a rich oakmoss and vetiver base.</p>
-      <p>The classic scent of enduring success by <strong>AD Perfumes</strong>, commanding timeless stature morning <strong>After Dreams</strong>.</p>
-    `,
-    metafields: {
-      custom: {
-        subtitle: 'Earthy Cypress, Amber & Forest Oakmoss',
-        top_notes: 'Crisp Siberian Fir, Italian Cypress, Artemisia',
-        heart_notes: 'Warm Amber, Frankincense Resins, Birchwood',
-        base_notes: 'Forest Oakmoss, Haitian Vetiver, Rich Patchouli'
-      },
-      reviews: { rating_count: '2.1k' }
-    },
+    tags: ['discovery', 'travel', '10ml', '20ml', 'earthy', 'classic'],
+    featured_image: { src: '/assets/discovery-travel-set.jpg', alt: 'Old Money — AD PERFUMES' },
+    images: [{ src: '/assets/discovery-travel-set.jpg', alt: 'Old Money Edition' }],
+    description: `Sophisticated and earthy. Fresh green notes of fir and cypress blend into warm amber and soft incense, finishing with a rich oakmoss and vetiver base. The classic scent of success by AD Perfumes.`,
     options_with_values: [
-      { name: 'Size', selected_value: '20ml Travel Spray', values: ['20ml Travel Spray', '10ml Pocket Flacon'] }
+      { name: 'Size', selected_value: '20ml', values: ['10ml', '20ml'] }
     ],
-    variants: [{ id: 'var-old-20', title: '20ml Travel Spray', price: 7200, compare_at_price: 9000, available: true }],
-    selected_or_first_available_variant: { id: 'var-old-20', title: '20ml Travel Spray', price: 7200, compare_at_price: 9000, available: true }
+    variants: [
+      { id: 1051, title: '10ml', price: 4500, compare_at_price: 0, available: true, options: ['10ml'] },
+      { id: 1052, title: '20ml', price: 7200, compare_at_price: 8800, available: true, options: ['20ml'] }
+    ],
+    selected_or_first_available_variant: { id: 1052, title: '20ml', price: 7200, compare_at_price: 8800, available: true, options: ['20ml'] }
   },
   {
-    id: 6,
+    id: 106,
     handle: 'fallen-star',
     title: 'Fallen Star',
-    type: 'Pocket Extrait • 20ml / 10ml',
-    price: 6500,
-    compare_at_price: 8000,
+    type: 'Pocket Extrait • 10ml / 20ml',
+    price: 3900,
+    compare_at_price: 4600,
     available: true,
     url: '/products/fallen-star',
-    tags: ['discovery', 'tea', 'fresh', 'citrus'],
-    featured_image: { src: '/assets/discovery-travel-set.jpg', alt: 'Fallen Star Travel Edition' },
-    images: [{ src: '/assets/discovery-travel-set.jpg', alt: 'Fallen Star Flacon' }],
-    description: `
-      <p class="lead"><strong>Clean and tea-like.</strong> Fresh bergamot and citrus sparkle above a heart of black tea, ginger, and Ceylon cinnamon, grounded by soft amber.</p>
-      <p>A bright, celestial spark in the <strong>AD Perfumes</strong> collection — a star caught slipping into dawn <strong>After Dreams</strong>.</p>
-    `,
-    metafields: {
-      custom: {
-        subtitle: 'Luminous Black Tea & Ceylon Cinnamon',
-        top_notes: 'Calabrian Bergamot, Meyer Lemon, Japanese Yuzu',
-        heart_notes: 'Smoked Black Tea, Fresh Ginger Root, Ceylon Cinnamon',
-        base_notes: 'Radiant Amber, Sandalwood, Clean Skin Musk'
-      },
-      reviews: { rating_count: '980' }
-    },
+    tags: ['discovery', 'travel', '10ml', '20ml', 'tea', 'citrus'],
+    featured_image: { src: '/assets/discovery-travel-set.jpg', alt: 'Fallen Star — AD PERFUMES' },
+    images: [{ src: '/assets/discovery-travel-set.jpg', alt: 'Fallen Star Edition' }],
+    description: `Clean and tea-like. Fresh bergamot and citrus sparkle above a heart of black tea, ginger, and Ceylon cinnamon, grounded by soft amber. A bright spark in the AD Perfumes collection.`,
     options_with_values: [
-      { name: 'Size', selected_value: '20ml Travel Spray', values: ['20ml Travel Spray', '10ml Pocket Flacon'] }
+      { name: 'Size', selected_value: '20ml', values: ['10ml', '20ml'] }
     ],
-    variants: [{ id: 'var-fallen-20', title: '20ml Travel Spray', price: 6500, compare_at_price: 8000, available: true }],
-    selected_or_first_available_variant: { id: 'var-fallen-20', title: '20ml Travel Spray', price: 6500, compare_at_price: 8000, available: true }
+    variants: [
+      { id: 1061, title: '10ml', price: 3900, compare_at_price: 4600, available: true, options: ['10ml'] },
+      { id: 1062, title: '20ml', price: 6500, compare_at_price: 7800, available: true, options: ['20ml'] }
+    ],
+    selected_or_first_available_variant: { id: 1062, title: '20ml', price: 6500, compare_at_price: 7800, available: true, options: ['20ml'] }
   },
   {
-    id: 7,
+    id: 107,
     handle: 'coffee',
     title: 'Coffee',
-    type: 'Pocket Extrait • 20ml / 10ml',
-    price: 6800,
-    compare_at_price: 8500,
+    type: 'Pocket Extrait • 10ml / 20ml',
+    price: 4200,
+    compare_at_price: 0,
     available: true,
     url: '/products/coffee',
-    tags: ['discovery', 'gourmand', 'sweet', 'warm'],
-    featured_image: { src: '/assets/discovery-travel-set.jpg', alt: 'Coffee Travel Edition' },
-    images: [{ src: '/assets/discovery-travel-set.jpg', alt: 'Coffee Atomizer' }],
-    description: `
-      <p class="lead"><strong>A gourmand's dream.</strong> Rich, roasted, creamy, and wonderfully sweet.</p>
-      <p>This warm, comforting scent by <strong>AD Perfumes</strong> is as addictive as your favorite morning brew, gently waking the senses into the daylight <strong>After Dreams</strong>.</p>
-    `,
-    metafields: {
-      custom: {
-        subtitle: 'Roasted Espresso, Steamed Cream & Vanilla',
-        top_notes: 'Dark Roasted Arabica Espresso, Crushed Cardamom',
-        heart_notes: 'Steamed Heavy Cream, Frosted Vanilla Bean, Brown Sugar',
-        base_notes: 'Golden Caramel, Tonka Bean, Mysore Sandalwood'
-      },
-      reviews: { rating_count: '3.4k' }
-    },
+    tags: ['discovery', 'travel', '10ml', '20ml', 'gourmand', 'roasted'],
+    featured_image: { src: '/assets/discovery-travel-set.jpg', alt: 'Coffee — AD PERFUMES' },
+    images: [{ src: '/assets/discovery-travel-set.jpg', alt: 'Coffee Edition' }],
+    description: `A gourmand's dream. Rich, roasted, creamy, and wonderfully sweet. This warm, comforting scent by AD Perfumes is as addictive as your favorite morning brew.`,
     options_with_values: [
-      { name: 'Size', selected_value: '20ml Travel Spray', values: ['20ml Travel Spray', '10ml Pocket Flacon'] }
+      { name: 'Size', selected_value: '20ml', values: ['10ml', '20ml'] }
     ],
-    variants: [{ id: 'var-coffee-20', title: '20ml Travel Spray', price: 6800, compare_at_price: 8500, available: true }],
-    selected_or_first_available_variant: { id: 'var-coffee-20', title: '20ml Travel Spray', price: 6800, compare_at_price: 8500, available: true }
+    variants: [
+      { id: 1071, title: '10ml', price: 4200, compare_at_price: 0, available: true, options: ['10ml'] },
+      { id: 1072, title: '20ml', price: 6800, compare_at_price: 8200, available: true, options: ['20ml'] }
+    ],
+    selected_or_first_available_variant: { id: 1072, title: '20ml', price: 6800, compare_at_price: 8200, available: true, options: ['20ml'] }
   },
   {
-    id: 8,
+    id: 108,
     handle: 'toxic',
     title: 'Toxic',
-    type: 'Pocket Extrait • 20ml / 10ml',
-    price: 7000,
-    compare_at_price: 8800,
+    type: 'Pocket Extrait • 10ml / 20ml',
+    price: 4400,
+    compare_at_price: 5200,
     available: true,
     url: '/products/toxic',
-    tags: ['discovery', 'sensual', 'tobacco', 'masculine'],
-    featured_image: { src: '/assets/discovery-travel-set.jpg', alt: 'Toxic Travel Edition' },
-    images: [{ src: '/assets/discovery-travel-set.jpg', alt: 'Toxic Atomizer' }],
-    description: `
-      <p class="lead"><strong>Bold, spicy, and unapologetically masculine.</strong> Fresh lavender and cardamom meet a rich heart of tobacco and cinnamon, resting on a warm base of vanilla and sandalwood.</p>
-      <p>An intoxicating, dangerously attractive blend from <strong>AD Perfumes</strong>, seductive long <strong>After Dreams</strong>.</p>
-    `,
-    metafields: {
-      custom: {
-        subtitle: 'Lavender, Cardamom & Blonde Tobacco',
-        top_notes: 'French Lavender, Green Cardamom, Cracked Black Pepper',
-        heart_notes: 'Rich Blonde Tobacco Leaf, Cinnamon Bark, Clove Bud',
-        base_notes: 'Bourbon Vanilla, Mysore Sandalwood, Dark Ambergris'
-      },
-      reviews: { rating_count: '1.7k' }
-    },
+    tags: ['discovery', 'travel', '10ml', '20ml', 'spicy', 'tobacco'],
+    featured_image: { src: '/assets/discovery-travel-set.jpg', alt: 'Toxic — AD PERFUMES' },
+    images: [{ src: '/assets/discovery-travel-set.jpg', alt: 'Toxic Edition' }],
+    description: `Bold, spicy, and masculine. Fresh lavender and cardamom meet a rich heart of tobacco and cinnamon, resting on a warm base of vanilla and sandalwood. An intoxicating blend from AD Perfumes.`,
     options_with_values: [
-      { name: 'Size', selected_value: '20ml Travel Spray', values: ['20ml Travel Spray', '10ml Pocket Flacon'] }
+      { name: 'Size', selected_value: '20ml', values: ['10ml', '20ml'] }
     ],
-    variants: [{ id: 'var-toxic-20', title: '20ml Travel Spray', price: 7000, compare_at_price: 8800, available: true }],
-    selected_or_first_available_variant: { id: 'var-toxic-20', title: '20ml Travel Spray', price: 7000, compare_at_price: 8800, available: true }
+    variants: [
+      { id: 1081, title: '10ml', price: 4400, compare_at_price: 5200, available: true, options: ['10ml'] },
+      { id: 1082, title: '20ml', price: 7000, compare_at_price: 8500, available: true, options: ['20ml'] }
+    ],
+    selected_or_first_available_variant: { id: 1082, title: '20ml', price: 7000, compare_at_price: 8500, available: true, options: ['20ml'] }
   },
   {
-    id: 9,
+    id: 109,
     handle: 'dark-chocolates',
     title: 'Dark Chocolates',
-    type: 'Pocket Extrait • 20ml / 10ml',
-    price: 6800,
-    compare_at_price: 8500,
+    type: 'Pocket Extrait • 10ml / 20ml',
+    price: 4200,
+    compare_at_price: 0,
     available: true,
     url: '/products/dark-chocolates',
-    tags: ['discovery', 'gourmand', 'cocoa', 'decadent'],
-    featured_image: { src: '/assets/discovery-travel-set.jpg', alt: 'Dark Chocolates Travel Edition' },
-    images: [{ src: '/assets/discovery-travel-set.jpg', alt: 'Dark Chocolates Atomizer' }],
-    description: `
-      <p class="lead"><strong>Rich, dark, and perfectly creamy.</strong> Bitter orange and roasted coffee melt into luxurious cocoa, hazelnut, and praline, wrapped in vanilla and tonka bean.</p>
-      <p>A decadent, melt-in-your-mouth treat by <strong>AD Perfumes</strong>, an opulent indulgence to savor <strong>After Dreams</strong>.</p>
-    `,
-    metafields: {
-      custom: {
-        subtitle: 'Bitter Orange, Cocoa & Hazelnut Praline',
-        top_notes: 'Candied Bitter Orange Peel, Roasted Arabica, Hazelnut Liqueur',
-        heart_notes: '85% Dark Cocoa Ganache, Roasted Hazelnut, Caramelized Praline',
-        base_notes: 'Madagascar Vanilla Pod, Roasted Tonka Bean, Soft Woods'
-      },
-      reviews: { rating_count: '2.5k' }
-    },
+    tags: ['discovery', 'travel', '10ml', '20ml', 'cocoa', 'gourmand'],
+    featured_image: { src: '/assets/discovery-travel-set.jpg', alt: 'Dark Chocolates — AD PERFUMES' },
+    images: [{ src: '/assets/discovery-travel-set.jpg', alt: 'Dark Chocolates Edition' }],
+    description: `Rich, dark, and perfectly creamy. Bitter orange and roasted coffee melt into luxurious cocoa, hazelnut, and praline, wrapped in vanilla and tonka bean. A decadent treat by AD Perfumes.`,
     options_with_values: [
-      { name: 'Size', selected_value: '20ml Travel Spray', values: ['20ml Travel Spray', '10ml Pocket Flacon'] }
+      { name: 'Size', selected_value: '20ml', values: ['10ml', '20ml'] }
     ],
-    variants: [{ id: 'var-choco-20', title: '20ml Travel Spray', price: 6800, compare_at_price: 8500, available: true }],
-    selected_or_first_available_variant: { id: 'var-choco-20', title: '20ml Travel Spray', price: 6800, compare_at_price: 8500, available: true }
+    variants: [
+      { id: 1091, title: '10ml', price: 4200, compare_at_price: 0, available: true, options: ['10ml'] },
+      { id: 1092, title: '20ml', price: 6800, compare_at_price: 8200, available: true, options: ['20ml'] }
+    ],
+    selected_or_first_available_variant: { id: 1092, title: '20ml', price: 6800, compare_at_price: 8200, available: true, options: ['20ml'] }
   }
 ];
 
-// In-Memory Live Cart for preview
+// In-Memory Live Cart Model
 let cartState = {
-  item_count: 2,
-  total_price: 33500,
+  item_count: 1,
+  total_price: 17500,
   currency: { iso_code: 'USD', symbol: '$' },
+  note: '',
   items: [
     {
-      id: 'item-1',
-      variant_id: 'var-addicted-50',
+      id: 1011,
+      key: '1011:key',
+      variant_id: 1011,
       quantity: 1,
       price: 17500,
-      original_price: 17500,
+      original_price: 21000,
       final_price: 17500,
-      line_price: 17500,
+      final_line_price: 17500,
       url: '/products/addicted',
-      title: 'ADDICTED - 50ml Extrait',
-      image: { src: '/assets/product-addicted.jpg' },
+      title: 'ADDICTED - 50ml',
+      product_title: 'ADDICTED',
+      variant_title: '50ml',
+      image: '/assets/product-addicted.jpg',
       product: PRODUCTS[0],
       variant: PRODUCTS[0].variants[0]
-    },
-    {
-      id: 'item-2',
-      variant_id: 'var-ice-50',
-      quantity: 1,
-      price: 16000,
-      original_price: 16000,
-      final_price: 16000,
-      line_price: 16000,
-      url: '/products/ice-of-heaven',
-      title: 'Ice of Heaven - 50ml Extrait',
-      image: { src: '/assets/product-ice-of-heaven.jpg' },
-      product: PRODUCTS[1],
-      variant: PRODUCTS[1].variants[0]
     }
   ]
 };
+
+function recalculateCart() {
+  let count = 0;
+  let total = 0;
+  cartState.items.forEach(item => {
+    count += item.quantity;
+    item.final_line_price = item.price * item.quantity;
+    total += item.final_line_price;
+  });
+  cartState.item_count = count;
+  cartState.total_price = total;
+}
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=UTF-8',
@@ -505,26 +421,36 @@ async function renderFullTheme(contentHtml, reqScope, templateName = 'index') {
 
   const globalScope = {
     shop: {
-      name: settings.brand_name || 'AD Perfumes',
-      description: 'Purveyors of rare and exceptional fragrances for those who understand that true luxury is found After Dreams.',
-      customer_accounts_enabled: false
+      name: settings.brand_name || 'AD PERFUMES',
+      description: 'Your Fragrance. Your Vision. Your Brand.',
+      customer_accounts_enabled: true,
+      policies: [
+        { title: 'Privacy Policy', url: '#' },
+        { title: 'Terms of Service', url: '#' },
+        { title: 'Refund Policy', url: '#' },
+        { title: 'Shipping Policy', url: '#' }
+      ]
     },
     settings: settings,
     routes: {
       root_url: '/',
       collections_url: '/collections',
+      all_products_collection_url: '/collections/all',
       search_url: '/search',
       cart_url: '/cart',
       cart_add_url: '/cart/add',
-      checkout_url: '/checkout'
+      cart_change_url: '/cart/change',
+      cart_clear_url: '/cart/clear',
+      checkout_url: '/checkout',
+      account_url: '/account'
     },
     request: {
       locale: { iso_code: 'en' },
       page_type: templateName
     },
     canonical_url: 'http://localhost:3000' + reqScope.canonicalPath,
-    page_title: reqScope.page_title || 'AD Perfumes — After Dreams • Haute Parfumerie',
-    page_description: reqScope.page_description || 'Born in the quiet hours After Dreams.',
+    page_title: reqScope.page_title || 'AD PERFUMES — Your Fragrance. Your Vision. Your Brand.',
+    page_description: reqScope.page_description || 'AD PERFUMES — Premium Haute Parfumerie.',
     template: {
       name: templateName,
       suffix: ''
@@ -534,35 +460,73 @@ async function renderFullTheme(contentHtml, reqScope, templateName = 'index') {
       'main-menu': {
         links: [
           { url: '/', title: 'Home', active: templateName === 'index' },
-          { url: '/collections', title: 'Shop All', active: templateName === 'collection' },
-          { url: '/collections/flagship', title: 'Flagships', active: false },
-          { url: '/pages/about', title: 'About Atelier', active: templateName === 'page' },
-          { url: '/pages/contact', title: 'Contact', active: false }
+          { url: '/collections/all', title: 'All Fragrances', active: templateName === 'collection' },
+          { url: '/collections/the-signature-collection', title: 'Signature 50ml', active: false },
+          { url: '/collections/the-discovery-collection', title: 'Discovery Editions', active: false },
+          { url: '/pages/about', title: 'About Atelier', active: false },
+          { url: '/pages/contact', title: 'Contact Concierge', active: false }
+        ]
+      },
+      footer: {
+        links: [
+          { url: '/collections/all', title: 'All Fragrances' },
+          { url: '/collections/the-signature-collection', title: 'The Signature Collection (50ml)' },
+          { url: '/collections/the-discovery-collection', title: 'The Discovery Collection (10ml & 20ml)' },
+          { url: '/search', title: 'Search Fragrances' }
         ]
       }
     },
     pages: {
       about: { url: '/pages/about' },
-      contact: { url: '/pages/contact' }
+      contact: { url: '/pages/contact' },
+      'business-services': { url: '/pages/business-services' }
     },
     collections: {
       all: {
-        title: 'All Fragrances',
-        description: 'Discover the full AD Perfumes portfolio — from the newly launched 50ml Flagship Extraits to versatile 10ml & 20ml Discovery Travel editions.',
+        title: 'All Fragrances — AD PERFUMES',
+        description: 'Discover the full portfolio of AD PERFUMES — from our 50ml Signature Flagship extraits to versatile 10ml & 20ml Discovery editions.',
         products_count: PRODUCTS.length,
-        products: PRODUCTS
+        products: PRODUCTS,
+        url: '/collections/all',
+        default_sort_by: 'manual',
+        sort_by: 'manual',
+        sort_options: [
+          { value: 'manual', name: 'Featured' },
+          { value: 'price-ascending', name: 'Price: Low to High' },
+          { value: 'price-descending', name: 'Price: High to Low' },
+          { value: 'title-ascending', name: 'Alphabetical: A-Z' }
+        ],
+        filters: []
       },
-      flagship: {
-        title: 'The Flagship Trinity (50ml)',
-        description: 'Haute Parfumerie statement pieces formulated at 30%+ Extrait de Parfum concentration for unyielding sillage.',
+      'the-signature-collection': {
+        title: 'The Signature Collection',
+        description: 'Our three flagship creations: ADDICTED, Ice of Heaven, and Rouge Elite. Deep, warm woods, icy marine accords, and decadent caramelized ambers in 50ml flacons.',
         products_count: 3,
-        products: PRODUCTS.slice(0, 3)
+        products: PRODUCTS.slice(0, 3),
+        url: '/collections/the-signature-collection',
+        default_sort_by: 'manual',
+        sort_by: 'manual',
+        sort_options: [
+          { value: 'manual', name: 'Featured' },
+          { value: 'price-ascending', name: 'Price: Low to High' },
+          { value: 'price-descending', name: 'Price: High to Low' }
+        ],
+        filters: []
       },
-      'travel-pocket': {
-        title: 'The Discovery & Travel Series (10ml & 20ml)',
-        description: 'Signature scents reimagined for travel, pocket portability, and bespoke scent layering.',
+      'the-discovery-collection': {
+        title: 'The Discovery Collection',
+        description: 'Six versatile smaller-format scents: Purple Mist, Old Money, Fallen Star, Coffee, Toxic, and Dark Chocolates. Designed for effortless travel, pocket portability, and everyday discovery.',
         products_count: 6,
-        products: PRODUCTS.slice(3)
+        products: PRODUCTS.slice(3),
+        url: '/collections/the-discovery-collection',
+        default_sort_by: 'manual',
+        sort_by: 'manual',
+        sort_options: [
+          { value: 'manual', name: 'Featured' },
+          { value: 'price-ascending', name: 'Price: Low to High' },
+          { value: 'price-descending', name: 'Price: High to Low' }
+        ],
+        filters: []
       }
     },
     ...reqScope
@@ -571,7 +535,7 @@ async function renderFullTheme(contentHtml, reqScope, templateName = 'index') {
   globalScope.content_for_header = `
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   `;
   globalScope.content_for_layout = contentHtml;
 
@@ -599,24 +563,151 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  // 2. Cart API Handling
+  // 2. Real Shopify AJAX Cart API Endpoints
   if (pathname === '/cart/add' || pathname === '/cart/add.js') {
     let body = '';
     req.on('data', chunk => { body += chunk; });
     req.on('end', () => {
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ status: 'success', message: 'Item added to luxury bag', cart: cartState }));
+      try {
+        const payload = JSON.parse(body || '{}');
+        const variantId = parseInt(payload.id, 10);
+        const qty = parseInt(payload.quantity, 10) || 1;
+
+        // Find variant in product catalogue
+        let foundProduct = null;
+        let foundVariant = null;
+        for (const p of PRODUCTS) {
+          const v = p.variants.find(vr => vr.id === variantId);
+          if (v) {
+            foundProduct = p;
+            foundVariant = v;
+            break;
+          }
+        }
+
+        if (!foundProduct) {
+          // Fallback to first variant if needed
+          foundProduct = PRODUCTS[0];
+          foundVariant = PRODUCTS[0].variants[0];
+        }
+
+        const existingItem = cartState.items.find(it => it.variant_id === foundVariant.id);
+        if (existingItem) {
+          existingItem.quantity += qty;
+        } else {
+          cartState.items.push({
+            id: foundVariant.id,
+            key: `${foundVariant.id}:key`,
+            variant_id: foundVariant.id,
+            quantity: qty,
+            price: foundVariant.price,
+            original_price: foundVariant.compare_at_price || foundVariant.price,
+            final_price: foundVariant.price,
+            final_line_price: foundVariant.price * qty,
+            url: foundProduct.url,
+            title: `${foundProduct.title} - ${foundVariant.title}`,
+            product_title: foundProduct.title,
+            variant_title: foundVariant.title,
+            image: foundProduct.featured_image.src,
+            product: foundProduct,
+            variant: foundVariant
+          });
+        }
+
+        recalculateCart();
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(cartState.items[cartState.items.length - 1]));
+      } catch (err) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ status: 400, message: 'Invalid cart payload' }));
+      }
     });
     return;
   }
+
+  if (pathname === '/cart/change' || pathname === '/cart/change.js') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', () => {
+      try {
+        const payload = JSON.parse(body || '{}');
+        const id = String(payload.id);
+        const newQty = parseInt(payload.quantity, 10);
+
+        const itemIndex = cartState.items.findIndex(it => String(it.key) === id || String(it.id) === id || String(it.variant_id) === id);
+        if (itemIndex > -1) {
+          if (newQty <= 0) {
+            cartState.items.splice(itemIndex, 1);
+          } else {
+            cartState.items[itemIndex].quantity = newQty;
+          }
+        }
+        recalculateCart();
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(cartState));
+      } catch (err) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ status: 400, message: 'Invalid change payload' }));
+      }
+    });
+    return;
+  }
+
   if (pathname === '/cart.js') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(cartState));
     return;
   }
 
+  if (pathname === '/cart/update.js') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', () => {
+      try {
+        const payload = JSON.parse(body || '{}');
+        if (payload.note !== undefined) cartState.note = payload.note;
+        recalculateCart();
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(cartState));
+      } catch (e) {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(cartState));
+      }
+    });
+    return;
+  }
+
+  // 3. Checkout Route: Confirms Shopify Checkout Hand-off
+  if (pathname === '/checkout') {
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=UTF-8' });
+    res.end(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Shopify Checkout — AD PERFUMES</title>
+        <style>
+          body { font-family: -apple-system, sans-serif; background: #0e0e10; color: #fff; padding: 4rem 2rem; text-align: center; }
+          .card { max-width: 600px; margin: 0 auto; background: #16191f; border: 1px solid #c5a059; border-radius: 16px; padding: 3rem 2rem; }
+          h1 { color: #c5a059; margin-bottom: 1rem; }
+          p { color: #838b96; line-height: 1.6; }
+          .btn { display: inline-block; margin-top: 2rem; background: #c5a059; color: #000; padding: 0.8rem 1.8rem; border-radius: 8px; text-decoration: none; font-weight: 600; }
+        </style>
+      </head>
+      <body>
+        <div class="card">
+          <h1>Shopify Checkout Connected</h1>
+          <p>This is the verified entry point to Shopify's native checkout route (<strong>/checkout</strong>).</p>
+          <p>In your live Shopify store, customer orders, payment gateways (Cards, UPI, etc.), regional taxes, and delivery methods are securely processed directly by Shopify.</p>
+          <a href="/cart" class="btn">Return to Shopping Bag</a>
+        </div>
+      </body>
+      </html>
+    `);
+    return;
+  }
+
   try {
-    // 3. PRODUCT VIEW PAGE: /products/:handle
+    // 4. PRODUCT VIEW PAGE: /products/:handle
     if (pathname.startsWith('/products/')) {
       const handle = pathname.replace('/products/', '');
       const product = PRODUCTS.find(p => p.handle === handle) || PRODUCTS[0];
@@ -626,11 +717,11 @@ const server = http.createServer(async (req, res) => {
       const reqScope = {
         canonicalPath: pathname,
         product: product,
-        page_title: `${product.title} — AD Perfumes (After Dreams)`,
-        page_description: product.metafields.custom.subtitle,
+        page_title: `${product.title} — AD PERFUMES`,
+        page_description: product.description.slice(0, 150),
         section: {
           id: 'product-main',
-          settings: { show_related: true }
+          settings: { show_care_tab: true, show_delivery_tab: true }
         }
       };
 
@@ -645,15 +736,15 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    // 4. CART PAGE: /cart
+    // 5. CART PAGE: /cart
     if (pathname === '/cart') {
       const secPath = path.resolve(root, 'sections', 'cart-main.liquid');
       const secRaw = fs.readFileSync(secPath, 'utf8');
       const reqScope = {
         canonicalPath: '/cart',
         cart: cartState,
-        page_title: 'Your Shopping Bag — AD Perfumes',
-        section: { id: 'cart-main', settings: {} }
+        page_title: 'Your Shopping Bag — AD PERFUMES',
+        section: { id: 'cart-main', settings: { show_notes: true } }
       };
       const cartContent = await engine.parseAndRender(secRaw, { cart: cartState, ...reqScope });
       const html = await renderFullTheme(
@@ -666,23 +757,48 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    // 5. COLLECTIONS PAGE: /collections or /collections/:handle
+    // 6. COLLECTIONS: /collections or /collections/:handle
     if (pathname.startsWith('/collections')) {
       let handle = pathname.replace('/collections', '').replace('/', '');
       if (!handle || handle === 'all') handle = 'all';
-      const colData = (handle === 'flagship') 
-        ? { title: 'The Flagship Trinity (50ml)', description: 'Haute Parfumerie statement pieces formulated at 30%+ Extrait de Parfum concentration.', products_count: 3, products: PRODUCTS.slice(0, 3) }
-        : (handle === 'travel-pocket' || handle === 'travel')
-        ? { title: 'The Discovery & Travel Series (10ml & 20ml)', description: 'Signature scents reimagined for travel and pocket portability.', products_count: 6, products: PRODUCTS.slice(3) }
-        : { title: 'All Fragrances — AD Perfumes', description: 'Explore the full portfolio of artisanal Extraits de Parfum by AD Perfumes.', products_count: PRODUCTS.length, products: PRODUCTS };
+
+      let colData;
+      if (handle === 'the-signature-collection' || handle === 'signature' || handle === 'flagship') {
+        colData = {
+          title: 'The Signature Collection',
+          description: 'Our three flagship creations: ADDICTED, Ice of Heaven, and Rouge Elite in 50ml statement flacons.',
+          products_count: 3,
+          products: PRODUCTS.slice(0, 3),
+          url: '/collections/the-signature-collection',
+          filters: []
+        };
+      } else if (handle === 'the-discovery-collection' || handle === 'discovery' || handle === 'travel') {
+        colData = {
+          title: 'The Discovery Collection',
+          description: 'Six versatile smaller-format scents: Purple Mist, Old Money, Fallen Star, Coffee, Toxic, and Dark Chocolates in 10ml and 20ml editions.',
+          products_count: 6,
+          products: PRODUCTS.slice(3),
+          url: '/collections/the-discovery-collection',
+          filters: []
+        };
+      } else {
+        colData = {
+          title: 'All Fragrances — AD PERFUMES',
+          description: 'Explore the full portfolio of artisanal fragrances by AD PERFUMES.',
+          products_count: PRODUCTS.length,
+          products: PRODUCTS,
+          url: '/collections/all',
+          filters: []
+        };
+      }
 
       const secPath = path.resolve(root, 'sections', 'collection-main.liquid');
-      const secRaw = fs.readFileSync(secPath, 'utf8');
+      const secRaw = fs.readFileSync(secPath, 'utf8').replace(/\{%-?\s*paginate[\s\S]*?%\}|\{%-?\s*endpaginate\s*-?%\}/g, '');
       const reqScope = {
         canonicalPath: pathname,
         collection: colData,
-        page_title: `${colData.title} — AD Perfumes`,
-        section: { id: 'collection-main', settings: { products_per_page: 12 } }
+        page_title: `${colData.title} — AD PERFUMES`,
+        section: { id: 'collection-main', settings: { products_per_page: 18, enable_filtering: true, enable_sorting: true } }
       };
       const colContent = await engine.parseAndRender(secRaw, { collection: colData, ...reqScope });
       const html = await renderFullTheme(
@@ -695,14 +811,45 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    // 6. ABOUT PAGE: /pages/about
+    // 7. SEARCH PAGE: /search
+    if (pathname.startsWith('/search')) {
+      const q = parsedUrl.searchParams.get('q') || '';
+      const matched = q ? PRODUCTS.filter(p => p.title.toLowerCase().includes(q.toLowerCase()) || p.description.toLowerCase().includes(q.toLowerCase())) : [];
+
+      const searchObj = {
+        performed: Boolean(q),
+        terms: q,
+        results_count: matched.length,
+        results: matched.map(p => ({ ...p, object_type: 'product' }))
+      };
+
+      const secPath = path.resolve(root, 'sections', 'search-main.liquid');
+      const secRaw = fs.readFileSync(secPath, 'utf8').replace(/\{%-?\s*paginate[\s\S]*?%\}|\{%-?\s*endpaginate\s*-?%\}/g, '');
+      const reqScope = {
+        canonicalPath: '/search',
+        search: searchObj,
+        page_title: `Search: ${q || 'Fragrances'} — AD PERFUMES`,
+        section: { id: 'search-main', settings: {} }
+      };
+      const searchContent = await engine.parseAndRender(secRaw, { search: searchObj, ...reqScope });
+      const html = await renderFullTheme(
+        `<div id="shopify-section-search-main" class="shopify-section">${searchContent}</div>`,
+        reqScope,
+        'search'
+      );
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=UTF-8' });
+      res.end(html);
+      return;
+    }
+
+    // 8. ABOUT PAGE: /pages/about
     if (pathname === '/pages/about') {
       const secPath = path.resolve(root, 'sections', 'page-about.liquid');
       if (fs.existsSync(secPath)) {
         const secRaw = fs.readFileSync(secPath, 'utf8');
         const reqScope = {
           canonicalPath: '/pages/about',
-          page_title: 'Our Atelier & Story — AD Perfumes (After Dreams)',
+          page_title: 'The World of AD PERFUMES — About Atelier',
           section: { id: 'page-about', settings: {} }
         };
         const aboutContent = await engine.parseAndRender(secRaw, reqScope);
@@ -717,14 +864,14 @@ const server = http.createServer(async (req, res) => {
       }
     }
 
-    // 7. CONTACT PAGE: /pages/contact
+    // 9. CONTACT PAGE: /pages/contact
     if (pathname === '/pages/contact') {
       const secPath = path.resolve(root, 'sections', 'page-contact.liquid');
       if (fs.existsSync(secPath)) {
         const secRaw = fs.readFileSync(secPath, 'utf8');
         const reqScope = {
           canonicalPath: '/pages/contact',
-          page_title: 'Contact Concierge — AD Perfumes',
+          page_title: 'Connect with AD PERFUMES — Concierge',
           section: { id: 'page-contact', settings: {} }
         };
         const contactContent = await engine.parseAndRender(secRaw, reqScope);
@@ -739,39 +886,81 @@ const server = http.createServer(async (req, res) => {
       }
     }
 
-    // 8. HOMEPAGE: /
-    const indexData = JSON.parse(fs.readFileSync(path.resolve(root, 'templates', 'index.json'), 'utf8'));
-    let layoutHtml = '';
-
-    for (const sectionId of indexData.order) {
-      const sectionConfig = indexData.sections[sectionId];
-      if (!sectionConfig) continue;
-      const secPath = path.resolve(root, 'sections', `${sectionConfig.type}.liquid`);
-      if (!fs.existsSync(secPath)) continue;
-
-      const blockOrder = sectionConfig.block_order || Object.keys(sectionConfig.blocks || {});
-      const blocksArray = blockOrder.map(bId => ({
-        id: bId,
-        type: sectionConfig.blocks[bId]?.type || '',
-        settings: sectionConfig.blocks[bId]?.settings || {},
-        shopify_attributes: `data-block-id="${bId}"`
-      }));
-
-      const secScope = {
-        section: {
-          id: sectionId,
-          settings: sectionConfig.settings || {},
-          blocks: blocksArray
-        }
-      };
-
-      const secRaw = fs.readFileSync(secPath, 'utf8');
-      const renderedSec = await engine.parseAndRender(secRaw, secScope);
-      layoutHtml += `<div id="shopify-section-${sectionId}" class="shopify-section">\n${renderedSec}\n</div>\n`;
+    // 10. BUSINESS & BRANDING SOLUTIONS: /pages/business-services
+    if (pathname === '/pages/business-services') {
+      const secPath = path.resolve(root, 'sections', 'page-business.liquid');
+      if (fs.existsSync(secPath)) {
+        const secRaw = fs.readFileSync(secPath, 'utf8');
+        const reqScope = {
+          canonicalPath: '/pages/business-services',
+          page_title: 'AD PERFUMES — Premium Fragrance & Branding Solutions',
+          section: { id: 'page-business', settings: {} }
+        };
+        const bizContent = await engine.parseAndRender(secRaw, reqScope);
+        const html = await renderFullTheme(
+          `<div id="shopify-section-page-business" class="shopify-section">${bizContent}</div>`,
+          reqScope,
+          'page'
+        );
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=UTF-8' });
+        res.end(html);
+        return;
+      }
     }
 
-    const html = await renderFullTheme(layoutHtml, { canonicalPath: '/' }, 'index');
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=UTF-8' });
+    // 11. HOMEPAGE: /
+    if (pathname === '/') {
+      const indexData = JSON.parse(fs.readFileSync(path.resolve(root, 'templates', 'index.json'), 'utf8'));
+      let layoutHtml = '';
+
+      for (const sectionId of indexData.order) {
+        const sectionConfig = indexData.sections[sectionId];
+        if (!sectionConfig) continue;
+        const secPath = path.resolve(root, 'sections', `${sectionConfig.type}.liquid`);
+        if (!fs.existsSync(secPath)) continue;
+
+        const blockOrder = sectionConfig.block_order || Object.keys(sectionConfig.blocks || {});
+        const blocksArray = blockOrder.map(bId => ({
+          id: bId,
+          type: sectionConfig.blocks[bId]?.type || '',
+          settings: sectionConfig.blocks[bId]?.settings || {},
+          shopify_attributes: `data-block-id="${bId}"`
+        }));
+
+        const secScope = {
+          section: {
+            id: sectionId,
+            settings: sectionConfig.settings || {},
+            blocks: blocksArray
+          }
+        };
+
+        const secRaw = fs.readFileSync(secPath, 'utf8');
+        const renderedSec = await engine.parseAndRender(secRaw, secScope);
+        layoutHtml += `<div id="shopify-section-${sectionId}" class="shopify-section">\n${renderedSec}\n</div>\n`;
+      }
+
+      const html = await renderFullTheme(layoutHtml, { canonicalPath: '/' }, 'index');
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=UTF-8' });
+      res.end(html);
+      return;
+    }
+
+    // 12. 404 FALLBACK
+    const sec404Path = path.resolve(root, 'sections', 'page-404.liquid');
+    const sec404Raw = fs.existsSync(sec404Path) ? fs.readFileSync(sec404Path, 'utf8') : '<h1>404 Not Found</h1>';
+    const reqScope = {
+      canonicalPath: pathname,
+      page_title: '404 Page Not Found — AD PERFUMES',
+      section: { id: 'page-404', settings: {} }
+    };
+    const content404 = await engine.parseAndRender(sec404Raw, reqScope);
+    const html = await renderFullTheme(
+      `<div id="shopify-section-page-404" class="shopify-section">${content404}</div>`,
+      reqScope,
+      '404'
+    );
+    res.writeHead(404, { 'Content-Type': 'text/html; charset=UTF-8' });
     res.end(html);
 
   } catch (err) {
@@ -783,14 +972,15 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, () => {
   console.log(`\n======================================================`);
-  console.log(`  AD PERFUMES (AFTER DREAMS) - FULL MULTI-PAGE PREVIEW`);
-  console.log(`  Homepage:        http://localhost:${PORT}/`);
-  console.log(`  Product Pages:   http://localhost:${PORT}/products/addicted`);
-  console.log(`                   http://localhost:${PORT}/products/ice-of-heaven`);
-  console.log(`                   http://localhost:${PORT}/products/rouge-elite`);
-  console.log(`  Cart Page:       http://localhost:${PORT}/cart`);
-  console.log(`  Collections:     http://localhost:${PORT}/collections`);
-  console.log(`  About Atelier:   http://localhost:${PORT}/pages/about`);
-  console.log(`  Contact Page:    http://localhost:${PORT}/pages/contact`);
+  console.log(`  AD PERFUMES (V3.0) — SHOPIFY REBUILD PREVIEW ACTIVE`);
+  console.log(`  Homepage:            http://localhost:${PORT}/`);
+  console.log(`  Signature (50ml):    http://localhost:${PORT}/collections/the-signature-collection`);
+  console.log(`  Discovery (10/20ml): http://localhost:${PORT}/collections/the-discovery-collection`);
+  console.log(`  Product (ADDICTED):  http://localhost:${PORT}/products/addicted`);
+  console.log(`  Product (Purple):    http://localhost:${PORT}/products/purple-mist`);
+  console.log(`  Cart Page:           http://localhost:${PORT}/cart`);
+  console.log(`  Search Page:         http://localhost:${PORT}/search?q=saffron`);
+  console.log(`  Contact Page:        http://localhost:${PORT}/pages/contact`);
+  console.log(`  Business Services:   http://localhost:${PORT}/pages/business-services`);
   console.log(`======================================================\n`);
 });

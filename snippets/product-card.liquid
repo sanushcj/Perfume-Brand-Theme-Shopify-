@@ -1,233 +1,154 @@
 {%- comment -%}
-  Renders a luxury product card with fallback dummy data, rating, notes, and quick add.
+  AD PERFUMES — Premium Reusable Product Card
   Accepts:
-  - product_card_product: {Object} Product object (optional)
-  - dummy_index: {Number} Optional fallback index (1 to 4)
+  - product_card_product: {Object} Shopify Product
+  - show_vendor: {Boolean} Show perfume brand/vendor
+  - show_quick_add: {Boolean} Show quick add action
+  - dummy_index: {Number} Fallback index if no product assigned
 {%- endcomment -%}
 
 {%- assign p = product_card_product -%}
 {%- assign current_variant = p.selected_or_first_available_variant -%}
+{%- assign image_ratio = settings.product_card_image_ratio | default: 'portrait' -%}
 
-{%- if p != blank and p.url != blank -%}
-  {%- assign card_url = p.url -%}
-{%- elsif dummy_index == 1 -%}
-  {%- assign card_url = '/products/addicted' -%}
-{%- elsif dummy_index == 2 -%}
-  {%- assign card_url = '/products/ice-of-heaven' -%}
-{%- elsif dummy_index == 3 -%}
-  {%- assign card_url = '/products/rouge-elite' -%}
-{%- elsif dummy_index == 4 -%}
-  {%- assign card_url = '/products/purple-mist' -%}
-{%- elsif dummy_index == 5 -%}
-  {%- assign card_url = '/products/old-money' -%}
-{%- elsif dummy_index == 6 -%}
-  {%- assign card_url = '/products/fallen-star' -%}
-{%- elsif dummy_index == 7 -%}
-  {%- assign card_url = '/products/coffee' -%}
-{%- elsif dummy_index == 8 -%}
-  {%- assign card_url = '/products/toxic' -%}
-{%- else -%}
-  {%- assign card_url = '/products/dark-chocolates' -%}
-{%- endif -%}
+{%- if p != blank -%}
+  <article class="product-card" data-product-id="{{ p.id }}">
+    <div class="product-card-media-wrapper product-card-ratio-{{ image_ratio }}">
+      <a href="{{ p.url }}" class="product-card-visual" aria-label="{{ p.title | escape }}">
 
-<article class="product-card" data-product-id="{{ p.id | default: dummy_index }}">
-  <div class="product-card-media-wrapper">
-    <a href="{{ card_url }}" class="product-card-visual" aria-label="{{ p.title | default: 'Artisanal Perfume' }}">
+        {%- comment -%} Badges {%- endcomment -%}
+        <div class="product-card-badges">
+          {%- if p.available == false -%}
+            <span class="product-badge badge-sold-out">Sold Out</span>
+          {%- elsif p.compare_at_price > p.price and settings.show_sale_badge != false -%}
+            {%- assign savings_percent = p.compare_at_price | minus: p.price | times: 100.0 | divided_by: p.compare_at_price | round -%}
+            <span class="product-badge badge-sale">Sale {%- if savings_percent > 0 -%}&nbsp;{{ savings_percent }}% OFF{%- endif -%}</span>
+          {%- endif -%}
+        </div>
 
-      {%- comment -%} Badges {%- endcomment -%}
-      <div class="product-card-badges">
-        {%- if p.tags contains 'bestseller' or dummy_index == 1 -%}
-          <span class="product-badge badge-gold">New Launch</span>
-        {%- elsif p.tags contains 'new' or dummy_index == 2 or dummy_index == 3 -%}
-          <span class="product-badge badge-gold">New Launch</span>
-        {%- elsif dummy_index == 4 or dummy_index == 6 -%}
-          <span class="product-badge badge-dark">Discovery</span>
-        {%- elsif dummy_index == 5 -%}
-          <span class="product-badge badge-dark">Classic</span>
-        {%- elsif dummy_index == 7 -%}
-          <span class="product-badge badge-gold">Gourmand</span>
-        {%- elsif dummy_index == 8 -%}
-          <span class="product-badge badge-dark">Sensual</span>
-        {%- elsif p.compare_at_price > p.price -%}
-          <span class="product-badge badge-sale">Sale</span>
-        {%- endif -%}
-      </div>
-
-      {%- comment -%} Images with secondary hover {%- endcomment -%}
-      {%- if p.featured_image -%}
-        <img
-          src="{{ p.featured_image | image_url: width: 600 }}"
-          alt="{{ p.featured_image.alt | default: p.title | escape }}"
-          class="product-card-img product-card-img-primary"
-          loading="lazy"
-          width="600"
-          height="600"
-        >
-        {%- if p.images.size > 1 -%}
+        {%- comment -%} Images with secondary hover {%- endcomment -%}
+        {%- if p.featured_image -%}
           <img
-            src="{{ p.images[1] | image_url: width: 600 }}"
-            alt="{{ p.images[1].alt | default: p.title | escape }}"
-            class="product-card-img product-card-img-secondary"
-            loading="lazy"
-            width="600"
-            height="600"
-          >
-        {%- endif -%}
-      {%- else -%}
-        {%- if dummy_index == 1 -%}
-          <img
-            src="{{ 'product-addicted.jpg' | asset_url }}"
-            alt="ADDICTED Extrait de Parfum 50ml - AD Perfumes"
+            src="{{ p.featured_image | image_url: width: 600 }}"
+            alt="{{ p.featured_image.alt | default: p.title | escape }}"
             class="product-card-img product-card-img-primary"
             loading="lazy"
             width="600"
-            height="600"
+            height="750"
           >
-        {%- elsif dummy_index == 2 -%}
-          <img
-            src="{{ 'product-ice-of-heaven.jpg' | asset_url }}"
-            alt="Ice of Heaven Extrait de Parfum 50ml - AD Perfumes"
-            class="product-card-img product-card-img-primary"
-            loading="lazy"
-            width="600"
-            height="600"
-          >
-        {%- elsif dummy_index == 3 -%}
-          <img
-            src="{{ 'product-rouge-elite.jpg' | asset_url }}"
-            alt="Rouge Elite Extrait de Parfum 50ml - AD Perfumes"
-            class="product-card-img product-card-img-primary"
-            loading="lazy"
-            width="600"
-            height="600"
-          >
-        {%- else -%}
-          <img
-            src="{{ 'discovery-travel-set.jpg' | asset_url }}"
-            alt="AD Perfumes Travel & Pocket Collection (10ml & 20ml)"
-            class="product-card-img product-card-img-primary"
-            loading="lazy"
-            width="600"
-            height="600"
-          >
-        {%- endif -%}
-      {%- endif -%}
-    </a>
-
-    {%- comment -%} Quick Add Button on Hover / Mobile Bar {%- endcomment -%}
-    <div class="product-card-actions">
-      <button
-        type="button"
-        class="btn btn-primary btn-sm btn-full quick-add-trigger"
-        data-variant-id="{{ current_variant.id | default: 'dummy-var' }}"
-        data-product-title="{% if p != blank %}{{ p.title | escape }}{% elsif dummy_index == 1 %}ADDICTED (50ml){% elsif dummy_index == 2 %}Ice of Heaven (50ml){% elsif dummy_index == 3 %}Rouge Elite (50ml){% elsif dummy_index == 4 %}Purple Mist (20ml){% elsif dummy_index == 5 %}Old Money (20ml){% elsif dummy_index == 6 %}Fallen Star (20ml){% elsif dummy_index == 7 %}Coffee (20ml){% elsif dummy_index == 8 %}Toxic (20ml){% else %}Dark Chocolates (20ml){% endif %}"
-        data-product-price="{% if p != blank %}{{ p.price | money }}{% elsif dummy_index == 1 %}$175.00{% elsif dummy_index == 2 %}$160.00{% elsif dummy_index == 3 %}$165.00{% elsif dummy_index == 4 %}$68.00{% elsif dummy_index == 5 %}$72.00{% elsif dummy_index == 6 %}$65.00{% elsif dummy_index == 7 %}$68.00{% elsif dummy_index == 8 %}$70.00{% else %}$68.00{% endif %}"
-        data-product-image="{% if p.featured_image %}{{ p.featured_image | image_url: width: 200 }}{% elsif dummy_index == 1 %}{{ 'product-addicted.jpg' | asset_url }}{% elsif dummy_index == 2 %}{{ 'product-ice-of-heaven.jpg' | asset_url }}{% elsif dummy_index == 3 %}{{ 'product-rouge-elite.jpg' | asset_url }}{% else %}{{ 'discovery-travel-set.jpg' | asset_url }}{% endif %}"
-        aria-label="Add to Bag"
-      >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <path d="M16 10a4 4 0 01-8 0"/>
-        </svg>
-        <span>Quick Add</span>
-      </button>
-    </div>
-  </div>
-
-  <div class="product-card-body">
-    <div class="product-card-top-row">
-      <span class="product-card-category">
-        {%- if p != blank -%}
-          {{ p.type | default: 'Extrait de Parfum' }}
-        {%- elsif dummy_index <= 3 -%}
-          Extrait de Parfum • 50ml
-        {%- else -%}
-          Pocket Extrait • 10ml & 20ml
-        {%- endif -%}
-      </span>
-      <div class="product-card-rating">
-        <span class="rating-star">★</span>
-        <span class="rating-score">4.9</span>
-      </div>
-    </div>
-
-    <h3 class="product-card-title">
-      <a href="{{ card_url }}">
-        {%- if p != blank -%}
-          {{ p.title }}
-        {%- elsif dummy_index == 1 -%}
-          ADDICTED
-        {%- elsif dummy_index == 2 -%}
-          Ice of Heaven
-        {%- elsif dummy_index == 3 -%}
-          Rouge Elite
-        {%- elsif dummy_index == 4 -%}
-          Purple Mist
-        {%- elsif dummy_index == 5 -%}
-          Old Money
-        {%- elsif dummy_index == 6 -%}
-          Fallen Star
-        {%- elsif dummy_index == 7 -%}
-          Coffee
-        {%- elsif dummy_index == 8 -%}
-          Toxic
-        {%- else -%}
-          Dark Chocolates
-        {%- endif -%}
-      </a>
-    </h3>
-
-    <div class="product-card-notes">
-      {%- if p.metafields.custom.notes != blank -%}
-        <span>{{ p.metafields.custom.notes }}</span>
-      {%- elsif dummy_index == 1 -%}
-        <span>Saffron · Smoky Woods · Leathery Resins</span>
-      {%- elsif dummy_index == 2 -%}
-        <span>Frozen Apple · Marine Accord · Driftwood</span>
-      {%- elsif dummy_index == 3 -%}
-        <span>Saffron · Caramelized Amber · Cedarwood</span>
-      {%- elsif dummy_index == 4 -%}
-        <span>Saffron · Sweet Citrus · Smooth Oud</span>
-      {%- elsif dummy_index == 5 -%}
-        <span>Cypress · Warm Amber · Oakmoss & Vetiver</span>
-      {%- elsif dummy_index == 6 -%}
-        <span>Bergamot · Black Tea · Ceylon Cinnamon</span>
-      {%- elsif dummy_index == 7 -%}
-        <span>Roasted Espresso · Sweet Cream · Vanilla</span>
-      {%- elsif dummy_index == 8 -%}
-        <span>Lavender · Cardamom · Rich Tobacco & Vanilla</span>
-      {%- else -%}
-        <span>Bitter Orange · Cocoa · Hazelnut Praline</span>
-      {%- endif -%}
-    </div>
-
-    <div class="product-card-price-row">
-      <div class="price-container">
-        {%- if p != blank -%}
-          <span class="product-card-price">{{ p.price | money }}</span>
-          {%- if p.compare_at_price > p.price -%}
-            <span class="product-card-compare-price">{{ p.compare_at_price | money }}</span>
+          {%- if settings.show_secondary_image_on_hover != false and p.images.size > 1 -%}
+            <img
+              src="{{ p.images[1] | image_url: width: 600 }}"
+              alt="{{ p.images[1].alt | default: p.title | escape }}"
+              class="product-card-img product-card-img-secondary"
+              loading="lazy"
+              width="600"
+              height="750"
+            >
           {%- endif -%}
         {%- else -%}
-          <span class="product-card-price">
-            {%- if dummy_index == 1 -%}$175.00
-            {%- elsif dummy_index == 2 -%}$160.00
-            {%- elsif dummy_index == 3 -%}$165.00
-            {%- elsif dummy_index == 4 -%}$68.00
-            {%- elsif dummy_index == 5 -%}$72.00
-            {%- elsif dummy_index == 6 -%}$65.00
-            {%- elsif dummy_index == 7 -%}$68.00
-            {%- elsif dummy_index == 8 -%}$70.00
-            {%- else -%}$68.00
-            {%- endif -%}
-          </span>
-          <span class="product-card-compare-price">
-            {%- if dummy_index <= 3 -%}$195.00{%- else -%}$85.00{%- endif -%}
-          </span>
+          <div class="product-card-placeholder">
+            <span class="placeholder-icon">✦</span>
+          </div>
+        {%- endif -%}
+      </a>
+
+      {%- comment -%} Quick Action Button {%- endcomment -%}
+      {%- if settings.enable_quick_add != false and show_quick_add != false -%}
+        <div class="product-card-actions">
+          {%- if p.available == false -%}
+            <button type="button" class="btn btn-ghost btn-sm btn-full" disabled>
+              Sold Out
+            </button>
+          {%- elsif p.has_only_default_variant or p.variants.size == 1 -%}
+            <button
+              type="button"
+              class="btn btn-primary btn-sm btn-full quick-add-trigger"
+              data-variant-id="{{ current_variant.id }}"
+              data-product-title="{{ p.title | escape }}"
+              data-product-price="{{ p.price | money }}"
+              data-product-image="{{ p.featured_image | image_url: width: 160 }}"
+              aria-label="Add {{ p.title | escape }} to shopping bag"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 01-8 0"/>
+              </svg>
+              <span>Add to Bag</span>
+            </button>
+          {%- else -%}
+            <a href="{{ p.url }}" class="btn btn-primary btn-sm btn-full" aria-label="Choose available sizes for {{ p.title | escape }}">
+              <span>Choose Size</span>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="product-card-body">
+      {%- if show_vendor or settings.show_vendor -%}
+        <span class="product-card-vendor">{{ p.vendor }}</span>
+      {%- elsif p.type != blank -%}
+        <span class="product-card-category">{{ p.type }}</span>
+      {%- endif -%}
+
+      <h3 class="product-card-title">
+        <a href="{{ p.url }}">{{ p.title }}</a>
+      </h3>
+
+      <div class="product-card-price-row">
+        <div class="price-container">
+          <span class="product-card-price">{{ p.price | money }}</span>
+          {%- if p.compare_at_price > p.price and settings.show_compare_at_price != false -%}
+            <s class="product-card-compare-price">{{ p.compare_at_price | money }}</s>
+          {%- endif -%}
+        </div>
+
+        {%- if p.available -%}
+          <span class="product-card-availability in-stock">Available</span>
+        {%- else -%}
+          <span class="product-card-availability out-of-stock">Sold Out</span>
         {%- endif -%}
       </div>
-      <span class="product-card-stock-status">24h Projection</span>
     </div>
-  </div>
-</article>
+  </article>
+
+{%- else -%}
+  {%- comment -%} Clean Onboarding Placeholder Card {%- endcomment -%}
+  <article class="product-card product-card-placeholder-card">
+    <div class="product-card-media-wrapper product-card-ratio-{{ image_ratio }}">
+      <div class="product-card-visual" style="background: var(--color-bg-card); display: flex; align-items: center; justify-content: center;">
+        {%- if dummy_index == 1 -%}
+          <img src="{{ 'product-addicted.jpg' | asset_url }}" alt="ADDICTED" class="product-card-img" width="600" height="750" loading="lazy">
+        {%- elsif dummy_index == 2 -%}
+          <img src="{{ 'product-ice-of-heaven.jpg' | asset_url }}" alt="Ice of Heaven" class="product-card-img" width="600" height="750" loading="lazy">
+        {%- elsif dummy_index == 3 -%}
+          <img src="{{ 'product-rouge-elite.jpg' | asset_url }}" alt="Rouge Elite" class="product-card-img" width="600" height="750" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'discovery-travel-set.jpg' | asset_url }}" alt="Discovery Fragrance" class="product-card-img" width="600" height="750" loading="lazy">
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="product-card-body">
+      <span class="product-card-category">
+        {%- if dummy_index <= 3 -%}The Signature Collection (50ml){%- else -%}The Discovery Collection{%- endif -%}
+      </span>
+      <h3 class="product-card-title">
+        {%- if dummy_index == 1 -%}ADDICTED — 50ml
+        {%- elsif dummy_index == 2 -%}Ice of Heaven — 50ml
+        {%- elsif dummy_index == 3 -%}Rouge Elite — 50ml
+        {%- elsif dummy_index == 4 -%}Purple Mist — 10ml / 20ml
+        {%- elsif dummy_index == 5 -%}Old Money — 10ml / 20ml
+        {%- elsif dummy_index == 6 -%}Fallen Star — 10ml / 20ml
+        {%- elsif dummy_index == 7 -%}Coffee — 10ml / 20ml
+        {%- elsif dummy_index == 8 -%}Toxic — 10ml / 20ml
+        {%- else -%}Dark Chocolates — 10ml / 20ml
+        {%- endif -%}
+      </h3>
+      <div class="product-card-price-row">
+        <span class="product-card-price" style="color: var(--color-text-muted); font-size: var(--text-xs);">Assign product in Shopify</span>
+      </div>
+    </div>
+  </article>
+{%- endif -%}

@@ -1,111 +1,216 @@
-<div class="collection-header">
-  <div class="container">
-    {%- render 'breadcrumbs', type: 'collection' -%}
-    <p class="section-eyebrow" style="justify-content: center;">{{ section.settings.eyebrow | default: 'Our Collection' }}</p>
-    <h1 class="section-title" style="text-align: center;">
-      {{ collection.title | default: 'All Fragrances' }}
-    </h1>
-    {%- if collection.description != blank -%}
-      <p class="section-subtitle" style="text-align: center; margin: var(--space-4) auto 0;">
-        {{ collection.description | strip_html | truncatewords: 30 }}
-      </p>
-    {%- else -%}
-      <p class="section-subtitle" style="text-align: center; margin: var(--space-4) auto 0;">
-        Discover our complete range of premium fragrances — from our celebrated flagship releases to our beloved classic collection, each one a masterpiece in its own right.
-      </p>
-    {%- endif -%}
-  </div>
-</div>
+<div class="collection-page" data-section-id="{{ section.id }}" data-section-type="collection">
 
-<div class="container section-padding" style="padding-top: var(--space-4);">
+  {%- comment -%} Collection Banner {%- endcomment -%}
+  <div class="collection-header">
+    <div class="container text-center">
+      {%- render 'breadcrumbs', type: 'collection' -%}
 
-  {%- comment -%} Toolbar {%- endcomment -%}
-  <div class="collection-toolbar">
-    <div class="collection-filters" role="group" aria-label="Filter products">
-      <button class="filter-chip active" data-filter="all" id="FilterAll">All</button>
-      {%- assign seen_types = '' -%}
-      {%- for product in collection.products -%}
-        {%- unless product.type == blank or seen_types contains product.type -%}
-          {%- assign seen_types = seen_types | append: product.type | append: ',' -%}
-          <button class="filter-chip" data-filter="{{ product.type | downcase | replace: ' ', '-' }}" id="Filter{{ product.type | downcase | replace: ' ', '-' | replace: "'", '' }}">
-            {{ product.type }}
-          </button>
-        {%- endunless -%}
-      {%- endfor -%}
-      {%- comment -%} Fallback filters if no product types set {%- endcomment -%}
-      {%- if seen_types == blank -%}
-        <button class="filter-chip" data-filter="flagship" id="FilterFlagship">Flagship</button>
-        <button class="filter-chip" data-filter="for-him" id="FilterHim">For Him</button>
-        <button class="filter-chip" data-filter="for-her" id="FilterHer">For Her</button>
-        <button class="filter-chip" data-filter="unisex" id="FilterUnisex">Unisex</button>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="section-eyebrow justify-center">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
-    </div>
 
-    <div class="collection-sort">
-      <label for="SortBy" class="sort-label">Sort by</label>
-      <select id="SortBy" class="sort-select" aria-label="Sort products">
-        {%- assign sort_options = 'manual,Featured|price-ascending,Price: Low to High|price-descending,Price: High to Low|title-ascending,A to Z|title-descending,Z to A|created-descending,Newest|best-selling,Best Selling' | split: '|' -%}
-        {%- for option in sort_options -%}
-          {%- assign parts = option | split: ',' -%}
-          <option value="{{ parts[0] }}"{% if collection.sort_by == parts[0] %} selected{% endif %}>{{ parts[1] }}</option>
-        {%- endfor -%}
-      </select>
-    </div>
+      <h1 class="section-title">{{ collection.title | default: 'Fragrance Portfolio' }}</h1>
 
-    <div class="collection-count" aria-live="polite">
-      <span>{{ collection.products_count }} {%- if collection.products_count == 1 -%}product{%- else -%}products{%- endif -%}</span>
-    </div>
-  </div>
-
-  {%- paginate collection.products by section.settings.products_per_page -%}
-    {%- if collection.products.size > 0 -%}
-      <div class="product-grid" id="ProductGrid">
-        {%- for product in collection.products -%}
-          <div class="reveal reveal-delay-{{ forloop.index | modulo: 4 | plus: 1 }}">
-            {%- render 'product-card', product_card_product: product -%}
-          </div>
-        {%- endfor -%}
-      </div>
-
-      {%- comment -%} Pagination {%- endcomment -%}
-      {%- if paginate.pages > 1 -%}
-        <div style="display: flex; justify-content: center; gap: var(--space-2); margin-top: var(--space-12);" aria-label="Pagination">
-          {%- if paginate.previous -%}
-            <a href="{{ paginate.previous.url }}" class="btn btn-outline btn-sm">← Previous</a>
-          {%- endif -%}
-          {%- for part in paginate.parts -%}
-            {%- if part.is_link -%}
-              <a href="{{ part.url }}" class="btn btn-ghost btn-sm">{{ part.title }}</a>
-            {%- else -%}
-              <span class="btn btn-primary btn-sm">{{ part.title }}</span>
-            {%- endif -%}
-          {%- endfor -%}
-          {%- if paginate.next -%}
-            <a href="{{ paginate.next.url }}" class="btn btn-outline btn-sm">Next →</a>
-          {%- endif -%}
+      {%- if collection.description != blank -%}
+        <div class="section-subtitle collection-desc">
+          {{ collection.description }}
         </div>
       {%- endif -%}
+    </div>
+  </div>
 
-    {%- else -%}
-      <div style="text-align: center; padding: var(--space-24) 0;">
-        <div style="font-size: 64px; margin-bottom: var(--space-6);">🌸</div>
-        <h2 style="font-family: var(--font-display); font-size: var(--text-3xl); color: var(--color-text-secondary); margin-bottom: var(--space-4);">No products found</h2>
-        <p style="color: var(--color-text-muted); margin-bottom: var(--space-8);">Try adjusting your filters or browse our full collection.</p>
-        <a href="{{ routes.collections_url }}/all" class="btn btn-primary">View All Fragrances</a>
+  <div class="container section-padding">
+
+    {%- comment -%} Toolbar: Filter Toggle & Sorting {%- endcomment -%}
+    <div class="collection-toolbar">
+      <div class="toolbar-left">
+        {%- if section.settings.enable_filtering and collection.filters.size > 0 -%}
+          <button type="button" class="btn btn-outline btn-sm filter-drawer-toggle" id="FilterDrawerToggleBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="4" y1="21" x2="4" y2="14"/>
+              <line x1="4" y1="10" x2="4" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12" y2="3"/>
+              <line x1="20" y1="21" x2="20" y2="16"/>
+              <line x1="20" y1="12" x2="20" y2="3"/>
+              <line x1="1" y1="14" x2="7" y2="14"/>
+              <line x1="9" y1="8" x2="15" y2="8"/>
+              <line x1="17" y1="16" x2="23" y2="16"/>
+            </svg>
+            <span>Filters</span>
+          </button>
+        {%- endif -%}
+
+        <span class="collection-count-text">
+          {{ collection.products_count }} {%- if collection.products_count == 1 -%}fragrance{%- else -%}fragrances{%- endif -%}
+        </span>
+      </div>
+
+      {%- if section.settings.enable_sorting -%}
+        <div class="toolbar-right">
+          <label for="CollectionSortBy" class="sort-label">Sort by:</label>
+          <select id="CollectionSortBy" class="sort-select" aria-label="Sort products">
+            {%- assign current_sort = collection.sort_by | default: collection.default_sort_by -%}
+            {%- for option in collection.sort_options -%}
+              <option value="{{ option.value }}"{% if option.value == current_sort %} selected{% endif %}>
+                {{ option.name }}
+              </option>
+            {%- endfor -%}
+          </select>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Active Filters Row {%- endcomment -%}
+    {%- assign active_filter_count = 0 -%}
+    {%- for filter in collection.filters -%}
+      {%- assign active_filter_count = active_filter_count | plus: filter.active_values.size -%}
+    {%- endfor -%}
+
+    {%- if active_filter_count > 0 -%}
+      <div class="active-filters-row">
+        <span class="active-filters-label">Active filters:</span>
+        {%- for filter in collection.filters -%}
+          {%- for value in filter.active_values -%}
+            <a href="{{ value.url_to_remove }}" class="active-filter-pill" aria-label="Remove filter {{ value.label }}">
+              <span>{{ value.label }}</span>
+              <span class="remove-x">✕</span>
+            </a>
+          {%- endfor -%}
+        {%- endfor -%}
+        <a href="{{ collection.url }}" class="clear-all-filters-btn">Clear All</a>
       </div>
     {%- endif -%}
-  {%- endpaginate -%}
 
+    <div class="collection-layout{% if section.settings.enable_filtering and collection.filters.size > 0 %} has-filters{% endif %}">
+
+      {%- comment -%} Sidebar / Filter Drawer {%- endcomment -%}
+      {%- if section.settings.enable_filtering and collection.filters.size > 0 -%}
+        <aside class="collection-filter-sidebar" id="CollectionFilterSidebar" aria-label="Product filters">
+          <div class="sidebar-header-mobile">
+            <h3 class="sidebar-title">Refine By</h3>
+            <button type="button" class="sidebar-close-btn" id="FilterDrawerCloseBtn" aria-label="Close filters">✕</button>
+          </div>
+
+          <form id="CollectionFiltersForm" class="filter-form">
+            {%- for filter in collection.filters -%}
+              <details class="filter-group" open>
+                <summary class="filter-group-header">
+                  <span>{{ filter.label }}</span>
+                  <span class="accordion-arrow">▼</span>
+                </summary>
+
+                <div class="filter-group-options">
+                  {%- case filter.type -%}
+                    {%- when 'list' -%}
+                      <ul class="filter-list" role="list">
+                        {%- for value in filter.values -%}
+                          <li class="filter-list-item">
+                            <label class="filter-checkbox-label">
+                              <input
+                                type="checkbox"
+                                name="{{ value.param_name }}"
+                                value="{{ value.value }}"
+                                class="filter-checkbox"
+                                {% if value.active %}checked{% endif %}
+                                {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                              >
+                              <span class="filter-name">{{ value.label }}</span>
+                              <span class="filter-count">({{ value.count }})</span>
+                            </label>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+
+                    {%- when 'price_range' -%}
+                      <div class="price-range-inputs">
+                        <div class="price-field">
+                          <label for="FilterMinPrice">From</label>
+                          <input
+                            type="number"
+                            name="{{ filter.min_value.param_name }}"
+                            id="FilterMinPrice"
+                            class="price-input"
+                            placeholder="0"
+                            min="0"
+                            {% if filter.min_value.value %}value="{{ filter.min_value.value | divided_by: 100 }}"{% endif %}
+                          >
+                        </div>
+                        <div class="price-field">
+                          <label for="FilterMaxPrice">To</label>
+                          <input
+                            type="number"
+                            name="{{ filter.max_value.param_name }}"
+                            id="FilterMaxPrice"
+                            class="price-input"
+                            placeholder="{{ filter.range_max | divided_by: 100 }}"
+                            min="0"
+                            {% if filter.max_value.value %}value="{{ filter.max_value.value | divided_by: 100 }}"{% endif %}
+                          >
+                        </div>
+                        <button type="submit" class="btn btn-outline btn-sm price-apply-btn">Apply</button>
+                      </div>
+                  {%- endcase -%}
+                </div>
+              </details>
+            {%- endfor -%}
+          </form>
+        </aside>
+      {%- endif -%}
+
+      {%- comment -%} Product Grid & Pagination {%- endcomment -%}
+      <div class="collection-main-content">
+        {%- paginate collection.products by section.settings.products_per_page -%}
+          {%- if collection.products.size > 0 -%}
+            <div class="product-grid" id="CollectionProductGrid">
+              {%- for product in collection.products -%}
+                <div class="reveal reveal-delay-{{ forloop.index | modulo: 4 | plus: 1 }}">
+                  {%- render 'product-card', product_card_product: product -%}
+                </div>
+              {%- endfor -%}
+            </div>
+
+            {%- if paginate.pages > 1 -%}
+              <nav class="pagination-nav" aria-label="Pagination">
+                {%- if paginate.previous -%}
+                  <a href="{{ paginate.previous.url }}" class="btn btn-outline btn-sm">← Previous</a>
+                {%- endif -%}
+
+                <div class="pagination-pages">
+                  {%- for part in paginate.parts -%}
+                    {%- if part.is_link -%}
+                      <a href="{{ part.url }}" class="pagination-page-link">{{ part.title }}</a>
+                    {%- else -%}
+                      <span class="pagination-page-current">{{ part.title }}</span>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+
+                {%- if paginate.next -%}
+                  <a href="{{ paginate.next.url }}" class="btn btn-outline btn-sm">Next →</a>
+                {%- endif -%}
+              </nav>
+            {%- endif -%}
+
+          {%- else -%}
+            <div class="collection-empty text-center">
+              <div class="empty-icon">✦</div>
+              <h2 class="empty-title">No Fragrances Found</h2>
+              <p class="empty-desc">
+                No products match the selected criteria or this collection is being curated in Shopify admin.
+              </p>
+              <a href="{{ routes.all_products_collection_url | default: '/collections/all' }}" class="btn btn-primary">
+                Browse All Fragrances
+              </a>
+            </div>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+
+    </div>
+
+  </div>
 </div>
-
-<script>
-  // Sort functionality
-  document.getElementById('SortBy')?.addEventListener('change', function() {
-    const url = new URL(window.location.href);
-    url.searchParams.set('sort_by', this.value);
-    window.location.href = url.toString();
-  });
-</script>
 
 {% schema %}
 {
@@ -114,17 +219,29 @@
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow text",
-      "default": "Our Collection"
+      "label": "Eyebrow Text",
+      "default": "AD PERFUMES Atelier"
     },
     {
       "type": "range",
       "id": "products_per_page",
       "label": "Products per page",
-      "min": 8,
-      "max": 48,
-      "step": 4,
-      "default": 24
+      "min": 6,
+      "max": 36,
+      "step": 3,
+      "default": 18
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "label": "Enable Faceted Storefront Filtering",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "label": "Enable Sorting Dropdown",
+      "default": true
     }
   ]
 }

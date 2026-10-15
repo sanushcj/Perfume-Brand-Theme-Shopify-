@@ -1,148 +1,54 @@
-{%- comment -%} About Hero {%- endcomment -%}
-<div class="about-hero" style="padding-top: calc(var(--nav-height) + var(--space-20) + 40px);">
-  <div class="container" style="max-width: 800px; text-align: center;">
-    <p class="section-eyebrow reveal" style="justify-content: center;">{{ section.settings.eyebrow | default: 'Our Story' }}</p>
-    <h1 class="section-title reveal reveal-delay-1" style="font-size: var(--text-6xl);">
-      {{ section.settings.hero_title | default: 'Where Tradition Meets Artistry' }}
-    </h1>
-    <p class="section-subtitle reveal reveal-delay-2" style="margin: 0 auto; font-size: var(--text-xl);">
-      {{ section.settings.hero_subtitle | default: 'For over two decades, we have pursued one singular obsession: creating fragrances worthy of the rarest moments in human life.' }}
-    </p>
-  </div>
-</div>
+<div class="about-page" data-section-id="{{ section.id }}" data-section-type="page-about">
+  <div class="container section-padding">
 
-{%- comment -%} Hero Image {%- endcomment -%}
-<div class="container reveal" style="margin-bottom: var(--space-24);">
-  {%- if section.settings.hero_image != blank -%}
-    <img
-      src="{{ section.settings.hero_image | image_url: width: 1400 }}"
-      alt="{{ section.settings.hero_image.alt | default: 'Our atelier' | escape }}"
-      width="1400"
-      height="600"
-      style="width: 100%; border-radius: var(--radius-2xl); max-height: 600px; object-fit: cover;"
-      loading="lazy"
-    >
-  {%- else -%}
-    <div style="
-      width: 100%;
-      height: 500px;
-      border-radius: var(--radius-2xl);
-      background: linear-gradient(135deg, #0f0d0a 0%, #1e1810 30%, #2a1f0e 60%, #1a1410 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--color-border);
-    ">
-      <div style="text-align: center;">
-        <div style="font-size: 80px; margin-bottom: var(--space-4);">⚗️</div>
-        <div style="font-family: var(--font-display); font-size: var(--text-3xl); color: var(--color-gold); letter-spacing: 0.1em;">The Atelier</div>
-        <div style="font-size: var(--text-sm); color: var(--color-text-muted); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 8px;">Est. 1998 · Paris, France</div>
+    <div class="about-header text-center">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="section-eyebrow justify-center">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h1 class="section-title">{{ section.settings.title | default: 'The World of AD PERFUMES' }}</h1>
+      <p class="section-subtitle max-w-prose">
+        {{ section.settings.tagline | default: 'Your Fragrance. Your Vision. Your Brand.' }}
+      </p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-media reveal">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ shop.name }}" class="about-img" loading="lazy" width="800" height="900">
+        {%- else -%}
+          <img src="{{ 'hero-perfume.jpg' | asset_url }}" alt="AD PERFUMES Luxury Craft" class="about-img" loading="lazy" width="800" height="900">
+        {%- endif -%}
+      </div>
+
+      <div class="about-narrative reveal reveal-delay-1">
+        <h2 class="narrative-heading">{{ section.settings.narrative_heading | default: 'Crafted for Distinctive Presence' }}</h2>
+        <div class="narrative-body">
+          {%- if section.settings.narrative_text != blank -%}
+            {{ section.settings.narrative_text }}
+          {%- else -%}
+            <p>
+              At <strong>AD PERFUMES</strong>, our mission is to craft exceptional fragrances that leave an indelible mark. We combine deep woods, radiant saffron, crisp frozen fruit notes, and rich gourmands to create scent signatures that speak of confidence, sophistication, and refined taste.
+            </p>
+            <p style="margin-top: var(--space-4);">
+              From our flagship 50ml Extraits — <strong>ADDICTED</strong>, <strong>Ice of Heaven</strong>, and <strong>Rouge Elite</strong> — to our versatile 10ml & 20ml Discovery Travel editions, every perfume is formulated with meticulous attention to detail.
+            </p>
+            <p style="margin-top: var(--space-4);">
+              Currently serving clients across <strong>Kerala, Karnataka, and the UAE</strong>, we are committed to delivering an elevated luxury perfume experience with every bottle.
+            </p>
+          {%- endif -%}
+        </div>
+
+        <div class="about-cta-row" style="margin-top: var(--space-6);">
+          <a href="{{ routes.all_products_collection_url | default: '/collections/all' }}" class="btn btn-primary">
+            Explore Fragrance Portfolio
+          </a>
+          <a href="/pages/contact" class="btn btn-outline">
+            Contact Concierge
+          </a>
+        </div>
       </div>
     </div>
-  {%- endif -%}
-</div>
 
-{%- comment -%} Story Content {%- endcomment -%}
-<div class="container" style="margin-bottom: var(--space-24);">
-  <div style="max-width: 800px; margin: 0 auto;">
-    <div class="reveal">
-      {%- if section.settings.story_text != blank -%}
-        <div style="font-size: var(--text-lg); color: var(--color-text-secondary); line-height: 1.9; font-weight: var(--fw-light);">
-          {{ section.settings.story_text }}
-        </div>
-      {%- else -%}
-        <p style="font-size: var(--text-lg); color: var(--color-text-secondary); line-height: 1.9; font-weight: var(--fw-light); margin-bottom: var(--space-6);">
-          It began with a single obsession: to capture the ephemeral. Our founder, a classically trained perfumer who spent fifteen years working under the great houses of Grasse, left it all behind to pursue a more personal vision — one where no compromise was made, no cost was spared, and no trend was followed.
-        </p>
-        <p style="font-size: var(--text-lg); color: var(--color-text-secondary); line-height: 1.9; font-weight: var(--fw-light); margin-bottom: var(--space-6);">
-          Our atelier in Paris houses the largest private collection of raw materials in the world. Over 3,000 ingredients, many harvested from sources that no other perfume house can access. We work with communities in Laos, Ethiopia, India, and Reunion Island who cultivate these materials with centuries-old methods.
-        </p>
-        <p style="font-size: var(--text-xl); color: var(--color-text-primary); font-family: var(--font-display); font-style: italic; line-height: 1.6; padding: var(--space-8); border-left: 3px solid var(--color-gold); background: rgba(201, 168, 76, 0.04); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; margin: var(--space-8) 0;">
-          "A great fragrance is not made. It is discovered — in the meeting of the perfect ingredient and the perfect moment."
-        </p>
-        <p style="font-size: var(--text-lg); color: var(--color-text-secondary); line-height: 1.9; font-weight: var(--fw-light);">
-          Today, we release only a handful of fragrances each year. Each one represents hundreds of hours of work, thousands of test versions, and years of patience. We do not follow trends. We create them.
-        </p>
-      {%- endif -%}
-    </div>
-  </div>
-</div>
-
-{%- comment -%} Numbers / Stats {%- endcomment -%}
-<div style="background: var(--color-bg-elevated); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); padding: var(--space-16) 0; margin-bottom: var(--space-24);">
-  <div class="container">
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-8); text-align: center;">
-      {%- assign stats = '25+,Years of Craftsmanship|3000+,Rare Ingredients|47,Countries Shipping|500k+,Happy Customers' | split: '|' -%}
-      {%- for stat in stats -%}
-        {%- assign parts = stat | split: ',' -%}
-        <div class="reveal reveal-delay-{{ forloop.index }}">
-          <div style="font-family: var(--font-display); font-size: var(--text-5xl); font-weight: var(--fw-regular); background: var(--color-gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: var(--space-2);">{{ parts[0] }}</div>
-          <div style="font-size: var(--text-sm); color: var(--color-text-muted); letter-spacing: var(--ls-wider); text-transform: uppercase; font-weight: var(--fw-medium);">{{ parts[1] }}</div>
-        </div>
-      {%- endfor -%}
-    </div>
-  </div>
-</div>
-
-{%- comment -%} Team / Perfumers {%- endcomment -%}
-<div class="container" style="margin-bottom: var(--space-24);">
-  <div style="text-align: center; margin-bottom: var(--space-12);" class="reveal">
-    <p class="section-eyebrow" style="justify-content: center;">The People Behind the Scent</p>
-    <h2 class="section-title">Our Master Perfumers</h2>
-  </div>
-  <div class="grid-3">
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'team_member' -%}
-        <div class="reveal reveal-delay-{{ forloop.index }}" {{ block.shopify_attributes }}>
-          <div style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); overflow: hidden; transition: all var(--transition-base);" onmouseover="this.style.borderColor='var(--color-border-strong)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor=''; this.style.transform=''">
-            {%- if block.settings.image != blank -%}
-              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name }}" width="600" height="400" loading="lazy" style="width:100%; aspect-ratio:3/2; object-fit:cover;">
-            {%- else -%}
-              <div style="width:100%; aspect-ratio:3/2; background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-card) 100%); display:flex; align-items:center; justify-content:center; font-size:64px;">
-                {%- if forloop.index == 1 -%}🧪{%- elsif forloop.index == 2 -%}🌿{%- else -%}⚗️{%- endif -%}
-              </div>
-            {%- endif -%}
-            <div style="padding: var(--space-6);">
-              <div style="font-family: var(--font-display); font-size: var(--text-xl); color: var(--color-text-primary); margin-bottom: 4px;">{{ block.settings.name | default: 'Master Perfumer' }}</div>
-              <div style="font-size: var(--text-xs); color: var(--color-gold); letter-spacing: var(--ls-wider); text-transform: uppercase; font-weight: var(--fw-semibold); margin-bottom: var(--space-3);">{{ block.settings.role | default: 'Nose & Founder' }}</div>
-              <p style="font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7;">{{ block.settings.bio | default: 'With over two decades of experience in haute parfumerie, dedicated to the art of capturing the invisible.' }}</p>
-            </div>
-          </div>
-        </div>
-      {%- endif -%}
-    {%- else -%}
-      {%- assign team = 'Isabelle Morel,Master Nose & Founder|Henri Beaumont,Senior Perfumer|Amara Singh,Raw Materials Expert' | split: '|' -%}
-      {%- for member in team -%}
-        {%- assign parts = member | split: ',' -%}
-        <div class="reveal reveal-delay-{{ forloop.index }}">
-          <div style="background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-xl); overflow: hidden; transition: all var(--transition-base);" onmouseover="this.style.borderColor='var(--color-border-strong)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor=''; this.style.transform=''">
-            <div style="width:100%; aspect-ratio:3/2; background: linear-gradient(135deg, #12100e 0%, #1e1810 100%); display:flex; align-items:center; justify-content:center; font-size:64px;">
-              {%- if forloop.index == 1 -%}🧪{%- elsif forloop.index == 2 -%}🌿{%- else -%}⚗️{%- endif -%}
-            </div>
-            <div style="padding: var(--space-6);">
-              <div style="font-family: var(--font-display); font-size: var(--text-xl); color: var(--color-text-primary); margin-bottom: 4px;">{{ parts[0] }}</div>
-              <div style="font-size: var(--text-xs); color: var(--color-gold); letter-spacing: var(--ls-wider); text-transform: uppercase; font-weight: var(--fw-semibold); margin-bottom: var(--space-3);">{{ parts[1] }}</div>
-              <p style="font-size: var(--text-sm); color: var(--color-text-muted); line-height: 1.7;">With over two decades of experience in haute parfumerie, dedicated to the art of capturing the invisible and making it unforgettable.</p>
-            </div>
-          </div>
-        </div>
-      {%- endfor -%}
-    {%- endfor -%}
-  </div>
-</div>
-
-{%- comment -%} CTA {%- endcomment -%}
-<div style="background: var(--color-bg-card); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); padding: var(--space-20) 0; margin-bottom: 0; text-align: center;">
-  <div class="container reveal" style="max-width: 600px;">
-    <p class="section-eyebrow" style="justify-content: center;">Ready to Begin?</p>
-    <h2 class="section-title">Find Your Signature Scent</h2>
-    <p style="font-size: var(--text-lg); color: var(--color-text-secondary); margin-bottom: var(--space-8); font-weight: var(--fw-light);">
-      Explore our complete collection and discover the fragrance that was made for you.
-    </p>
-    <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
-      <a href="{{ routes.collections_url }}/all" class="btn btn-primary btn-lg">Explore Collection</a>
-      <a href="{{ pages['contact'].url | default: '/pages/contact' }}" class="btn btn-outline btn-lg">Request Consultation</a>
-    </div>
   </div>
 </div>
 
@@ -153,62 +59,36 @@
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow text",
-      "default": "Our Story"
+      "label": "Eyebrow Text",
+      "default": "Haute Parfumerie"
     },
     {
       "type": "text",
-      "id": "hero_title",
-      "label": "Hero title",
-      "default": "Where Tradition Meets Artistry"
+      "id": "title",
+      "label": "Heading",
+      "default": "The World of AD PERFUMES"
     },
     {
-      "type": "textarea",
-      "id": "hero_subtitle",
-      "label": "Hero subtitle"
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Your Fragrance. Your Vision. Your Brand."
     },
     {
       "type": "image_picker",
-      "id": "hero_image",
-      "label": "Hero image"
+      "id": "image",
+      "label": "Feature Image"
     },
     {
-      "type": "richtext",
-      "id": "story_text",
-      "label": "Story text"
-    }
-  ],
-  "blocks": [
+      "type": "text",
+      "id": "narrative_heading",
+      "label": "Narrative Heading",
+      "default": "Crafted for Distinctive Presence"
+    },
     {
-      "type": "team_member",
-      "name": "Team Member",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Photo"
-        },
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Name"
-        },
-        {
-          "type": "text",
-          "id": "role",
-          "label": "Role / Title"
-        },
-        {
-          "type": "textarea",
-          "id": "bio",
-          "label": "Bio"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "About Page"
+      "type": "textarea",
+      "id": "narrative_text",
+      "label": "Narrative Body Text"
     }
   ]
 }

@@ -1,24 +1,37 @@
-<section class="category-spotlight section-padding" id="category-spotlight" aria-label="Curated fragrance collections">
+<section class="category-spotlight section-padding" id="categories-{{ section.id }}" aria-label="Collections">
   <div class="container">
 
     <div class="section-header text-center reveal">
-      <p class="section-eyebrow" style="justify-content: center;">{{ section.settings.eyebrow | default: 'Curated Collections' }}</p>
-      <h2 class="section-title">{{ section.settings.title | default: 'Explore By Scent Signature' }}</h2>
-      <p class="section-subtitle" style="margin: 0 auto;">
-        {{ section.settings.subtitle | default: 'Immerse yourself in artisanal compositions tailored for the discerning connoisseur.' }}
-      </p>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="section-eyebrow justify-center">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="section-title">{{ section.settings.title | default: 'Fragrance Categories' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="section-subtitle max-w-prose">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
     </div>
 
     <div class="spotlight-grid">
 
-      {%- comment -%} Card 1: Men's Fragrances {%- endcomment -%}
+      {%- comment -%} Card 1: The Signature Collection {%- endcomment -%}
+      {%- assign col_1 = collections[section.settings.card_1_collection] -%}
+      {%- assign card_1_url = section.settings.card_1_url | default: col_1.url | default: '/collections' -%}
       <div class="spotlight-card reveal reveal-delay-1">
         <div class="spotlight-media">
-          {%- if section.settings.men_image != blank -%}
+          {%- if section.settings.card_1_image != blank -%}
             <img
-              src="{{ section.settings.men_image | image_url: width: 900 }}"
-              alt="{{ section.settings.men_title | default: 'The Flagship Trinity' | escape }}"
-              class="spotlight-image"
+              src="{{ section.settings.card_1_image | image_url: width: 900 }}"
+              alt="{{ section.settings.card_1_title | default: 'The Signature Collection' | escape }}"
+              class="spotlight-img"
+              loading="lazy"
+              width="900"
+              height="750"
+            >
+          {%- elsif col_1.image != blank -%}
+            <img
+              src="{{ col_1.image | image_url: width: 900 }}"
+              alt="{{ col_1.title | escape }}"
+              class="spotlight-img"
               loading="lazy"
               width="900"
               height="750"
@@ -26,41 +39,51 @@
           {%- else -%}
             <img
               src="{{ 'product-rouge-elite.jpg' | asset_url }}"
-              alt="The Flagship Trinity - AD Perfumes"
-              class="spotlight-image"
+              alt="The Signature Collection — AD PERFUMES"
+              class="spotlight-img"
               loading="lazy"
               width="900"
               height="750"
             >
           {%- endif -%}
-          <div class="spotlight-overlay"></div>
+          <div class="spotlight-gradient-overlay"></div>
         </div>
 
         <div class="spotlight-content">
-          <span class="spotlight-badge">{{ section.settings.men_badge | default: 'NEW LAUNCH • 50ML EXTRAIT' }}</span>
-          <h3 class="spotlight-heading">{{ section.settings.men_title | default: 'The Flagship Trinity' }}</h3>
+          <span class="spotlight-badge">{{ section.settings.card_1_badge | default: '50ML FLAGSHIPS' }}</span>
+          <h3 class="spotlight-heading">{{ section.settings.card_1_title | default: 'The Signature Collection' }}</h3>
           <p class="spotlight-desc">
-            {{ section.settings.men_desc | default: 'Commanding compositions with notes of smoky oud, cedarwood, ambergris, and black spices designed for timeless presence.' }}
+            {{ section.settings.card_1_desc | default: 'Our three flagship creations: ADDICTED, Ice of Heaven, and Rouge Elite. Deep, warm woods, icy marine accords, and decadent caramelized ambers in 50ml flacons.' }}
           </p>
-          <div class="spotlight-action">
-            <a href="{{ section.settings.men_url | default: routes.collections_url | append: '/flagship' }}" class="btn btn-outline-white">
-              {{ section.settings.men_btn_label | default: 'Explore Flagships' }}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
-          </div>
+
+          <a href="{{ card_1_url }}" class="btn btn-primary btn-sm spotlight-cta">
+            <span>{{ section.settings.card_1_btn_label | default: 'Explore 50ml Collection' }}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
         </div>
       </div>
 
-      {%- comment -%} Card 2: Women's Fragrances {%- endcomment -%}
+      {%- comment -%} Card 2: The Discovery Collection {%- endcomment -%}
+      {%- assign col_2 = collections[section.settings.card_2_collection] -%}
+      {%- assign card_2_url = section.settings.card_2_url | default: col_2.url | default: '/collections' -%}
       <div class="spotlight-card reveal reveal-delay-2">
         <div class="spotlight-media">
-          {%- if section.settings.women_image != blank -%}
+          {%- if section.settings.card_2_image != blank -%}
             <img
-              src="{{ section.settings.women_image | image_url: width: 900 }}"
-              alt="{{ section.settings.women_title | default: 'The Discovery & Travel Series' | escape }}"
-              class="spotlight-image"
+              src="{{ section.settings.card_2_image | image_url: width: 900 }}"
+              alt="{{ section.settings.card_2_title | default: 'The Discovery Collection' | escape }}"
+              class="spotlight-img"
+              loading="lazy"
+              width="900"
+              height="750"
+            >
+          {%- elsif col_2.image != blank -%}
+            <img
+              src="{{ col_2.image | image_url: width: 900 }}"
+              alt="{{ col_2.title | escape }}"
+              class="spotlight-img"
               loading="lazy"
               width="900"
               height="750"
@@ -68,35 +91,33 @@
           {%- else -%}
             <img
               src="{{ 'discovery-travel-set.jpg' | asset_url }}"
-              alt="The Discovery & Travel Series - AD Perfumes"
-              class="spotlight-image"
+              alt="The Discovery Collection — AD PERFUMES"
+              class="spotlight-img"
               loading="lazy"
               width="900"
               height="750"
             >
           {%- endif -%}
-          <div class="spotlight-overlay"></div>
+          <div class="spotlight-gradient-overlay"></div>
         </div>
 
         <div class="spotlight-content">
-          <span class="spotlight-badge">{{ section.settings.women_badge | default: 'COLLECTION POUR FEMME' }}</span>
-          <h3 class="spotlight-heading">{{ section.settings.women_title | default: 'Discover Top Perfumes for Women' }}</h3>
+          <span class="spotlight-badge">{{ section.settings.card_2_badge | default: '10ML / 20ML EDITIONS' }}</span>
+          <h3 class="spotlight-heading">{{ section.settings.card_2_title | default: 'The Discovery Collection' }}</h3>
           <p class="spotlight-desc">
-            {{ section.settings.women_desc | default: 'Ethereal bouquets of Grasse rose, crystalline jasmine, solar bergamot, and warm Madagascar vanilla accords.' }}
+            {{ section.settings.card_2_desc | default: 'Six versatile smaller-format scents: Purple Mist, Old Money, Fallen Star, Coffee, Toxic, and Dark Chocolates. Perfect for pocket portability and daily versatility.' }}
           </p>
-          <div class="spotlight-action">
-            <a href="{{ section.settings.women_url | default: routes.collections_url | append: '/women' }}" class="btn btn-outline-white">
-              {{ section.settings.women_btn_label | default: 'Shop Women' }}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
-          </div>
+
+          <a href="{{ card_2_url }}" class="btn btn-primary btn-sm spotlight-cta">
+            <span>{{ section.settings.card_2_btn_label | default: 'Explore Discovery Collection' }}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
         </div>
       </div>
 
     </div>
-
   </div>
 </section>
 
@@ -107,96 +128,106 @@
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow text",
-      "default": "Curated Collections"
+      "label": "Section Eyebrow",
+      "default": "AD PERFUMES Collections"
     },
     {
       "type": "text",
       "id": "title",
-      "label": "Section title",
-      "default": "Explore By Scent Signature"
+      "label": "Section Heading",
+      "default": "Explore By Category"
     },
     {
       "type": "textarea",
       "id": "subtitle",
-      "label": "Section subtitle",
-      "default": "Immerse yourself in artisanal compositions tailored for the discerning connoisseur."
+      "label": "Section Subtitle",
+      "default": "Discover our signature 50ml flagship extraits alongside our versatile 10ml & 20ml Discovery line."
     },
     {
       "type": "header",
-      "content": "Men's Spotlight"
+      "content": "Card 1: The Signature Collection (50ml)"
+    },
+    {
+      "type": "collection",
+      "id": "card_1_collection",
+      "label": "Assign Collection"
     },
     {
       "type": "image_picker",
-      "id": "men_image",
-      "label": "Men's Banner Image"
+      "id": "card_1_image",
+      "label": "Card 1 Background Image"
     },
     {
       "type": "text",
-      "id": "men_badge",
-      "label": "Men's Badge",
-      "default": "COLLECTION POUR HOMME"
+      "id": "card_1_badge",
+      "label": "Badge",
+      "default": "50ML FLAGSHIPS"
     },
     {
       "type": "text",
-      "id": "men_title",
-      "label": "Men's Title",
-      "default": "Discover Top Perfumes for Men"
+      "id": "card_1_title",
+      "label": "Heading",
+      "default": "The Signature Collection"
     },
     {
       "type": "textarea",
-      "id": "men_desc",
-      "label": "Men's Description",
-      "default": "Commanding compositions with notes of smoky oud, cedarwood, ambergris, and black spices designed for timeless presence."
-    },
-    {
-      "type": "url",
-      "id": "men_url",
-      "label": "Men's Link URL"
+      "id": "card_1_desc",
+      "label": "Description",
+      "default": "Our three flagship creations: ADDICTED, Ice of Heaven, and Rouge Elite. Deep, warm woods, icy marine accords, and decadent caramelized ambers in 50ml flacons."
     },
     {
       "type": "text",
-      "id": "men_btn_label",
-      "label": "Men's Button Label",
-      "default": "Shop Men"
+      "id": "card_1_btn_label",
+      "label": "Button Label",
+      "default": "Explore 50ml Collection"
+    },
+    {
+      "type": "url",
+      "id": "card_1_url",
+      "label": "Custom URL Destination (Optional)"
     },
     {
       "type": "header",
-      "content": "Women's Spotlight"
+      "content": "Card 2: The Discovery Collection (10ml & 20ml)"
+    },
+    {
+      "type": "collection",
+      "id": "card_2_collection",
+      "label": "Assign Collection"
     },
     {
       "type": "image_picker",
-      "id": "women_image",
-      "label": "Women's Banner Image"
+      "id": "card_2_image",
+      "label": "Card 2 Background Image"
     },
     {
       "type": "text",
-      "id": "women_badge",
-      "label": "Women's Badge",
-      "default": "COLLECTION POUR FEMME"
+      "id": "card_2_badge",
+      "label": "Badge",
+      "default": "10ML / 20ML EDITIONS"
     },
     {
       "type": "text",
-      "id": "women_title",
-      "label": "Women's Title",
-      "default": "Discover Top Perfumes for Women"
+      "id": "card_2_title",
+      "label": "Heading",
+      "default": "The Discovery Collection"
     },
     {
       "type": "textarea",
-      "id": "women_desc",
-      "label": "Women's Description",
-      "default": "Ethereal bouquets of Grasse rose, crystalline jasmine, solar bergamot, and warm Madagascar vanilla accords."
-    },
-    {
-      "type": "url",
-      "id": "women_url",
-      "label": "Women's Link URL"
+      "id": "card_2_desc",
+      "label": "Description",
+      "default": "Six versatile smaller-format scents: Purple Mist, Old Money, Fallen Star, Coffee, Toxic, and Dark Chocolates. Perfect for pocket portability and daily versatility."
     },
     {
       "type": "text",
-      "id": "women_btn_label",
-      "label": "Women's Button Label",
-      "default": "Shop Women"
+      "id": "card_2_btn_label",
+      "label": "Button Label",
+      "default": "Explore Discovery Collection"
+    },
+    {
+      "type": "url",
+      "id": "card_2_url",
+      "label": "Custom URL Destination (Optional)"
     }
   ],
   "presets": [

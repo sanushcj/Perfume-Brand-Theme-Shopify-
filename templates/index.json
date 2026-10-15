@@ -3,167 +3,95 @@
     "hero-banner": {
       "type": "hero-banner",
       "settings": {
-        "eyebrow_text": "AFTER DREAMS • HAUTE PARFUMERIE",
-        "heading_line1": "Born in the Silence",
-        "heading_line2": "After Dreams",
-        "subheading": "When subconscious reverie transforms into an enduring aura. Discover the newly launched flagship extraits — ADDICTED, Ice of Heaven, and Rouge Elite — crafted with rare absolutes for unmatched presence.",
-        "cta_primary_label": "Explore New Flagships",
-        "cta_secondary_label": "Discover Travel Editions",
-        "stat_1_number": "24h+",
-        "stat_1_label": "Extrait Longevity",
-        "stat_2_number": "100%",
-        "stat_2_label": "Rare Natural Absolutes",
-        "stat_3_number": "Pure",
-        "stat_3_label": "Artisanal Blends",
-        "badge_title": "Rated 4.9/5 by Connoisseurs Worldwide",
-        "badge_sub": "“The scent that awakens when daylight begins.”"
+        "eyebrow": "AD PERFUMES • HAUTE PARFUMERIE",
+        "heading_line1": "Distinctive Fragrances",
+        "heading_line2": "Crafted with Precision",
+        "subheading": "Explore our portfolio of artisanal fragrances — from our commanding 50ml Signature Collection to versatile 10ml & 20ml Discovery editions.",
+        "cta_primary_label": "Explore The Signature Collection",
+        "cta_secondary_label": "Discover Travel Formats",
+        "floating_badge_text": "Artisanal Perfumery",
+        "floating_badge_sub": "Your Fragrance. Your Vision. Your Brand.",
+        "show_highlights": true,
+        "highlight_1_title": "3 Flagships",
+        "highlight_1_desc": "The Signature 50ml",
+        "highlight_2_title": "6 Editions",
+        "highlight_2_desc": "The Discovery 10ml & 20ml",
+        "highlight_3_title": "Regional",
+        "highlight_3_desc": "Kerala, Karnataka & UAE"
       }
     },
     "category-spotlight": {
       "type": "category-spotlight",
       "settings": {
-        "eyebrow": "Atelier Collections",
-        "title": "Two Worlds of Invisible Luxury",
-        "subtitle": "From our newly unveiled 50ml Flagship Extraits to our versatile 10ml & 20ml Travel and Pocket editions.",
-        "men_badge": "NEW LAUNCH • 50ML EXTRAIT",
-        "men_title": "The Flagship Trinity",
-        "men_desc": "Newly unveiled statement flacons: ADDICTED, Ice of Heaven, and Rouge Elite. Formulated at 30%+ Extrait concentration for 24h lasting sillage.",
-        "men_btn_label": "Explore 50ml Flagships",
-        "women_badge": "POCKET & TRAVEL LUXURY • 10ML / 20ML",
-        "women_title": "The Discovery & Travel Series",
-        "women_desc": "Six captivating everyday signatures — from roasted Coffee and sweet Purple Mist to the aristocratic allure of Old Money, Fallen Star, and Toxic.",
-        "women_btn_label": "Explore 10ml & 20ml Editions"
+        "eyebrow": "AD PERFUMES Collections",
+        "title": "Explore By Category",
+        "subtitle": "Discover our signature 50ml flagship extraits alongside our versatile 10ml & 20ml Discovery line.",
+        "card_1_badge": "50ML FLAGSHIPS",
+        "card_1_title": "The Signature Collection",
+        "card_1_desc": "Our three flagship creations: ADDICTED, Ice of Heaven, and Rouge Elite. Deep, warm woods, icy marine accords, and decadent caramelized ambers in 50ml flacons.",
+        "card_1_btn_label": "Explore 50ml Collection",
+        "card_2_badge": "10ML / 20ML EDITIONS",
+        "card_2_title": "The Discovery Collection",
+        "card_2_desc": "Six versatile smaller-format scents: Purple Mist, Old Money, Fallen Star, Coffee, Toxic, and Dark Chocolates. Perfect for pocket portability and daily versatility.",
+        "card_2_btn_label": "Explore Discovery Collection"
       }
     },
-    "featured-collection": {
-      "type": "featured-collection",
+    "the-signature-collection": {
+      "type": "the-signature-collection",
       "settings": {
-        "eyebrow": "Artisanal Masterpieces",
-        "title": "Newly Launched & Best Sellers",
-        "subtitle": "Experience our newest 50ml Flagships alongside timeless 10ml & 20ml pocket signatures.",
-        "products_to_show": 8,
+        "eyebrow": "FLAGSHIP 50ML EXTRAITS",
+        "title": "The Signature Collection",
+        "subtitle": "Experience our three flagship creations: ADDICTED, Ice of Heaven, and Rouge Elite. Formulated for profound character and lasting sillage.",
+        "products_to_show": 3,
         "show_view_all": true,
-        "view_all_label": "View All Fragrances"
+        "view_all_label": "Explore Signature Perfumes"
       }
     },
-    "fragrance-families": {
-      "type": "fragrance-families",
+    "the-discovery-collection": {
+      "type": "the-discovery-collection",
       "settings": {
-        "eyebrow": "Olfactory Notes",
-        "title": "Find Your Scent Family",
-        "subtitle": "From deep smoky woods to glacial fresh aquatics and decadent roasted gourmands."
+        "eyebrow": "10ML & 20ML EDITIONS",
+        "title": "The Discovery Collection",
+        "subtitle": "Six smaller-format scents: Purple Mist, Old Money, Fallen Star, Coffee, Toxic, and Dark Chocolates. Designed for effortless travel, pocket portability, and everyday discovery.",
+        "products_to_show": 6,
+        "show_view_all": true,
+        "view_all_label": "Explore Discovery Editions"
       }
     },
     "brand-story": {
       "type": "brand-story",
-      "blocks": {
-        "pillar-1": {
-          "type": "pillar",
-          "settings": {
-            "icon": "🌿",
-            "title": "Rare Essences",
-            "text": "Every botanical extract distilled ethically in Grasse and the Far East, the capitals of perfumery."
-          }
-        },
-        "pillar-2": {
-          "type": "pillar",
-          "settings": {
-            "icon": "⏳",
-            "title": "24h Enduring Longevity",
-            "text": "High concentration Extrait de Parfum formulated to project effortlessly from day to night."
-          }
-        },
-        "pillar-3": {
-          "type": "pillar",
-          "settings": {
-            "icon": "✨",
-            "title": "After Dreams Philosophy",
-            "text": "Scents crafted to capture that ethereal moment when dreams transition into awakening reality."
-          }
-        },
-        "pillar-4": {
-          "type": "pillar",
-          "settings": {
-            "icon": "🎁",
-            "title": "Complimentary Discovery Vials",
-            "text": "Every bottle arrives with 2 complimentary discovery vials and signature velvet packaging."
-          }
-        }
-      },
-      "block_order": [
-        "pillar-1",
-        "pillar-2",
-        "pillar-3",
-        "pillar-4"
-      ],
       "settings": {
-        "eyebrow": "The Lore of AD Perfumes",
-        "title": "Crafted in the Hours After Dreams",
-        "text": "Behind the initials AD Perfumes lies our quiet philosophy: After Dreams. True luxury is born at the boundary where nocturnal reverie dissolves into daylight, leaving behind sensory memories that cannot be spoken, only worn. Every Extrait de Parfum is distilled to capture that fleeting perfection.",
-        "founded_year": "2024",
-        "cta_label": "Explore The Atelier"
+        "eyebrow": "The AD PERFUMES Vision",
+        "title": "Distinctive Fragrances, Enduring Character"
       }
     },
-    "testimonials": {
-      "type": "testimonials",
-      "blocks": {
-        "review-1": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "text": "ADDICTED is pure hypnosis. That smoky saffron and oud dry-down lasts a full 24 hours on my skin and coat. AD Perfumes has created an instant icon.",
-            "name": "Sophia Laurent",
-            "location": "Paris, France"
-          }
-        },
-        "review-2": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "text": "Ice of Heaven has the cleanest, most invigorating glacial aquatic opening I have ever smelled. Crisp, icy, and draws compliments everywhere.",
-            "name": "Alexander Vance",
-            "location": "London, UK"
-          }
-        },
-        "review-3": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "text": "Rouge Elite feels like warm liquid gold. The caramelized amber and cedarwood aura is rich, decadent, and impossible to forget.",
-            "name": "Elena Rostova",
-            "location": "New York, USA"
-          }
-        }
-      },
-      "block_order": [
-        "review-1",
-        "review-2",
-        "review-3"
-      ],
+    "faq-accordion": {
+      "type": "faq-accordion",
       "settings": {
-        "eyebrow": "Verified Connoisseurs",
-        "title": "Loved by Over 50,000 Fragrance Enthusiasts"
+        "eyebrow": "Client Assistance",
+        "title": "Fragrance Guidance & FAQs",
+        "subtitle": "Answers to frequent inquiries regarding our fragrance collections, bottle sizes, and care."
       }
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "eyebrow": "Private Members",
-        "title": "Join the Atelier Circle",
-        "subtitle": "Receive 10% off your inaugural order and private invitations to limited-edition small batch releases.",
+        "eyebrow": "AD PERFUMES Bulletin",
+        "title": "Join the AD PERFUMES Circle",
+        "subtitle": "Subscribe for early announcements, new fragrance releases, and exclusive boutique updates.",
         "placeholder": "Enter your email address",
-        "button_label": "Claim 10% Off",
-        "disclaimer": "Complimentary shipping on orders over $100. Instant coupon delivered to your inbox."
+        "button_label": "Subscribe",
+        "disclaimer": "Your privacy is respected. You can unsubscribe at any time."
       }
     }
   },
   "order": [
     "hero-banner",
     "category-spotlight",
-    "featured-collection",
-    "fragrance-families",
+    "the-signature-collection",
+    "the-discovery-collection",
     "brand-story",
-    "testimonials",
+    "faq-accordion",
     "newsletter"
   ]
 }

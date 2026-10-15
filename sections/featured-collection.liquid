@@ -1,28 +1,29 @@
 {%- assign selected_collection = collections[section.settings.collection] -%}
 
-<section class="featured-products section-padding" id="bestsellers" aria-label="Featured Fragrances">
+<section class="featured-collection section-padding" id="collection-{{ section.id }}" aria-label="Featured Collection">
   <div class="container">
 
     <div class="section-header text-center reveal">
-      <p class="section-eyebrow" style="justify-content: center;">{{ section.settings.eyebrow | default: 'Our Signature Blends' }}</p>
-      <h2 class="section-title">{{ section.settings.title | default: 'Best Sellers & Icons' }}</h2>
-      <p class="section-subtitle" style="margin: 0 auto;">
-        {{ section.settings.subtitle | default: 'Experience the most coveted fragrances, meticulously distilled and aged for unmatched depth.' }}
-      </p>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="section-eyebrow justify-center">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="section-title">{{ section.settings.title | default: 'Featured Collection' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="section-subtitle max-w-prose">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
     </div>
 
-    <div class="products-grid">
-      {%- if selected_collection != blank and selected_collection.products_count > 0 -%}
+    <div class="product-grid" id="FeaturedGrid-{{ section.id }}">
+      {%- if selected_collection != blank and selected_collection.products.size > 0 -%}
         {%- for product in selected_collection.products limit: section.settings.products_to_show -%}
-          <div class="product-grid-col reveal reveal-delay-{{ forloop.index | modulo: 4 | plus: 1 }}">
-            {%- render 'product-card', product_card_product: product, dummy_index: forloop.index -%}
+          <div class="reveal reveal-delay-{{ forloop.index | modulo: 4 | plus: 1 }}">
+            {%- render 'product-card', product_card_product: product -%}
           </div>
         {%- endfor -%}
       {%- else -%}
-        {%- comment -%} Seamless Dummy Luxury Products for instant preview {%- endcomment -%}
-        {%- assign fallback_count = section.settings.products_to_show | default: 8 -%}
+        {%- assign fallback_count = section.settings.products_to_show | default: 6 -%}
         {%- for i in (1..fallback_count) -%}
-          <div class="product-grid-col reveal reveal-delay-{{ forloop.index | modulo: 4 | plus: 1 }}">
+          <div class="reveal reveal-delay-{{ forloop.index | modulo: 4 | plus: 1 }}">
             {%- render 'product-card', product_card_product: nil, dummy_index: i -%}
           </div>
         {%- endfor -%}
@@ -30,10 +31,11 @@
     </div>
 
     {%- if section.settings.show_view_all -%}
-      <div class="section-footer-actions text-center reveal">
-        <a href="{{ selected_collection.url | default: routes.collections_url }}" class="btn btn-outline btn-lg">
-          {{ section.settings.view_all_label | default: 'View All Fragrances' }}
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      {%- assign view_all_target = section.settings.custom_url | default: selected_collection.url | default: routes.all_products_collection_url | default: '/collections/all' -%}
+      <div class="section-footer-cta text-center reveal">
+        <a href="{{ view_all_target }}" class="btn btn-outline btn-lg">
+          <span>{{ section.settings.view_all_label | default: 'View All Fragrances' }}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
         </a>
@@ -50,46 +52,51 @@
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow text",
-      "default": "Our Signature Blends"
+      "label": "Eyebrow Text",
+      "default": "AD PERFUMES Atelier"
     },
     {
       "type": "text",
       "id": "title",
-      "label": "Section title",
-      "default": "Best Sellers & Icons"
+      "label": "Heading",
+      "default": "Featured Fragrances"
     },
     {
       "type": "textarea",
       "id": "subtitle",
-      "label": "Section subtitle",
-      "default": "Experience the most coveted fragrances, meticulously distilled and aged for unmatched depth."
+      "label": "Subtitle",
+      "default": "Explore our curated fragrance selection, crafted with rare absolutes for unmatched presence."
     },
     {
       "type": "collection",
       "id": "collection",
-      "label": "Collection"
+      "label": "Shopify Collection"
     },
     {
       "type": "range",
       "id": "products_to_show",
-      "label": "Products to show",
-      "min": 4,
-      "max": 16,
-      "step": 4,
-      "default": 8
+      "label": "Products to Show",
+      "min": 3,
+      "max": 12,
+      "step": 3,
+      "default": 6
     },
     {
       "type": "checkbox",
       "id": "show_view_all",
-      "label": "Show 'View All' button",
+      "label": "Show View All Button",
       "default": true
     },
     {
       "type": "text",
       "id": "view_all_label",
-      "label": "View all button text",
+      "label": "Button Label",
       "default": "View All Fragrances"
+    },
+    {
+      "type": "url",
+      "id": "custom_url",
+      "label": "Custom Button Destination (Optional)"
     }
   ],
   "presets": [

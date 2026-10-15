@@ -1,45 +1,48 @@
-<section class="brand-story section-padding-lg" id="brand-story" aria-label="Our story">
+<section class="brand-story section-padding-lg" id="brand-story-{{ section.id }}" aria-label="Brand Story">
   <div class="container">
     <div class="brand-story-layout">
 
-      {%- comment -%} Visual {%- endcomment -%}
+      {%- comment -%} Visual Column {%- endcomment -%}
       <div class="brand-story-visual reveal">
         {%- if section.settings.image != blank -%}
           <img
-            src="{{ section.settings.image | image_url: width: 700 }}"
-            alt="{{ section.settings.image.alt | default: 'Our story' | escape }}"
+            src="{{ section.settings.image | image_url: width: 800 }}"
+            alt="{{ section.settings.image.alt | default: 'AD PERFUMES Philosophy' | escape }}"
             class="brand-story-image"
             loading="lazy"
-            width="700"
-            height="900"
+            width="800"
+            height="1000"
           >
         {%- else -%}
           <img
             src="{{ 'hero-perfume.jpg' | asset_url }}"
-            alt="Artisanal Fragrance Heritage"
+            alt="AD PERFUMES Craftsmanship"
             class="brand-story-image"
             loading="lazy"
-            width="700"
-            height="900"
+            width="800"
+            height="1000"
           >
         {%- endif -%}
         <div class="brand-story-accent" aria-hidden="true"></div>
       </div>
 
-      {%- comment -%} Content {%- endcomment -%}
+      {%- comment -%} Content Column {%- endcomment -%}
       <div class="brand-story-content">
-        <p class="section-eyebrow reveal">{{ section.settings.eyebrow | default: 'Our Heritage' }}</p>
-        <h2 class="section-title reveal reveal-delay-1">{{ section.settings.title | default: 'Crafted With Purpose, Worn With Intention' }}</h2>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="section-eyebrow reveal">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        <h2 class="section-title reveal reveal-delay-1">{{ section.settings.title | default: 'Distinctive Fragrances, Enduring Character' }}</h2>
 
         <div class="reveal reveal-delay-2">
           {%- if section.settings.text != blank -%}
-            <p class="brand-story-text">{{ section.settings.text }}</p>
+            <div class="brand-story-text">{{ section.settings.text }}</div>
           {%- else -%}
             <p class="brand-story-text">
-              For over two decades, our master perfumers have traveled the world's most remote corners — the oud forests of Southeast Asia, the jasmine fields of Grasse, the ambergris shores of the Maldives — sourcing ingredients that cannot be replicated by science alone.
+              At <strong>AD PERFUMES</strong>, we believe fragrance is the ultimate invisible signature. From rich, smoky woods and warm saffron to crisp frozen bergamot and decadent caramelized ambers, every creation is composed with care and sophistication.
             </p>
             <p class="brand-story-text" style="margin-top: var(--space-4);">
-              Every fragrance we create is a testament to patience. To the belief that true luxury cannot be rushed. That the most beautiful things in life deserve time — time to be found, time to be understood, time to be shared.
+              Whether discovering your personal scent identity through our 50ml Flagship collection or selecting everyday versatility from our 10ml & 20ml Discovery line, we deliver quality, elegance, and memorable fragrance experiences across Kerala, Karnataka, and the UAE.
             </p>
           {%- endif -%}
         </div>
@@ -49,37 +52,32 @@
             {%- if block.type == 'pillar' -%}
               <div class="brand-pillar" {{ block.shopify_attributes }}>
                 <div class="brand-pillar-icon">{{ block.settings.icon | default: '✦' }}</div>
-                <div class="brand-pillar-title">{{ block.settings.title | default: 'Excellence' }}</div>
-                <div class="brand-pillar-text">{{ block.settings.text | default: 'Uncompromising standards in every bottle.' }}</div>
+                <div class="brand-pillar-title">{{ block.settings.title }}</div>
+                <div class="brand-pillar-text">{{ block.settings.text }}</div>
               </div>
             {%- endif -%}
           {%- else -%}
             <div class="brand-pillar">
               <div class="brand-pillar-icon">🌿</div>
-              <div class="brand-pillar-title">Natural Origins</div>
-              <div class="brand-pillar-text">Every ingredient sourced directly from its native habitat, ethically and sustainably.</div>
+              <div class="brand-pillar-title">Distinctive Scents</div>
+              <div class="brand-pillar-text">Curated note profiles tailored for depth, character, and sophistication.</div>
             </div>
             <div class="brand-pillar">
-              <div class="brand-pillar-icon">⚗️</div>
-              <div class="brand-pillar-title">Master Craftsmanship</div>
-              <div class="brand-pillar-text">Created by fourth-generation perfumers with decades of olfactory expertise.</div>
+              <div class="brand-pillar-icon">🧴</div>
+              <div class="brand-pillar-title">50ml & Travel Sizes</div>
+              <div class="brand-pillar-text">Signature 50ml flacons alongside convenient 10ml & 20ml pocket editions.</div>
             </div>
             <div class="brand-pillar">
-              <div class="brand-pillar-icon">🕰️</div>
-              <div class="brand-pillar-title">Timeless Quality</div>
-              <div class="brand-pillar-text">Aged to perfection. Every batch rests for a minimum of six months before bottling.</div>
-            </div>
-            <div class="brand-pillar">
-              <div class="brand-pillar-icon">🌍</div>
-              <div class="brand-pillar-title">Responsibly Made</div>
-              <div class="brand-pillar-text">Cruelty-free, sustainably sourced, and packaged in recyclable luxury materials.</div>
+              <div class="brand-pillar-icon">📍</div>
+              <div class="brand-pillar-title">Regional Dispatch</div>
+              <div class="brand-pillar-text">Dedicated customer care serving clients across Kerala, Karnataka & the UAE.</div>
             </div>
           {%- endfor -%}
         </div>
 
-        {%- if section.settings.cta_label != blank -%}
+        {%- if section.settings.cta_label != blank and section.settings.cta_url != blank -%}
           <div class="reveal reveal-delay-4" style="margin-top: var(--space-6);">
-            <a href="{{ section.settings.cta_url | default: routes.root_url | append: 'pages/about' }}" class="btn btn-outline">
+            <a href="{{ section.settings.cta_url }}" class="btn btn-outline">
               {{ section.settings.cta_label }}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
@@ -98,47 +96,40 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Story image"
+      "label": "Story Image"
     },
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "Our Heritage"
+      "label": "Eyebrow Text",
+      "default": "The AD PERFUMES Vision"
     },
     {
       "type": "text",
       "id": "title",
-      "label": "Title",
-      "default": "Crafted With Purpose, Worn With Intention"
+      "label": "Section Heading",
+      "default": "Distinctive Fragrances, Enduring Character"
     },
     {
       "type": "textarea",
       "id": "text",
-      "label": "Story text"
-    },
-    {
-      "type": "text",
-      "id": "founded_year",
-      "label": "Founded year",
-      "default": "1998"
+      "label": "Story Narrative"
     },
     {
       "type": "text",
       "id": "cta_label",
-      "label": "CTA label",
-      "default": "Read Our Story"
+      "label": "Optional Button Label"
     },
     {
       "type": "url",
       "id": "cta_url",
-      "label": "CTA URL"
+      "label": "Optional Button Destination"
     }
   ],
   "blocks": [
     {
       "type": "pillar",
-      "name": "Brand Pillar",
+      "name": "Feature Pillar",
       "settings": [
         {
           "type": "text",
@@ -149,12 +140,14 @@
         {
           "type": "text",
           "id": "title",
-          "label": "Title"
+          "label": "Pillar Title",
+          "default": "Distinctive Scents"
         },
         {
           "type": "textarea",
           "id": "text",
-          "label": "Description"
+          "label": "Pillar Description",
+          "default": "Curated note profiles tailored for depth, character, and sophistication."
         }
       ]
     }

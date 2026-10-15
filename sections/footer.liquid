@@ -2,97 +2,133 @@
   <div class="container">
     <div class="footer-main">
 
-      {%- comment -%} Brand Column {%- endcomment -%}
+      {%- comment -%} Brand & Contact Column {%- endcomment -%}
       <div class="footer-brand">
-        <a href="{{ routes.root_url }}" aria-label="{{ shop.name }} - Home">
+        <a href="{{ routes.root_url }}" aria-label="{{ shop.name }} - Home" class="footer-logo-link">
           {%- if section.settings.logo != blank -%}
-            <img src="{{ section.settings.logo | image_url: width: 160 }}" alt="{{ shop.name }}" width="160" height="40" loading="lazy" style="max-height: 40px; width: auto;">
+            <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" width="140" height="auto" loading="lazy" style="max-height: 48px; width: auto;">
           {%- else -%}
-            <div class="nav-logo" style="text-decoration: none;">
-              <span class="nav-logo-name">{{ settings.brand_name | default: shop.name }}</span>
-              <span class="nav-logo-tagline">{{ settings.brand_tagline | default: 'Haute Parfumerie' }}</span>
-            </div>
+            <span class="footer-logo-name">{{ section.settings.brand_name | default: settings.brand_name | default: 'AD PERFUMES' }}</span>
+            <span class="footer-logo-tagline">{{ section.settings.brand_tagline | default: settings.brand_tagline | default: 'Your Fragrance. Your Vision. Your Brand.' }}</span>
           {%- endif -%}
         </a>
         <p class="footer-brand-desc">
-          {{ section.settings.brand_desc | default: 'Purveyors of rare and exceptional fragrances for those who understand that true luxury is found in the invisible.' }}
+          {{ section.settings.brand_desc | default: 'Crafting distinctive perfume experiences and premium fragrances. Discover your signature scent with AD PERFUMES.' }}
         </p>
-        <div class="social-links">
-          {%- if settings.social_instagram_link != blank -%}
-            <a href="{{ settings.social_instagram_link }}" class="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+
+        <div class="footer-contact-details">
+          <div class="footer-contact-row">
+            <span class="footer-contact-icon">📞</span>
+            <a href="tel:{{ section.settings.phone | default: settings.contact_phone | default: '+918921362927' | remove: ' ' }}">
+              {{ section.settings.phone | default: settings.contact_phone | default: '+91 89213 62927' }}
             </a>
-          {%- endif -%}
-          {%- if settings.social_twitter_link != blank -%}
-            <a href="{{ settings.social_twitter_link }}" class="social-link" aria-label="Twitter / X" target="_blank" rel="noopener noreferrer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </div>
+          <div class="footer-contact-row">
+            <span class="footer-contact-icon">📧</span>
+            <a href="mailto:{{ section.settings.email | default: settings.contact_email | default: 'Connect.adperfumes@gmail.com' }}">
+              {{ section.settings.email | default: settings.contact_email | default: 'Connect.adperfumes@gmail.com' }}
+            </a>
+          </div>
+          <div class="footer-contact-row">
+            <span class="footer-contact-icon">📍</span>
+            <span>{{ section.settings.regions | default: settings.contact_regions | default: 'Serving Kerala, Karnataka & UAE' }}</span>
+          </div>
+        </div>
+
+        <div class="social-links" style="margin-top: var(--space-4);">
+          {%- if settings.social_instagram_link != blank or section.settings.instagram_url != blank -%}
+            <a
+              href="{{ section.settings.instagram_url | default: settings.social_instagram_link | default: 'https://instagram.com/ad_.perfumes' }}"
+              class="social-link"
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             </a>
           {%- endif -%}
           {%- if settings.social_facebook_link != blank -%}
             <a href="{{ settings.social_facebook_link }}" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
           {%- endif -%}
-          {%- if settings.social_pinterest_link != blank -%}
-            <a href="{{ settings.social_pinterest_link }}" class="social-link" aria-label="Pinterest" target="_blank" rel="noopener noreferrer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+          {%- if settings.social_whatsapp_number != blank -%}
+            <a href="https://wa.me/{{ settings.social_whatsapp_number }}" class="social-link" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
             </a>
           {%- endif -%}
         </div>
       </div>
 
-      {%- comment -%} Quick Links {%- endcomment -%}
-      <div>
-        <h3 class="footer-col-title">Shop</h3>
+      {%- comment -%} Navigation Column 1 {%- endcomment -%}
+      <div class="footer-column">
+        <h3 class="footer-col-title">{{ section.settings.menu_1_heading | default: 'Collections' }}</h3>
         <ul class="footer-links" role="list">
-          <li><a href="{{ routes.collections_url }}/flagship" class="footer-link">New Flagships</a></li>
-          <li><a href="{{ routes.collections_url }}/all" class="footer-link">All Fragrances</a></li>
-          <li><a href="{{ routes.collections_url }}/for-him" class="footer-link">For Him</a></li>
-          <li><a href="{{ routes.collections_url }}/for-her" class="footer-link">For Her</a></li>
-          <li><a href="{{ routes.collections_url }}/unisex" class="footer-link">Unisex</a></li>
-          <li><a href="{{ routes.collections_url }}/gift-sets" class="footer-link">Gift Sets</a></li>
+          {%- assign menu_1 = section.settings.menu_1 | default: 'footer' -%}
+          {%- if linklists[menu_1].links.size > 0 -%}
+            {%- for link in linklists[menu_1].links -%}
+              <li><a href="{{ link.url }}" class="footer-link">{{ link.title }}</a></li>
+            {%- endfor -%}
+          {%- else -%}
+            <li><a href="{{ routes.all_products_collection_url | default: '/collections/all' }}" class="footer-link">All Fragrances</a></li>
+            <li><a href="{{ routes.collections_url }}" class="footer-link">Browse Collections</a></li>
+            <li><a href="{{ routes.search_url }}" class="footer-link">Search Fragrances</a></li>
+          {%- endif -%}
         </ul>
       </div>
 
-      {%- comment -%} Company {%- endcomment -%}
-      <div>
-        <h3 class="footer-col-title">Company</h3>
+      {%- comment -%} Navigation Column 2 {%- endcomment -%}
+      <div class="footer-column">
+        <h3 class="footer-col-title">{{ section.settings.menu_2_heading | default: 'Customer Care' }}</h3>
         <ul class="footer-links" role="list">
-          <li><a href="{{ pages['about'].url | default: '/pages/about' }}" class="footer-link">About Us</a></li>
-          <li><a href="{{ pages['contact'].url | default: '/pages/contact' }}" class="footer-link">Contact</a></li>
-          <li><a href="{{ pages['our-story'].url | default: '/pages/our-story' }}" class="footer-link">Our Story</a></li>
-          <li><a href="{{ pages['sustainability'].url | default: '#' }}" class="footer-link">Sustainability</a></li>
-          <li><a href="{{ pages['press'].url | default: '#' }}" class="footer-link">Press</a></li>
-          <li><a href="{{ routes.search_url }}" class="footer-link">Search</a></li>
+          {%- assign menu_2 = section.settings.menu_2 -%}
+          {%- if menu_2 != blank and linklists[menu_2].links.size > 0 -%}
+            {%- for link in linklists[menu_2].links -%}
+              <li><a href="{{ link.url }}" class="footer-link">{{ link.title }}</a></li>
+            {%- endfor -%}
+          {%- else -%}
+            <li><a href="/pages/contact" class="footer-link">Contact Us</a></li>
+            {%- if section.settings.show_business_link -%}
+              <li><a href="{{ section.settings.business_link_url | default: '/pages/business-services' }}" class="footer-link">{{ section.settings.business_link_title | default: 'Bespoke & Business Solutions' }}</a></li>
+            {%- endif -%}
+          {%- endif -%}
         </ul>
       </div>
 
-      {%- comment -%} Newsletter {%- endcomment -%}
-      <div>
-        <h3 class="footer-col-title">Inner Circle</h3>
+      {%- comment -%} Newsletter Column {%- endcomment -%}
+      <div class="footer-column footer-newsletter-col">
+        <h3 class="footer-col-title">{{ section.settings.newsletter_title | default: 'Stay Connected' }}</h3>
         <p class="footer-newsletter-text">
-          Subscribe for exclusive access to new releases, private events, and complimentary samples.
+          {{ section.settings.newsletter_desc | default: 'Subscribe to receive updates on new scent releases and exclusive boutique announcements.' }}
         </p>
-        <form class="footer-newsletter-form" action="/contact#contact_form" method="post" accept-charset="UTF-8">
-          <input type="hidden" name="form_type" value="customer">
-          <input type="hidden" name="utf8" value="✓">
+
+        {%- form 'customer', class: 'footer-newsletter-form', id: 'FooterNewsletterForm' -%}
           <input type="hidden" name="contact[tags]" value="newsletter">
-          <label for="FooterEmail" class="visually-hidden">Email address</label>
-          <input
-            type="email"
-            name="contact[email]"
-            id="FooterEmail"
-            class="footer-newsletter-input"
-            placeholder="Email address"
-            required
-            autocomplete="email"
-          >
-          <button type="submit" class="footer-newsletter-btn" aria-label="Subscribe to newsletter">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </button>
-        </form>
+          {%- if form.posted_successfully? -%}
+            <p class="newsletter-success" style="color: var(--color-gold); font-size: var(--text-sm);">✓ Thank you for subscribing!</p>
+          {%- else -%}
+            <div class="footer-input-wrap">
+              <input
+                type="email"
+                name="contact[email]"
+                id="FooterNewsletterEmail"
+                class="footer-newsletter-input"
+                placeholder="Enter your email"
+                required
+                autocomplete="email"
+                aria-label="Email address"
+              >
+              <button type="submit" class="footer-newsletter-btn" aria-label="Subscribe">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+            {%- if form.errors -%}
+              <p class="newsletter-error" style="color: var(--color-sale); font-size: var(--text-xs); margin-top: 4px;">{{ form.errors.translated_fields['email'] }} {{ form.errors.messages['email'] }}</p>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endform -%}
       </div>
 
     </div>
@@ -100,18 +136,21 @@
     {%- comment -%} Footer Bottom {%- endcomment -%}
     <div class="footer-bottom">
       <p class="footer-copyright">
-        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name | default: 'AD PERFUMES' }}. All rights reserved.
       </p>
 
-      <nav class="footer-legal" aria-label="Legal links">
-        <a href="{{ pages['privacy-policy'].url | default: '/policies/privacy-policy' }}">Privacy Policy</a>
-        <a href="{{ pages['terms'].url | default: '/policies/terms-of-service' }}">Terms of Service</a>
-        <a href="{{ pages['refund-policy'].url | default: '/policies/refund-policy' }}">Returns</a>
-        <a href="{{ pages['shipping-policy'].url | default: '/policies/shipping-policy' }}">Shipping</a>
-      </nav>
+      {%- if shop.policies.size > 0 -%}
+        <nav class="footer-legal" aria-label="Legal links">
+          {%- for policy in shop.policies -%}
+            {%- if policy != blank -%}
+              <a href="{{ policy.url }}">{{ policy.title }}</a>
+            {%- endif -%}
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}
 
-      <div style="font-size: var(--text-xs); color: var(--color-text-muted);">
-        {{ section.settings.currency_note | default: 'All prices in USD. Free shipping over $150.' }}
+      <div class="footer-meta-note">
+        <span>{{ section.settings.bottom_note | default: 'AD PERFUMES — Your Fragrance. Your Vision. Your Brand.' }}</span>
       </div>
     </div>
 
@@ -125,18 +164,118 @@
     {
       "type": "image_picker",
       "id": "logo",
-      "label": "Footer logo"
+      "label": "Footer Logo"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand Name",
+      "default": "AD PERFUMES"
+    },
+    {
+      "type": "text",
+      "id": "brand_tagline",
+      "label": "Brand Tagline",
+      "default": "Your Fragrance. Your Vision. Your Brand."
     },
     {
       "type": "textarea",
       "id": "brand_desc",
-      "label": "Brand description"
+      "label": "Brand Description",
+      "default": "Crafting distinctive perfume experiences and premium fragrances. Discover your signature scent with AD PERFUMES."
     },
     {
       "type": "text",
-      "id": "currency_note",
-      "label": "Currency/shipping note",
-      "default": "All prices in USD. Free shipping over $150."
+      "id": "phone",
+      "label": "Phone Number",
+      "default": "+91 89213 62927"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email Address",
+      "default": "Connect.adperfumes@gmail.com"
+    },
+    {
+      "type": "text",
+      "id": "regions",
+      "label": "Service Regions",
+      "default": "Serving Kerala, Karnataka & UAE"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram Profile URL"
+    },
+    {
+      "type": "header",
+      "content": "Navigation Menus"
+    },
+    {
+      "type": "text",
+      "id": "menu_1_heading",
+      "label": "Column 1 Heading",
+      "default": "Collections"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_1",
+      "label": "Column 1 Menu",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "menu_2_heading",
+      "label": "Column 2 Heading",
+      "default": "Customer Care"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_2",
+      "label": "Column 2 Menu"
+    },
+    {
+      "type": "header",
+      "content": "Optional Business Services Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_business_link",
+      "label": "Show Business & Branding Link",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "business_link_title",
+      "label": "Business Link Title",
+      "default": "Bespoke & Private Label Solutions"
+    },
+    {
+      "type": "url",
+      "id": "business_link_url",
+      "label": "Business Link Destination"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Newsletter Heading",
+      "default": "Stay Connected"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_desc",
+      "label": "Newsletter Description",
+      "default": "Subscribe to receive updates on new scent releases and exclusive boutique announcements."
+    },
+    {
+      "type": "text",
+      "id": "bottom_note",
+      "label": "Bottom Tagline Note",
+      "default": "AD PERFUMES — Your Fragrance. Your Vision. Your Brand."
     }
   ]
 }

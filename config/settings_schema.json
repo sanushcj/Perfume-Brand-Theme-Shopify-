@@ -1,96 +1,239 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "L'Élixir Atelier",
-    "theme_version": "1.0.0",
-    "theme_author": "Antigravity Luxury",
+    "theme_name": "AD PERFUMES — Luxury Haute Parfumerie",
+    "theme_version": "3.0.0",
+    "theme_author": "AD Perfumes",
     "theme_documentation_url": "https://help.shopify.com",
-    "theme_support_email": "support@lelixir-atelier.com"
+    "theme_support_email": "Connect.adperfumes@gmail.com"
   },
   {
-    "name": "Brand",
+    "name": "Brand Identity",
     "settings": [
       {
         "type": "text",
         "id": "brand_name",
         "label": "Brand Name",
-        "default": "L'ÉLIXIR ATELIER"
+        "default": "AD PERFUMES"
       },
       {
         "type": "text",
         "id": "brand_tagline",
         "label": "Brand Tagline",
-        "default": "Haute Parfumerie Paris"
+        "default": "Your Fragrance. Your Vision. Your Brand."
+      },
+      {
+        "type": "image_picker",
+        "id": "brand_logo",
+        "label": "Brand Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo Max Width (px)",
+        "min": 60,
+        "max": 300,
+        "step": 10,
+        "default": 140
       }
     ]
   },
   {
-    "name": "Colors & Aesthetics",
+    "name": "Verified Contact Details",
+    "settings": [
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "Phone Number",
+        "default": "+91 89213 62927"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Email Address",
+        "default": "Connect.adperfumes@gmail.com"
+      },
+      {
+        "type": "text",
+        "id": "contact_instagram_handle",
+        "label": "Instagram Handle",
+        "default": "@ad_.perfumes"
+      },
+      {
+        "type": "text",
+        "id": "contact_regions",
+        "label": "Service Regions",
+        "default": "Kerala, Karnataka & UAE"
+      }
+    ]
+  },
+  {
+    "name": "Social Media Links",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram Profile URL",
+        "default": "https://instagram.com/ad_.perfumes"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_link",
+        "label": "Facebook Page URL"
+      },
+      {
+        "type": "text",
+        "id": "social_whatsapp_number",
+        "label": "WhatsApp Number (International format without +)",
+        "default": "918921362927"
+      }
+    ]
+  },
+  {
+    "name": "Luxury Colors & Palette",
     "settings": [
       {
         "type": "color",
-        "id": "color_primary",
-        "label": "Primary Accent Color",
+        "id": "color_gold",
+        "label": "Muted Gold / Amber Accent",
         "default": "#C5A059"
       },
       {
         "type": "color",
-        "id": "color_dark",
-        "label": "Dark Obsidian Tone",
-        "default": "#0C0E12"
+        "id": "color_bg_body",
+        "label": "Body Canvas Background",
+        "default": "#FFFFFF"
       },
       {
         "type": "color",
-        "id": "color_light",
-        "label": "Light Canvas Tone",
-        "default": "#FFFFFF"
+        "id": "color_bg_card",
+        "label": "Card & Surface Background",
+        "default": "#FAFAF8"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_dark",
+        "label": "Dark Obsidian Background",
+        "default": "#0E0E10"
+      },
+      {
+        "type": "color",
+        "id": "color_text_primary",
+        "label": "Primary Text",
+        "default": "#121417"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted",
+        "label": "Muted Text",
+        "default": "#767D87"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Border & Divider Line",
+        "default": "#EBE8E2"
       }
     ]
   },
   {
-    "name": "Cart Drawer",
+    "name": "Product Cards",
     "settings": [
+      {
+        "type": "select",
+        "id": "product_card_image_ratio",
+        "label": "Image Aspect Ratio",
+        "options": [
+          { "value": "square", "label": "Square (1:1)" },
+          { "value": "portrait", "label": "Portrait (4:5)" }
+        ],
+        "default": "portrait"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_secondary_image_on_hover",
+        "label": "Show Secondary Image on Hover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_compare_at_price",
+        "label": "Show Real Compare-at Price",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_sale_badge",
+        "label": "Show Sale Badge on Discounted Items",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show Perfume Vendor / House",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_quick_add",
+        "label": "Enable Quick Add to Cart",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Cart Experience",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart Presentation",
+        "options": [
+          { "value": "drawer", "label": "Slide-out Drawer" },
+          { "value": "page", "label": "Dedicated Cart Page" }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cart_notes",
+        "label": "Enable Order Notes (e.g. Gift Message)",
+        "default": true
+      },
       {
         "type": "number",
         "id": "free_shipping_threshold",
-        "label": "Free Shipping Threshold (Amount)",
+        "label": "Free Delivery Threshold (in store currency units, 0 to disable)",
         "default": 100
       },
       {
         "type": "text",
         "id": "free_shipping_message",
-        "label": "Free Shipping Success Message",
-        "default": "🎉 You qualify for Free Worldwide Express Delivery!"
+        "label": "Free Delivery Qualified Message",
+        "default": "You qualify for complimentary fragrance delivery!"
       }
     ]
   },
   {
-    "name": "Social Media",
+    "name": "Navigation & Header",
     "settings": [
       {
-        "type": "url",
-        "id": "social_instagram_link",
-        "label": "Instagram URL"
+        "type": "checkbox",
+        "id": "sticky_header",
+        "label": "Enable Sticky Header on Scroll",
+        "default": true
       },
       {
-        "type": "url",
-        "id": "social_twitter_link",
-        "label": "Twitter / X URL"
+        "type": "checkbox",
+        "id": "show_header_search",
+        "label": "Show Search Icon in Header",
+        "default": true
       },
       {
-        "type": "url",
-        "id": "social_facebook_link",
-        "label": "Facebook URL"
-      },
-      {
-        "type": "url",
-        "id": "social_pinterest_link",
-        "label": "Pinterest URL"
-      },
-      {
-        "type": "url",
-        "id": "social_youtube_link",
-        "label": "YouTube URL"
+        "type": "checkbox",
+        "id": "show_header_account",
+        "label": "Show Customer Account Link",
+        "default": true
       }
     ]
   },
@@ -100,32 +243,32 @@
       {
         "type": "image_picker",
         "id": "favicon",
-        "label": "Favicon image"
+        "label": "Store Favicon"
       }
     ]
   },
   {
-    "name": "SEO & Social Sharing",
+    "name": "Social Sharing & SEO",
     "settings": [
       {
         "type": "image_picker",
         "id": "social_share_image",
-        "label": "Default social sharing image"
+        "label": "Social Sharing Image"
       }
     ]
   },
   {
-    "name": "Custom Code",
+    "name": "Custom Code Injection",
     "settings": [
       {
         "type": "textarea",
         "id": "custom_head_code",
-        "label": "Custom <head> code"
+        "label": "Custom <head> Scripts"
       },
       {
         "type": "textarea",
         "id": "custom_footer_code",
-        "label": "Custom footer code"
+        "label": "Custom Footer Scripts"
       }
     ]
   }
